@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/agent/**
+/ancient-agent/dependency-reduced-pom.xml
