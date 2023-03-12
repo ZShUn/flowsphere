@@ -1,0 +1,41 @@
+#server
+#  port:8089
+#spring
+#  application.name=insight-gateway
+#
+#spring.cloud.nacos.discovery.server-addr=localhost:8848
+#spring.cloud.nacos.discovery.enabled=true
+#spring.cloud.nacos.username=nacos
+#spring.cloud.nacos.password=nacos
+#
+#spring.cloud.gateway.routes.id=test1
+##spring.cloud.gateway.routes.id=insight-example
+#spring.cloud.gateway.routes.uri=http://127.0.0.1:8080/myClient?str=1
+##spring.cloud.gateway.routes.predicates.path=/insight-example
+#
+#logging.level.org.springframework.cloud.gateway=debug
+#http://localhost:8089/insight-example/myClient?str=1
+#http://localhost:8080/myClient?str=1
+
+server:
+  port: 8089
+spring:
+  application:
+    name: insight-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: test1
+#          uri: http://192.168.0.100:8080/myClient?str=1
+          uri: lb://insight-example
+          predicates:
+            - Path=/myClient
+      discovery:
+        locator:
+          enabled: true
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        enabled: true
+      username: nacos
+      password: nacos
