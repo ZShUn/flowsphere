@@ -35,7 +35,7 @@ public class NacosServerEnhance implements InstanceEnhance {
                 if (server instanceof NacosServer) {
                     NacosServer nacosServer = (NacosServer) server;
                     String version = nacosServer.getInstance().getMetadata().get(CommonConstant.VERSION);
-                    if (!RuleContext.get().contains(version)) {
+                    if (!RuleContext.get().equals(version)) {
                         serverList.remove(server);
                     }
                 }

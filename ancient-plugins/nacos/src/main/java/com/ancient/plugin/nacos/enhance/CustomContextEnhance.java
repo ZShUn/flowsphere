@@ -32,7 +32,7 @@ public class CustomContextEnhance implements InstanceEnhance {
     public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, MethodInterceptorResult methodInterceptorResult) {
         CustomContext customContext = (CustomContext) customContextAccessor.getCustomContext();
         Optional.ofNullable(getRuleJson()).orElseGet(() -> {
-            if (StringUtils.isNotBlank(customContext.getRuleContextStr())) {
+            if (Objects.nonNull(customContext) && StringUtils.isNotBlank(customContext.getRuleContextStr())) {
                 RuleContext.set(customContext.getRuleContextStr());
             }
             if (StringUtils.isNotBlank(RuleContext.get())) {

@@ -13,7 +13,7 @@ public class NacosInterceptorManager {
 
     private static final String EXECUTE = "execute";
 
-    private static final String COMPOSITE_PREDICATE = "CompositePredicate";
+    private static final String COMPOSITE_PREDICATE = "com.netflix.loadbalancer.CompositePredicate";
 
     private static final String GET_ELIGIBLE_SERVERS = "getEligibleServers";
 

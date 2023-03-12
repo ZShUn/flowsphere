@@ -41,6 +41,7 @@ public class MyApiImpl implements MyApi {
 
     @PostMapping("/myClient")
     public String myClient(String str) {
+        System.out.println("myClient 接收到请求 str=" + str);
         return "ok";
     }
 

@@ -40,13 +40,13 @@ public class AncientBootstrap {
         try {
             File file = JsonPath.getPath();
             if (Objects.isNull(file)) {
-                LOGGER.error("rule.json file is null");
+                LOGGER.warn("rule.json file is null");
                 return;
             }
             ObjectMapper objectMapper = new ObjectMapper();
             RuleEntity ruleEntity = objectMapper.readValue(file, RuleEntity.class);
             RuleCache.put(CommonConstant.RULE_KEY, ruleEntity);
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOGGER.error("load rule config error", e);
         }
     }
