@@ -30,6 +30,7 @@
         <module>nacos</module>
         <module>async-rule-context</module>
         <module>spring-mvc</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
 

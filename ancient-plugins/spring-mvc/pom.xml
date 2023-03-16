@@ -11,8 +11,8 @@
 
     <artifactId>ancient-plugin-spring-mvc</artifactId>
     <version>${revision}</version>
-    <name>ancient-plugin-spring-mvc</name>
-    <description>Demo project for Spring Boot</description>
+    <name>spring-mvc</name>
+    <description>spring-mvc</description>
     <properties>
         <java.version>8</java.version>
     </properties>

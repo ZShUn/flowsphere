@@ -11,6 +11,16 @@ public class RuleEntity extends BaseEntity {
 
     private RocketMQEntity rocketMQEntity;
 
+    private VersionEntity versionEntity;
+
+    public VersionEntity getVersionEntity() {
+        return versionEntity;
+    }
+
+    public void setVersionEntity(VersionEntity versionEntity) {
+        this.versionEntity = versionEntity;
+    }
+
     public RocketMQEntity getRocketMQEntity() {
         return rocketMQEntity;
     }

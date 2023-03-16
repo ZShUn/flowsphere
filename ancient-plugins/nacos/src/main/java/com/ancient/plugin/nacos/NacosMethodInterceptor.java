@@ -1,6 +1,5 @@
 package com.ancient.plugin.nacos;
 
-import com.ancient.plugin.nacos.enhance.CustomContextEnhance;
 import com.ancient.plugin.nacos.enhance.FeignRequestEnhance;
 import com.ancient.plugin.nacos.enhance.NacosServerEnhance;
 import com.ancient.agent.core.context.CustomContextAccessor;
@@ -14,7 +13,7 @@ public class NacosMethodInterceptor implements MethodInterceptor {
 
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, MethodInterceptorResult methodInterceptorResult) {
         if (NacosInterceptorManager.isInterceptorMethod(method.getName())) {
-            CustomContextEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, methodInterceptorResult);
+//            CustomContextEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, methodInterceptorResult);
             FeignRequestEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, methodInterceptorResult);
         }
     }

@@ -1,4 +1,4 @@
-package com.ancient.plugin.spring.mvc;
+package com.ancient.plugin.spring.cloud.gateway;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
@@ -7,22 +7,25 @@ import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RuleEntity;
 import com.ancient.common.entity.VersionEntity;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.server.ServerWebExchange;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.concurrent.Callable;
 
-public class SpringMvcMethodInterceptor implements MethodInterceptor {
+public class SpringCloudGatewayMethodInterceptor implements MethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, MethodInterceptorResult methodInterceptorResult) {
-        if (SpringMvcInterceptorManager.isInterceptorMethod(method.getName())) {
-            if (allArguments.length > 0 && allArguments[0] instanceof ServletRequest) {
-                ServletRequest request = (ServletRequest) allArguments[0];
-                HttpServletRequest httpRequest = (HttpServletRequest) request;
+        if (allArguments.length > 0 && allArguments[0] instanceof ServerWebExchange) {
+            ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
+            ServerHttpRequest request = exchange.getRequest();
+            List<String> versionList = request.getHeaders().get(CommonConstant.VERSION);
+            if (!CollectionUtils.isEmpty(versionList)) {
                 RuleEntity ruleEntity = new RuleEntity();
-                ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.VERSION)));
+                ruleEntity.setVersionEntity(new VersionEntity(versionList.get(0)));
                 RuleContext.set(ruleEntity);
             }
         }

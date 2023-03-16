@@ -13,8 +13,8 @@
     <artifactId>ancient-plugin-rocketmq</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
-    <name>ancient-plugin-rocketmq</name>
-    <description>Demo project for Spring Boot</description>
+    <name>rocketmq</name>
+    <description>rocketmq</description>
 
     <properties>
 

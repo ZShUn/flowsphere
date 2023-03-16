@@ -1,10 +1,12 @@
 package com.ancient.common.context;
 
+import com.ancient.common.entity.RuleEntity;
+
 public class RuleContext {
 
-    private static final ThreadLocal<String> RULE_LOCAL = new ThreadLocal<String>();
+    private static final ThreadLocal<RuleEntity> RULE_LOCAL = new ThreadLocal<RuleEntity>();
 
-    public static void set(String rule) {
+    public static void set(RuleEntity rule) {
         RULE_LOCAL.set(rule);
     }
 
@@ -14,7 +16,7 @@ public class RuleContext {
         }
     }
 
-    public static String get() {
+    public static RuleEntity get() {
         return RULE_LOCAL.get();
     }
 

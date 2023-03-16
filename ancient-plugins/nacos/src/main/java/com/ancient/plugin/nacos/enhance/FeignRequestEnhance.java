@@ -3,8 +3,9 @@ package com.ancient.plugin.nacos.enhance;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
 import com.ancient.agent.core.interceptor.MethodInterceptorResult;
-import com.ancient.common.constant.HeaderConstant;
+import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.entity.RuleEntity;
 import feign.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +35,12 @@ public class FeignRequestEnhance implements InstanceEnhance {
             if (allArguments.length > 0 && allArguments[0] instanceof Request) {
                 Request request = (Request) allArguments[0];
                 Map<String, Collection<String>> headers = new LinkedHashMap<String, Collection<String>>();
-                List<String> contextCollection = new ArrayList<String>(1);
-                contextCollection.add(RuleContext.get());
-                headers.put(HeaderConstant.RULE, contextCollection);
+                RuleEntity ruleEntity = RuleContext.get();
+                if (Objects.nonNull(ruleEntity.getVersionEntity())) {
+                    List<String> contextCollection = new ArrayList<String>(1);
+                    contextCollection.add(ruleEntity.getVersionEntity().getVersion());
+                    headers.put(CommonConstant.VERSION, contextCollection);
+                }
                 headers.putAll(request.headers());
                 try {
                     Field headersField = Request.class.getDeclaredField(DECLARED_FIELD_NAME);

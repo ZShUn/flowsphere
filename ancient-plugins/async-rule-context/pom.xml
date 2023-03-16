@@ -11,8 +11,8 @@
 
     <artifactId>ancient-plugin-async-rule-context</artifactId>
     <version>${revision}</version>
-    <name>ancient-plugin-async-rule-context</name>
-    <description>Demo project for Spring Boot</description>
+    <name>async-rule-context</name>
+    <description>async-rule-context</description>
 
     <properties>
         <java.version>8</java.version>
