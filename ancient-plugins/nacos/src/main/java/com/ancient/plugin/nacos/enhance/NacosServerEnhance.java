@@ -6,6 +6,7 @@ import com.ancient.agent.core.enhance.InstanceEnhance;
 import com.ancient.agent.core.interceptor.MethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.entity.RuleEntity;
 import com.netflix.loadbalancer.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class NacosServerEnhance implements InstanceEnhance {
@@ -35,8 +37,12 @@ public class NacosServerEnhance implements InstanceEnhance {
                 if (server instanceof NacosServer) {
                     NacosServer nacosServer = (NacosServer) server;
                     String version = nacosServer.getInstance().getMetadata().get(CommonConstant.VERSION);
-                    if (!RuleContext.get().equals(version)) {
-                        serverList.remove(server);
+                    RuleEntity ruleEntity = RuleContext.get();
+                    if (Objects.nonNull(ruleEntity)) {
+                        if (Objects.nonNull(ruleEntity.getVersionEntity()) &&
+                                !ruleEntity.getVersionEntity().getVersion().equals(version)) {
+                            serverList.remove(server);
+                        }
                     }
                 }
             }

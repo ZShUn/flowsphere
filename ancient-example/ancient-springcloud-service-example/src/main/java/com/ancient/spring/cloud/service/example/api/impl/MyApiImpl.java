@@ -27,7 +27,7 @@ public class MyApiImpl implements MyApi {
     public String helloword(String str) {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest httpServletRequest = servletRequestAttributes.getRequest();
-        String json = httpServletRequest.getHeader("rule");
+        String json = httpServletRequest.getHeader("version");
         System.out.println("获取到请求头：" + json);
         return "MyApiImpl:" + str;
     }
