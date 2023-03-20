@@ -22,7 +22,7 @@ RocketMQ 4.8
 -javaagent:xxx\agent\ancient-agent-0.0.1-SNAPSHOT.jar
 
 ### 异步使用方式
--Dasync.thread.package.path=packageName
+-Dasync.thread.package.path=packagePath
 
 
 ## 注意事项
