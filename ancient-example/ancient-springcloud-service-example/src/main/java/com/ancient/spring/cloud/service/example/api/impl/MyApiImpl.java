@@ -17,6 +17,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 @RequestMapping
 @RestController
@@ -46,8 +48,8 @@ public class MyApiImpl implements MyApi {
     }
 
 
-    @PostMapping("/myThreadClient")
-    public String myThreadClient(String str) {
+    @PostMapping("/myRunnableThreadClient")
+    public String myRunnableThreadClient(String str) {
         System.out.println("同步线程获取到的上下文：" + RuleContext.get());
         new Thread(new Runnable() {
             @Override
@@ -56,6 +58,23 @@ public class MyApiImpl implements MyApi {
                 myClient.helloword(str);
             }
         }).start();
+        return "ok";
+    }
+
+    @PostMapping("/myCallableThreadClient")
+    public String myCallableThreadClient(String str) {
+        System.out.println("同步线程获取到的上下文：" + RuleContext.get());
+        Executors.newFixedThreadPool(4)
+                .submit(new Callable() {
+
+                    @Override
+                    public Object call() throws Exception {
+                        System.out.println("异步线程获取到的上下文：" + RuleContext.get());
+                        myClient.helloword(str);
+                        return null;
+                    }
+
+                });
         return "ok";
     }
 

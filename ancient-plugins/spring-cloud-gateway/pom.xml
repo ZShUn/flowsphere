@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>ancient-spring-cloud-gateway</artifactId>
+    <artifactId>ancient-plugin-spring-cloud-gateway</artifactId>
     <version>${revision}</version>
     <name>spring-cloud-gateway</name>
     <description>ancient-spring-cloud-gateway</description>
