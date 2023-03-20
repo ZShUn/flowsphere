@@ -17,6 +17,11 @@ Spring Cloud Nacos 2.2.9.RELEASE
 
 RocketMQ 4.8
 
+## 支持功能
+-- 版本路由
+
+-- RocketMQ队列路由
+
 ## 使用方式
 ### JVM参数配置
 -javaagent:xxx\agent\ancient-agent-0.0.1-SNAPSHOT.jar
