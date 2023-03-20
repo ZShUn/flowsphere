@@ -7,7 +7,7 @@ ancient是一款无侵入agent流量治理库，主要基于byte-buddy进行开�
 让程序员脱离熬夜发版，提高公司内部研发效率。
 
 ## 示意图
-![binaryTree](../Resources/binaryTree.jpg "binaryTree")
+![](https://github.com/ZShUn/ancient/blob/main/Resources/binaryTree.jpg)
 
 ## 支持组件
 
