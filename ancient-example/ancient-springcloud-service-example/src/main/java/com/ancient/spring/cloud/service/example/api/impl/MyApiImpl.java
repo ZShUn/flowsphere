@@ -50,26 +50,26 @@ public class MyApiImpl implements MyApi {
 
     @PostMapping("/myRunnableThreadClient")
     public String myRunnableThreadClient(String str) {
-        System.out.println("同步线程获取到的上下文：" + RuleContext.get());
+        System.out.println("myRunnableThreadClient同步线程获取到的上下文：" + RuleContext.get());
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("异步线程获取到的上下文：" + RuleContext.get());
+                System.out.println("myRunnableThreadClient异步线程获取到的上下文：" + RuleContext.get());
                 myClient.helloword(str);
             }
         }).start();
         return "ok";
     }
 
-    @PostMapping("/myCallableThreadClient")
+    @GetMapping("/myCallableThreadClient")
     public String myCallableThreadClient(String str) {
-        System.out.println("同步线程获取到的上下文：" + RuleContext.get());
+        System.out.println("myCallableThreadClient同步线程获取到的上下文：" + RuleContext.get());
         Executors.newFixedThreadPool(4)
                 .submit(new Callable() {
 
                     @Override
                     public Object call() throws Exception {
-                        System.out.println("异步线程获取到的上下文：" + RuleContext.get());
+                        System.out.println("myCallableThreadClient异步线程获取到的上下文：" + RuleContext.get());
                         myClient.helloword(str);
                         return null;
                     }
@@ -80,11 +80,11 @@ public class MyApiImpl implements MyApi {
 
     @PostMapping("/myThreadPoolClient")
     public String myThreadPoolClient(String str) {
-        System.out.println("同步线程获取到的上下文：" + RuleContext.get());
+        System.out.println("myThreadPoolClient同步线程获取到的上下文：" + RuleContext.get());
         threadPoolTaskExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                System.out.println("线程池获取到的上下文：" + RuleContext.get());
+                System.out.println("myThreadPoolClient线程池获取到的上下文：" + RuleContext.get());
                 myClient.helloword(str);
             }
         });

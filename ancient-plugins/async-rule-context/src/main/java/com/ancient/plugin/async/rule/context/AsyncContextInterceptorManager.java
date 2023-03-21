@@ -9,8 +9,11 @@ public class AsyncContextInterceptorManager {
 
     private static final String RUN = "run";
 
+    private static final String CALL = "call";
+
     static {
         METHOD.add(RUN);
+        METHOD.add(CALL);
     }
 
     public static boolean isInterceptorMethod(String methodName) {

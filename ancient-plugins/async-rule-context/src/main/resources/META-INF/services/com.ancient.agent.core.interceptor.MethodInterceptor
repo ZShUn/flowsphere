@@ -1,1 +1,2 @@
 com.ancient.plugin.async.rule.context.RunnableMethodInterceptor
+com.ancient.plugin.async.rule.context.CallableMethodInterceptor
