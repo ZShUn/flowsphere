@@ -30,6 +30,31 @@ ancient是一款无侵入agent流量治理库，主要基于byte-buddy进行开�
 ### 异步使用方式
 -Dasync.thread.package.path=packagePath
 
+### RocketMQ使用方式
+```
+{
+  "rocketMQEntity":{
+    "topic":"TopicTest",
+    "producerEntityList":[
+      {
+        "queueList":[ //Topic发送的队列
+          0,
+          1
+        ]
+      }
+    ],
+    "consumerEntityList":[
+      {
+        "groupName":"CID_JODIE_2",
+        "queueList":[ //消费者消费队列
+          3,
+          4
+        ]
+      }
+    ]
+  }
+}
+```
 
-## 注意事项
-项目开发中......
+## 版本规划
+![](https://github.com/ZShUn/ancient/blob/main/Resources/Planning.png)
