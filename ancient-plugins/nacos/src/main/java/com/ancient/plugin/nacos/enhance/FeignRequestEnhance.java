@@ -35,13 +35,8 @@ public class FeignRequestEnhance implements InstanceEnhance {
             if (allArguments.length > 0 && allArguments[0] instanceof Request) {
                 Request request = (Request) allArguments[0];
                 Map<String, Collection<String>> headers = new LinkedHashMap<String, Collection<String>>();
-                RuleEntity ruleEntity = RuleContext.get();
-                if (Objects.nonNull(ruleEntity.getVersionEntity())) {
-                    List<String> contextCollection = new ArrayList<String>(1);
-                    contextCollection.add(ruleEntity.getVersionEntity().getVersion());
-                    headers.put(CommonConstant.VERSION, contextCollection);
-                }
                 headers.putAll(request.headers());
+                resolver(headers);
                 try {
                     Field headersField = Request.class.getDeclaredField(DECLARED_FIELD_NAME);
                     headersField.setAccessible(true);
@@ -50,6 +45,21 @@ public class FeignRequestEnhance implements InstanceEnhance {
                     LOGGER.error("", e);
                 }
             }
+        }
+    }
+
+
+    private void resolver(Map<String, Collection<String>> headers) {
+        RuleEntity ruleEntity = RuleContext.get();
+        if (Objects.nonNull(ruleEntity.getVersionEntity())) {
+            List<String> versionList = new ArrayList<String>();
+            versionList.add(ruleEntity.getVersionEntity().getVersion());
+            headers.put(CommonConstant.VERSION, versionList);
+        }
+        if (Objects.nonNull(ruleEntity.getRegionEntity())) {
+            List<String> regionList = new ArrayList<String>();
+            regionList.add(ruleEntity.getRegionEntity().getRegion());
+            headers.put(CommonConstant.REGION, regionList);
         }
     }
 

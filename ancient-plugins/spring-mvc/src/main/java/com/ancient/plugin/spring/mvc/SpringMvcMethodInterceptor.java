@@ -5,12 +5,15 @@ import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.interceptor.MethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.entity.RegionEntity;
+import com.ancient.common.entity.RocketMQEntity;
 import com.ancient.common.entity.RuleEntity;
 import com.ancient.common.entity.VersionEntity;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class SpringMvcMethodInterceptor implements MethodInterceptor {
@@ -21,11 +24,21 @@ public class SpringMvcMethodInterceptor implements MethodInterceptor {
             if (allArguments.length > 0 && allArguments[0] instanceof ServletRequest) {
                 ServletRequest request = (ServletRequest) allArguments[0];
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
-                RuleEntity ruleEntity = new RuleEntity();
-                ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.VERSION)));
-                RuleContext.set(ruleEntity);
+                resolver(httpRequest);
             }
         }
+    }
+
+
+    private void resolver(HttpServletRequest httpRequest) {
+        RuleEntity ruleEntity = new RuleEntity();
+        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.REGION))) {
+            ruleEntity.setRegionEntity(new RegionEntity(httpRequest.getHeader(CommonConstant.REGION)));
+        }
+        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.VERSION))) {
+            ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.VERSION)));
+        }
+        RuleContext.set(ruleEntity);
     }
 
     @Override

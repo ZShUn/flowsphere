@@ -13,6 +13,16 @@ public class RuleEntity extends BaseEntity {
 
     private VersionEntity versionEntity;
 
+    private RegionEntity regionEntity;
+
+    public RegionEntity getRegionEntity() {
+        return regionEntity;
+    }
+
+    public void setRegionEntity(RegionEntity regionEntity) {
+        this.regionEntity = regionEntity;
+    }
+
     public VersionEntity getVersionEntity() {
         return versionEntity;
     }

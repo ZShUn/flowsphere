@@ -5,6 +5,7 @@ import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.interceptor.MethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.entity.RegionEntity;
 import com.ancient.common.entity.RuleEntity;
 import com.ancient.common.entity.VersionEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -22,12 +23,23 @@ public class SpringCloudGatewayMethodInterceptor implements MethodInterceptor {
         if (allArguments.length > 0 && allArguments[0] instanceof ServerWebExchange) {
             ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
             ServerHttpRequest request = exchange.getRequest();
-            List<String> versionList = request.getHeaders().get(CommonConstant.VERSION);
-            if (!CollectionUtils.isEmpty(versionList)) {
-                RuleEntity ruleEntity = new RuleEntity();
-                ruleEntity.setVersionEntity(new VersionEntity(versionList.get(0)));
-                RuleContext.set(ruleEntity);
-            }
+            resolver(request);
+        }
+    }
+
+    private void resolver(ServerHttpRequest request) {
+        List<String> regionList = request.getHeaders().get(CommonConstant.REGION);
+        if (!CollectionUtils.isEmpty(regionList)) {
+            RuleEntity ruleEntity = new RuleEntity();
+            ruleEntity.setRegionEntity(new RegionEntity(regionList.get(0)));
+            RuleContext.set(ruleEntity);
+        }
+
+        List<String> versionList = request.getHeaders().get(CommonConstant.VERSION);
+        if (!CollectionUtils.isEmpty(versionList)) {
+            RuleEntity ruleEntity = new RuleEntity();
+            ruleEntity.setVersionEntity(new VersionEntity(versionList.get(0)));
+            RuleContext.set(ruleEntity);
         }
     }
 
