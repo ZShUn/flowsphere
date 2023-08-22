@@ -3,7 +3,7 @@ package com.ancient.plugin.nacos.enhance;
 import com.alibaba.cloud.nacos.ribbon.NacosServer;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
-import com.ancient.agent.core.interceptor.MethodInterceptorResult;
+import com.ancient.agent.core.interceptor.InstantInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RuleEntity;
@@ -28,7 +28,7 @@ public class NacosServerEnhance implements InstanceEnhance {
     }
 
     @Override
-    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, MethodInterceptorResult methodInterceptorResult) {
+    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
         if (result instanceof List) {
             List<Server> serverList = (List<Server>) result;
             serverList = new ArrayList<>(serverList);
@@ -46,8 +46,8 @@ public class NacosServerEnhance implements InstanceEnhance {
                     }
                 }
             }
-            methodInterceptorResult.setContinue(false);
-            methodInterceptorResult.setResult(serverList);
+            instantInterceptorResult.setContinue(false);
+            instantInterceptorResult.setResult(serverList);
         }
     }
 

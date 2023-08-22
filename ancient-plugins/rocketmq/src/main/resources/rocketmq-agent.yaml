@@ -1,0 +1,2 @@
+pointcutConfigs:
+  - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig1

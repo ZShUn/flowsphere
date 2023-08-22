@@ -9,18 +9,11 @@ public class NacosInterceptorManager {
 
     private static final Set<String> METHOD = new HashSet<String>();
 
-    private static final String LOAD_BALANCER_FEIGN_CLIENT = "org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient";
-
-    private static final String EXECUTE = "execute";
-
     private static final String COMPOSITE_PREDICATE = "com.netflix.loadbalancer.CompositePredicate";
 
     private static final String GET_ELIGIBLE_SERVERS = "getEligibleServers";
 
     static {
-        CLAZZ.add(LOAD_BALANCER_FEIGN_CLIENT);
-        METHOD.add(EXECUTE);
-
         CLAZZ.add(COMPOSITE_PREDICATE);
         METHOD.add(GET_ELIGIBLE_SERVERS);
     }

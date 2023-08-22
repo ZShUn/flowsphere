@@ -2,7 +2,7 @@ package com.ancient.plugin.rocketmq.enhance;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
-import com.ancient.agent.core.interceptor.MethodInterceptorResult;
+import com.ancient.agent.core.interceptor.InstantInterceptorResult;
 import com.ancient.common.cache.RuleCache;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.entity.ProducerEntity;
@@ -24,7 +24,7 @@ public class ProducerMessageQueueEnhance implements InstanceEnhance {
         return INSTANCE;
     }
 
-    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, MethodInterceptorResult methodInterceptorResult) {
+    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
         if (allArguments[0] instanceof TopicPublishInfo) {
             TopicPublishInfo topicPublishInfo = (TopicPublishInfo) allArguments[0];
             RuleEntity ruleEntity = RuleCache.get(CommonConstant.RULE_KEY);
