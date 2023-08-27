@@ -15,9 +15,9 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
     }
 
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
-        if (NacosInterceptorManager.isInterceptorMethod(method.getName())) {
+//        if (NacosInterceptorManager.isInterceptorMethod(method.getName())) {
             NacosServerEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, result, instantInterceptorResult);
-        }
+//        }
     }
 
     public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {

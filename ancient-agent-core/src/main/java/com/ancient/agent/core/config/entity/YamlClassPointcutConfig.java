@@ -1,12 +1,13 @@
 package com.ancient.agent.core.config.entity;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public class YamlClassPointcutConfig {
 
     private String className;
 
-    private List<YamlMethodPointcutConfig> yamlMethodPointcutConfigs;
+    private Collection<YamlMethodPointcutConfig> yamlMethodPointcutConfigs = new LinkedList<>();
 
     public String getClassName() {
         return className;
@@ -16,12 +17,11 @@ public class YamlClassPointcutConfig {
         this.className = className;
     }
 
-    public List<YamlMethodPointcutConfig> getMethodPointcutConfigs() {
+    public Collection<YamlMethodPointcutConfig> getYamlMethodPointcutConfigs() {
         return yamlMethodPointcutConfigs;
     }
 
-    public void setMethodPointcutConfigs(List<YamlMethodPointcutConfig> yamlMethodPointcutConfigs) {
+    public void setYamlMethodPointcutConfigs(Collection<YamlMethodPointcutConfig> yamlMethodPointcutConfigs) {
         this.yamlMethodPointcutConfigs = yamlMethodPointcutConfigs;
     }
-
 }

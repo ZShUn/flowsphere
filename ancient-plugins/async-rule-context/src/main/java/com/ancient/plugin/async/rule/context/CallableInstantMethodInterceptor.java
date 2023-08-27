@@ -14,20 +14,16 @@ public class CallableInstantMethodInterceptor implements InstantMethodIntercepto
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantInterceptorResult instantInterceptorResult) {
-        if (AsyncContextInterceptorManager.isInterceptorMethod(method.getName())) {
-            Object object = customContextAccessor.getCustomContext();
-            if (Objects.nonNull(object) && object instanceof CustomContext) {
-                CustomContext customContext = (CustomContext) object;
-                RuleContext.set(customContext.getRuleContextStr());
-            }
+        Object object = customContextAccessor.getCustomContext();
+        if (Objects.nonNull(object) && object instanceof CustomContext) {
+            CustomContext customContext = (CustomContext) object;
+            RuleContext.set(customContext.getRuleContextStr());
         }
     }
 
     @Override
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
-        if (AsyncContextInterceptorManager.isInterceptorMethod(method.getName())) {
-            RuleContext.remove();
-        }
+        RuleContext.remove();
     }
 
     @Override
