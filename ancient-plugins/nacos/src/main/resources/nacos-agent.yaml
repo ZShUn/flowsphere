@@ -1,2 +1,5 @@
 pointcutConfigs:
-  - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig
+  - className: com.netflix.loadbalancer.CompositePredicate
+    yamlMethodPointcutConfigs:
+      - methodName: getEligibleServers
+        type: instant

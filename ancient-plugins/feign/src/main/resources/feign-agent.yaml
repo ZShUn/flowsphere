@@ -1,0 +1,5 @@
+pointcutConfigs:
+  - className: org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient
+    yamlMethodPointcutConfigs:
+      - methodName: execute
+        type: instant

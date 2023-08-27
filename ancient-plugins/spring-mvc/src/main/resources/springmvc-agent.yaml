@@ -1,0 +1,5 @@
+pointcutConfigs:
+  - className: org.springframework.web.filter.RequestContextFilter
+    yamlMethodPointcutConfigs:
+      - methodName: doFilterInternal
+        type: instant
