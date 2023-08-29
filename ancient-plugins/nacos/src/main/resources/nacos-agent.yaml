@@ -1,5 +1,5 @@
 pointcutConfigs:
   - className: com.netflix.loadbalancer.CompositePredicate
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: getEligibleServers
         type: instant

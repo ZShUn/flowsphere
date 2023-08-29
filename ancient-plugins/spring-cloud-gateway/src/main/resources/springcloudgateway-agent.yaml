@@ -1,5 +1,5 @@
 pointcutConfigs:
   - className: org.springframework.cloud.gateway.filter.LoadBalancerClientFilter
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: filter
         type: instant

@@ -1,10 +1,10 @@
 pointcutConfigs:
   - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
     - methodName: example
       type: instant
   - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig1
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: example1
         type: instant1
       - methodName: example2

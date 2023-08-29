@@ -7,7 +7,9 @@ public class YamlClassPointcutConfig {
 
     private String className;
 
-    private Collection<YamlMethodPointcutConfig> yamlMethodPointcutConfigs = new LinkedList<>();
+    private String interceptorName;
+
+    private Collection<YamlMethodPointcutConfig> methodPointcutConfigs = new LinkedList<>();
 
     public String getClassName() {
         return className;
@@ -17,11 +19,11 @@ public class YamlClassPointcutConfig {
         this.className = className;
     }
 
-    public Collection<YamlMethodPointcutConfig> getYamlMethodPointcutConfigs() {
-        return yamlMethodPointcutConfigs;
+    public String getInterceptorName() {
+        return interceptorName;
     }
 
-    public void setYamlMethodPointcutConfigs(Collection<YamlMethodPointcutConfig> yamlMethodPointcutConfigs) {
-        this.yamlMethodPointcutConfigs = yamlMethodPointcutConfigs;
+    public void setInterceptorName(String interceptorName) {
+        this.interceptorName = interceptorName;
     }
 }

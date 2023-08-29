@@ -10,8 +10,8 @@ public class ConstructorInterceptorTemplate {
     public static void intercept(
             @This Object obj,
             @AllArguments Object[] allArguments) {
-        ConstructorInterceptorManager.getMethodInterceptorList()
-                .forEach(constructorInterceptor -> constructorInterceptor.onConstructor(obj, allArguments));
+//        ConstructorInterceptorManager.getMethodInterceptorList()
+//                .forEach(constructorInterceptor -> constructorInterceptor.onConstructor(obj, allArguments));
     }
 
 }

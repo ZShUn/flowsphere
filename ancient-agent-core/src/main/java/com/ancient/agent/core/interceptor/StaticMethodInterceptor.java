@@ -1,4 +1,4 @@
 package com.ancient.agent.core.interceptor;
 
-public interface StaticMethodInterceptor {
+public interface StaticMethodInterceptor extends MethodInterceptor {
 }

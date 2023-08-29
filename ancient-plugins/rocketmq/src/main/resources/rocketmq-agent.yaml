@@ -1,13 +1,13 @@
 pointcutConfigs:
   - className: org.apache.rocketmq.client.impl.consumer.PullAPIWrapper
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: pullKernelImpl
         type: instant
   - className: org.apache.rocketmq.client.latency.MQFaultStrategy
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: selectOneMessageQueue
         type: instant
   - className: org.apache.rocketmq.client.impl.consumer.PullMessageService
-    yamlMethodPointcutConfigs:
+    methodPointcutConfigs:
       - methodName: executePullRequestImmediately
         type: instant
