@@ -1,7 +1,7 @@
 package com.ancient.agent.core;
 
 import com.ancient.agent.core.config.PointcutConfigLoader;
-import com.ancient.agent.core.config.entity.YamlClassPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

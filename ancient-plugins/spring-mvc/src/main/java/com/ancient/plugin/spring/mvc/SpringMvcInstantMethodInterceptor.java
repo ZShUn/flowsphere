@@ -1,8 +1,8 @@
 package com.ancient.plugin.spring.mvc;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.agent.core.interceptor.InstantMethodInterceptor;
-import com.ancient.agent.core.interceptor.InstantInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RegionEntity;
@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 public class SpringMvcInstantMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantInterceptorResult instantInterceptorResult) {
+    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
 //        if (SpringMvcInterceptorManager.isInterceptorMethod(method.getName())) {
             if (allArguments.length > 0 && allArguments[0] instanceof ServletRequest) {
                 ServletRequest request = (ServletRequest) allArguments[0];
@@ -41,7 +41,7 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
     }
 
     @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
 
     }
 

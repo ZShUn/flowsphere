@@ -1,13 +1,13 @@
-package com.ancient.agent.core.interceptor;
+package com.ancient.agent.core.interceptor.executor;
 
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;
 
-public class ConstructorInterceptorTemplate {
+public class ConstructorInterceptorExecutor {
 
     @RuntimeType
-    public static void intercept(
+    public void intercept(
             @This Object obj,
             @AllArguments Object[] allArguments) {
 //        ConstructorInterceptorManager.getMethodInterceptorList()

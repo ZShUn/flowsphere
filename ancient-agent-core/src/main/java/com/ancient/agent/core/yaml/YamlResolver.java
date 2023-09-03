@@ -1,7 +1,7 @@
 package com.ancient.agent.core.yaml;
 
-import com.ancient.agent.core.config.entity.YamlPluginConfig;
-import com.ancient.agent.core.config.entity.YamlPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlPluginConfig;
+import com.ancient.agent.core.config.yaml.YamlPointcutConfig;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;

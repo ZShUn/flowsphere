@@ -1,10 +1,20 @@
-package com.ancient.agent.core.config.entity;
+package com.ancient.agent.core.config.yaml;
 
 public class YamlMethodPointcutConfig {
 
     private String methodName;
 
     private String type;
+
+    private String interceptorName;
+
+    public String getInterceptorName() {
+        return interceptorName;
+    }
+
+    public void setInterceptorName(String interceptorName) {
+        this.interceptorName = interceptorName;
+    }
 
     public String getMethodName() {
         return methodName;

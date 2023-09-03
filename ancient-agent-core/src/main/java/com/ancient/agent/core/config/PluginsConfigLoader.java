@@ -1,6 +1,6 @@
 package com.ancient.agent.core.config;
 
-import com.ancient.agent.core.config.entity.YamlPluginConfig;
+import com.ancient.agent.core.config.yaml.YamlPluginConfig;
 import com.ancient.agent.core.utils.AgentPath;
 import com.ancient.agent.core.utils.FileUtils;
 import com.ancient.agent.core.yaml.YamlResolver;

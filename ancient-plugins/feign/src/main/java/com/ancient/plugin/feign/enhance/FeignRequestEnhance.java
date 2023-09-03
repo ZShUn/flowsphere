@@ -2,7 +2,7 @@ package com.ancient.plugin.feign.enhance;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
-import com.ancient.agent.core.interceptor.InstantInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RuleEntity;
@@ -32,7 +32,7 @@ public class FeignRequestEnhance implements InstanceEnhance {
     }
 
     @Override
-    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
+    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         if (method.getName().equals(METHOD_NAME)) {
             if (allArguments.length > 0 && allArguments[0] instanceof Request) {
                 Request request = (Request) allArguments[0];

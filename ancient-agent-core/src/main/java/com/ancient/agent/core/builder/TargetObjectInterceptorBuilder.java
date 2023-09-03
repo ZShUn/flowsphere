@@ -5,7 +5,7 @@ import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.FieldAccessor;
 
-public class TargetObjectBuilderInterceptor implements InterceptorBuilder {
+public class TargetObjectInterceptorBuilder implements InterceptorBuilder {
 
     public static final String CONTEXT_ATTR_NAME = "_$CustomContextAccessorField_ws";
 

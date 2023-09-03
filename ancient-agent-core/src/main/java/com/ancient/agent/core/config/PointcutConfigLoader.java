@@ -1,7 +1,7 @@
 package com.ancient.agent.core.config;
 
-import com.ancient.agent.core.config.entity.YamlClassPointcutConfig;
-import com.ancient.agent.core.config.entity.YamlPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlPointcutConfig;
 import com.ancient.agent.core.yaml.YamlResolver;
 
 import java.io.InputStream;

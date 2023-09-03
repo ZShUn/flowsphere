@@ -1,8 +1,8 @@
 package com.ancient.plugin.spring.cloud.gateway;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.agent.core.interceptor.InstantMethodInterceptor;
-import com.ancient.agent.core.interceptor.InstantInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RegionEntity;
@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
 public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantInterceptorResult instantInterceptorResult) {
+    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         if (allArguments.length > 0 && allArguments[0] instanceof ServerWebExchange) {
             ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
             ServerHttpRequest request = exchange.getRequest();
@@ -44,7 +44,7 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
     }
 
     @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
 
     }
 

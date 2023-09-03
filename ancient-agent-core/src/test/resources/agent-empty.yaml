@@ -2,10 +2,13 @@ pointcutConfigs:
   - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig
     methodPointcutConfigs:
     - methodName: example
-      type: instant
+      type: static
+      interceptorName: com.ancient.agent.core.config.entity.YamlClassPointcutConfig
   - className: com.ancient.agent.core.config.entity.YamlClassPointcutConfig1
     methodPointcutConfigs:
       - methodName: example1
-        type: instant1
+        type: instant
+        interceptorName: com.ancient.agent.core.config.entity.YamlClassPointcutConfig1
       - methodName: example2
-        type: instant2
+        type: constructor
+        interceptorName: com.ancient.agent.core.config.entity.YamlClassPointcutConfig1

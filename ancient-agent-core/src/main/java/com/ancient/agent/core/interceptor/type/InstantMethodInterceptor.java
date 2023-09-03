@@ -1,6 +1,7 @@
-package com.ancient.agent.core.interceptor;
+package com.ancient.agent.core.interceptor.type;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
+import com.ancient.agent.core.interceptor.MethodInterceptor;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
@@ -13,13 +14,13 @@ public interface InstantMethodInterceptor extends MethodInterceptor {
      * @param allArguments             注入目标方法的全部参数
      * @param callable                 调用目标方法
      * @param method                   目标方法
-     * @param instantInterceptorResult 自定义拦截器返回结果
+     * @param instantMethodInterceptorResult 自定义拦截器返回结果
      */
     void beforeMethod(CustomContextAccessor customContextAccessor,
                       Object[] allArguments,
                       Callable<?> callable,
                       Method method,
-                      InstantInterceptorResult instantInterceptorResult);
+                      InstantMethodInterceptorResult instantMethodInterceptorResult);
 
     /**
      * @param customContextAccessor    目标对象
@@ -27,14 +28,14 @@ public interface InstantMethodInterceptor extends MethodInterceptor {
      * @param callable                 调用目标方法
      * @param method                   目标方法
      * @param result                   方法执行结果
-     * @param instantInterceptorResult 自定义拦截器返回结果
+     * @param instantMethodInterceptorResult 自定义拦截器返回结果
      */
     void afterMethod(CustomContextAccessor customContextAccessor,
                      Object[] allArguments,
                      Callable<?> callable,
                      Method method,
                      Object result,
-                     InstantInterceptorResult instantInterceptorResult);
+                     InstantMethodInterceptorResult instantMethodInterceptorResult);
 
     /**
      * @param customContextAccessor 目标对象

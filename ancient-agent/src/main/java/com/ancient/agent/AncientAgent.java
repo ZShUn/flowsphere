@@ -1,13 +1,13 @@
 package com.ancient.agent;
 
+import com.ancient.agent.core.AncientAgentJunction;
 import com.ancient.agent.core.AncientAgentListener;
 import com.ancient.agent.core.AncientAgentTransform;
 import com.ancient.agent.core.AncientBootstrap;
-import com.ancient.agent.core.AncientAgentJunction;
 import com.ancient.agent.core.config.PluginsConfigLoader;
 import com.ancient.agent.core.config.PointcutConfigLoader;
-import com.ancient.agent.core.config.entity.YamlClassPointcutConfig;
-import com.ancient.agent.core.config.entity.YamlMethodPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
+import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.utils.URLClassLoaderFactory;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
@@ -17,10 +17,10 @@ import java.io.File;
 import java.io.InputStream;
 import java.lang.instrument.Instrumentation;
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class AncientAgent {
 
@@ -35,7 +35,7 @@ public class AncientAgent {
         ClassLoader classLoader = URLClassLoaderFactory.createClassLoader(pluginUrls, AncientAgent.class.getClassLoader());
         InputStream agentYamlInputStream = classLoader.getResourceAsStream(String.join(File.separator, "agent.yaml"));
         List<String> pluginNames = PluginsConfigLoader.load(agentYamlInputStream);
-        Map<String, List<YamlMethodPointcutConfig>> classPointcutConfigMap = new HashMap<>();
+        Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap = new HashMap<>();
         for (String pluginName : pluginNames) {
             InputStream pluginClassLoader = classLoader.getResourceAsStream(String.join(File.separator, pluginName + "-agent.yaml"));
             List<YamlClassPointcutConfig> classPointcutConfigs = PointcutConfigLoader.load(pluginClassLoader);

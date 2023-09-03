@@ -1,6 +1,6 @@
 package com.ancient.agent.core;
 
-import com.ancient.agent.core.config.entity.YamlPluginConfig;
+import com.ancient.agent.core.config.yaml.YamlPluginConfig;
 import com.ancient.agent.core.yaml.YamlResolver;
 import org.junit.jupiter.api.Test;
 

@@ -2,7 +2,7 @@ package com.ancient.plugin.rocketmq.enhance;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
-import com.ancient.agent.core.interceptor.InstantInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import com.ancient.common.cache.RuleCache;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.entity.ConsumerEntity;
@@ -26,7 +26,7 @@ public class ConsumerPullRequestEnhance implements InstanceEnhance {
         return INSTANCE;
     }
 
-    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantInterceptorResult instantInterceptorResult) {
+    public void enhance(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         if (allArguments[0] instanceof PullRequest) {
             PullRequest pullRequest = (PullRequest) allArguments[0];
 
@@ -42,12 +42,12 @@ public class ConsumerPullRequestEnhance implements InstanceEnhance {
                 for (ConsumerEntity consumerEntity : ruleEntity.getRocketMQEntity().getConsumerEntityList()) {
                     if (consumerEntity.getGroupName().equals(pullRequest.getConsumerGroup())
                             && consumerEntity.getQueueList().contains(messageQueue.getQueueId())) {
-                        instantInterceptorResult.setContinue(true);
+                        instantMethodInterceptorResult.setContinue(true);
                         return;
                     }
                 }
             }
-            instantInterceptorResult.setContinue(false);
+            instantMethodInterceptorResult.setContinue(false);
         }
     }
 }

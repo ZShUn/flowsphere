@@ -1,6 +1,6 @@
-package com.ancient.agent.core.interceptor;
+package com.ancient.agent.core.interceptor.type;
 
-public class InstantInterceptorResult {
+public class InstantMethodInterceptorResult {
 
     private boolean isContinue = true;
 

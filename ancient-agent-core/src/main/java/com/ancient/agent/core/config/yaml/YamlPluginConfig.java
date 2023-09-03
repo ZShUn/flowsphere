@@ -1,4 +1,4 @@
-package com.ancient.agent.core.config.entity;
+package com.ancient.agent.core.config.yaml;
 
 import java.util.List;
 
