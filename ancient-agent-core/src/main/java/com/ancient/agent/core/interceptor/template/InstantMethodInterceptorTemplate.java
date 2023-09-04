@@ -1,14 +1,27 @@
-package com.ancient.agent.core.interceptor.executor;
+package com.ancient.agent.core.interceptor.template;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
+import com.ancient.agent.core.interceptor.MethodInterceptorOperator;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.type.StaticMethodInterceptor;
+import net.bytebuddy.description.method.MethodDescription;
+import net.bytebuddy.dynamic.DynamicType;
+import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.implementation.bind.annotation.*;
+import net.bytebuddy.matcher.ElementMatchers;
 
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
-public class InstantMethodInterceptorExecutor {
+public class InstantMethodInterceptorTemplate implements MethodInterceptorOperator {
 
+    private final Map<String, List<StaticMethodInterceptor>> interceptorMap;
+
+    public InstantMethodInterceptorTemplate(Map<String, List<StaticMethodInterceptor>> interceptorMap) {
+        this.interceptorMap = interceptorMap;
+    }
 
     /**
      * @param obj          目标对象
@@ -40,5 +53,10 @@ public class InstantMethodInterceptorExecutor {
 
     }
 
+
+    @Override
+    public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder, MethodDescription pointcut) {
+        return builder.method(ElementMatchers.is(pointcut)).intercept(MethodDelegation.withDefaultConfiguration().to(this));
+    }
 
 }

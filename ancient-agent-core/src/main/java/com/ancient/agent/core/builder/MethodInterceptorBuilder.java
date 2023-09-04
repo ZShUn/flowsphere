@@ -1,7 +1,7 @@
 package com.ancient.agent.core.builder;
 
 import com.ancient.agent.core.config.MethodMatcherConfig;
-import com.ancient.agent.core.interceptor.executor.ConstructorInterceptorExecutor;
+import com.ancient.agent.core.interceptor.template.ConstructorInterceptorTemplate;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.utils.MethodTypeUtils;
 import net.bytebuddy.description.method.MethodDescription;
@@ -61,7 +61,7 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
     private void builderConstructorMethod(DynamicType.Builder<?> builder) {
         builder.constructor(ElementMatchers.isConstructor())
                 .intercept(SuperMethodCall.INSTANCE.andThen(MethodDelegation.withDefaultConfiguration()
-                        .to(ConstructorInterceptorExecutor.class)));
+                        .to(ConstructorInterceptorTemplate.class)));
     }
 
     private void builderStaticMethod(DynamicType.Builder<?> builder) {
