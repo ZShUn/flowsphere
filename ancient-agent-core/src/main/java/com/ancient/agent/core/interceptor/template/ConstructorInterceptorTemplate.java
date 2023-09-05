@@ -1,7 +1,7 @@
 package com.ancient.agent.core.interceptor.template;
 
 import com.ancient.agent.core.interceptor.MethodInterceptorOperator;
-import com.ancient.agent.core.interceptor.type.StaticMethodInterceptor;
+import com.ancient.agent.core.interceptor.type.ConstructorInterceptor;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class ConstructorInterceptorTemplate implements MethodInterceptorOperator {
 
-    private final Map<String, List<StaticMethodInterceptor>> interceptorMap;
+    private final Map<String, List<ConstructorInterceptor>> interceptorMap;
 
-    public ConstructorInterceptorTemplate(Map<String, List<StaticMethodInterceptor>> interceptorMap) {
+    public ConstructorInterceptorTemplate(Map<String, List<ConstructorInterceptor>> interceptorMap) {
         this.interceptorMap = interceptorMap;
     }
 
@@ -26,8 +26,11 @@ public class ConstructorInterceptorTemplate implements MethodInterceptorOperator
     public void intercept(
             @This Object obj,
             @AllArguments Object[] allArguments) {
-//        ConstructorInterceptorManager.getMethodInterceptorList()
-//                .forEach(constructorInterceptor -> constructorInterceptor.onConstructor(obj, allArguments));
+        for (Map.Entry<String, List<ConstructorInterceptor>> entry : interceptorMap.entrySet()) {
+            for (ConstructorInterceptor interceptor : entry.getValue()) {
+                interceptor.onConstructor(obj, allArguments);
+            }
+        }
     }
 
     @Override

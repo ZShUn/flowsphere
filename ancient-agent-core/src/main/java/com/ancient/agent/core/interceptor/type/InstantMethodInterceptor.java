@@ -34,8 +34,7 @@ public interface InstantMethodInterceptor extends MethodInterceptor {
                      Object[] allArguments,
                      Callable<?> callable,
                      Method method,
-                     Object result,
-                     InstantMethodInterceptorResult instantMethodInterceptorResult);
+                     Object result);
 
     /**
      * @param customContextAccessor 目标对象
