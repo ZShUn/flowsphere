@@ -2,7 +2,7 @@ package com.ancient.plugin.rocketmq.enhance;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.enhance.InstanceEnhance;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.common.cache.RuleCache;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.entity.ConsumerEntity;

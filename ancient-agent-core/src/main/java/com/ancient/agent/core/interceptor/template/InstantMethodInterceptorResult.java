@@ -1,4 +1,4 @@
-package com.ancient.agent.core.interceptor.type;
+package com.ancient.agent.core.interceptor.template;
 
 public class InstantMethodInterceptorResult {
 

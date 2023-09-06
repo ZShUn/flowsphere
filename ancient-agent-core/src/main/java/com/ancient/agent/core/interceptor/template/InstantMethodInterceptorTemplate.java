@@ -3,7 +3,6 @@ package com.ancient.agent.core.interceptor.template;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.MethodInterceptorOperator;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;

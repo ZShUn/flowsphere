@@ -2,7 +2,7 @@ package com.ancient.plugin.feign;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.plugin.feign.enhance.FeignRequestEnhance;
 
 import java.lang.reflect.Method;

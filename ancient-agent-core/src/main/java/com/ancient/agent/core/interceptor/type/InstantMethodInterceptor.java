@@ -2,6 +2,7 @@ package com.ancient.agent.core.interceptor.type;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
+import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;

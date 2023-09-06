@@ -8,12 +8,12 @@ public class MethodInterceptorFactory {
 
     private static final Map<String, MethodInterceptor> METHOD_INTERCEPTOR_MAP = new HashMap<>();
 
-    public MethodInterceptor getMethodInterceptor(String methodInterceptorClassName, ClassLoader classLoader) {
+    public static MethodInterceptor getMethodInterceptor(String methodInterceptorClassName, ClassLoader classLoader) {
         String cacheKey = String.format("%s_%s@%s", methodInterceptorClassName, classLoader.getClass().getName(), Integer.toHexString(classLoader.hashCode()));
         return METHOD_INTERCEPTOR_MAP.computeIfAbsent(cacheKey, key -> createMethodInterceptor(methodInterceptorClassName, classLoader));
     }
 
-    private MethodInterceptor createMethodInterceptor(String methodInterceptorClassName, ClassLoader classLoader) {
+    private static MethodInterceptor createMethodInterceptor(String methodInterceptorClassName, ClassLoader classLoader) {
         try {
             return (MethodInterceptor) Class.forName(methodInterceptorClassName, true, classLoader).getDeclaredConstructor().newInstance();
         } catch (InstantiationException e) {

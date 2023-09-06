@@ -3,7 +3,7 @@ package com.ancient.plugin.async.rule.context;
 import com.ancient.agent.core.context.CustomContext;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.common.context.RuleContext;
 
 import java.lang.reflect.Method;

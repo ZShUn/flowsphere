@@ -1,7 +1,6 @@
 package com.ancient.agent.core.interceptor.template;
 
 import com.ancient.agent.core.interceptor.MethodInterceptorOperator;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.StaticMethodInterceptor;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.dynamic.DynamicType;
@@ -23,7 +22,7 @@ public class StaticMethodInterceptorTemplate implements MethodInterceptorOperato
     }
 
     @RuntimeType
-    public static Object intercept(@Origin final Class<?> klass, @This Object obj, @AllArguments Object[] allArguments, @SuperCall Callable<?> callable, @Origin Method method) throws Exception {
+    public Object intercept(@Origin final Class<?> klass, @This Object obj, @AllArguments Object[] allArguments, @SuperCall Callable<?> callable, @Origin Method method) throws Exception {
         //类似拦截器效果
         Object result = null;
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
