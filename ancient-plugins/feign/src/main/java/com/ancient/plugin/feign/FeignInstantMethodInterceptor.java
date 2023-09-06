@@ -18,7 +18,7 @@ public class FeignInstantMethodInterceptor implements InstantMethodInterceptor {
     }
 
     @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
 
     }
 

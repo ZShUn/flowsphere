@@ -19,13 +19,11 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-//        if (SpringMvcInterceptorManager.isInterceptorMethod(method.getName())) {
-            if (allArguments.length > 0 && allArguments[0] instanceof ServletRequest) {
-                ServletRequest request = (ServletRequest) allArguments[0];
-                HttpServletRequest httpRequest = (HttpServletRequest) request;
-                resolver(httpRequest);
-            }
-//        }
+        if (allArguments.length > 0 && allArguments[0] instanceof ServletRequest) {
+            ServletRequest request = (ServletRequest) allArguments[0];
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            resolver(httpRequest);
+        }
     }
 
 
@@ -41,7 +39,7 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
     }
 
     @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
 
     }
 

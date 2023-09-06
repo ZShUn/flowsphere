@@ -27,6 +27,16 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
         }
     }
 
+    @Override
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
+
+    }
+
+    @Override
+    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
+
+    }
+
     private void resolver(ServerHttpRequest request) {
         List<String> regionList = request.getHeaders().get(CommonConstant.REGION);
         if (!CollectionUtils.isEmpty(regionList)) {
@@ -43,14 +53,5 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
         }
     }
 
-    @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-
-    }
-
-    @Override
-    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
-
-    }
 
 }

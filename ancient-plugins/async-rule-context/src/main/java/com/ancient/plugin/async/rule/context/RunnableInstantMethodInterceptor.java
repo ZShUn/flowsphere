@@ -22,7 +22,7 @@ public class RunnableInstantMethodInterceptor implements InstantMethodIntercepto
     }
 
     @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
         RuleContext.remove();
     }
 

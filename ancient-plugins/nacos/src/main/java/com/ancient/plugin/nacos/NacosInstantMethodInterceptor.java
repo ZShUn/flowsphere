@@ -10,16 +10,19 @@ import java.util.concurrent.Callable;
 
 public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
 
+    @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
 
     }
 
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-//        if (NacosInterceptorManager.isInterceptorMethod(method.getName())) {
-            NacosServerEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, result, instantMethodInterceptorResult);
-//        }
+    @Override
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
+        NacosServerEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, result, null);
+
     }
 
+
+    @Override
     public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
 
     }
