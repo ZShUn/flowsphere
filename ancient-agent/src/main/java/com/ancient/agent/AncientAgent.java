@@ -28,26 +28,12 @@ public class AncientAgent {
 
     public static void premain(String agentArgs, Instrumentation inst) {
         LOGGER.info("-------------------AncientAgent开始启动-------------------");
-        AncientBootstrap.load();
-
-        //解析plugins配置
-        URL[] pluginUrls = PluginsConfigLoader.getPluginURL().toArray(new URL[]{});
-        ClassLoader classLoader = URLClassLoaderFactory.createClassLoader(pluginUrls, AncientAgent.class.getClassLoader());
-        InputStream agentYamlInputStream = classLoader.getResourceAsStream(String.join(File.separator, "agent.yaml"));
-        List<String> pluginNames = PluginsConfigLoader.load(agentYamlInputStream);
-        Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap = new HashMap<>();
-        for (String pluginName : pluginNames) {
-            InputStream pluginClassLoader = classLoader.getResourceAsStream(String.join(File.separator, pluginName + "-agent.yaml"));
-            List<YamlClassPointcutConfig> classPointcutConfigs = PointcutConfigLoader.load(pluginClassLoader);
-            for (YamlClassPointcutConfig classPointcutConfig : classPointcutConfigs) {
-                classPointcutConfigMap.computeIfAbsent(classPointcutConfig.getClassName(), key -> classPointcutConfig.getMethodPointcutConfigs());
-            }
-        }
-
+        AncientBootstrap.loadRule();
+        Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap =  AncientBootstrap.loadPlugins();
         //解析pointcut配置
         new AgentBuilder.Default()
-                .type(new AncientAgentJunction(classPointcutConfigMap))
-                .transform(new AncientAgentTransform(classPointcutConfigMap))
+                .type(new AncientAgentJunction(methodPointcutConfigMap))
+                .transform(new AncientAgentTransform(methodPointcutConfigMap))
                 .with(new AncientAgentListener())
                 .installOn(inst);
         LOGGER.info("-------------------AncientAgent启动成功-------------------");

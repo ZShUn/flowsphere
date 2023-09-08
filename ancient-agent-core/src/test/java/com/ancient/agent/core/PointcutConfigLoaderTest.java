@@ -16,7 +16,7 @@ public class PointcutConfigLoaderTest {
 
     @Test
     public void loadTest() throws FileNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream(new File(PointcutConfigLoaderTest.class.getResource("/").getPath() + "agent-empty.yaml"));
+        FileInputStream fileInputStream = new FileInputStream(new File(PointcutConfigLoaderTest.class.getResource("/").getPath() + "example-agent.yaml"));
         List<YamlClassPointcutConfig> classPointcutConfigs = PointcutConfigLoader.load(fileInputStream);
         assertNotNull(classPointcutConfigs);
         assertTrue(classPointcutConfigs.size() > 0);

@@ -11,7 +11,10 @@ import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class MethodInterceptorBuilder implements InterceptorBuilder {
 
@@ -31,16 +34,17 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
     public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder) {
 
         for (MethodDescription.InDefinedShape each : typePointcut.getDeclaredMethods()) {
-
             Map<String, List<MethodInterceptor>> methodInterceptorMap = new HashMap<>();
 
             for (MethodMatcherConfig methodMatcherConfig : methodMatcherConfigs) {
                 if (methodMatcherConfig.getPointcut().matches(each)) {
-                    methodInterceptorMap.computeIfAbsent(methodMatcherConfig.getType(), key ->
-                            new LinkedList<>());
-                    methodInterceptorMap.get(methodMatcherConfig.getType())
-                            .add(MethodInterceptorFactory.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), classLoader));
+                    methodInterceptorMap.computeIfAbsent(methodMatcherConfig.getType(), key -> new LinkedList<>());
+                    methodInterceptorMap.get(methodMatcherConfig.getType()).add(MethodInterceptorFactory.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), classLoader));
                 }
+            }
+
+            if (methodInterceptorMap.isEmpty()) {
+                continue;
             }
 
             if (MethodTypeUtils.isInstantMethod(each)) {
@@ -52,6 +56,7 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
             if (MethodTypeUtils.isConstructorMethod(each)) {
                 builder = new StaticMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
             }
+
         }
         return builder;
     }
