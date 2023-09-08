@@ -12,10 +12,11 @@ public class TargetObjectInterceptorBuilder implements InterceptorBuilder {
 
     @Override
     public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder) {
-        return builder.defineField(
-                        EXTRA_DATA, Object.class, Opcodes.ACC_PRIVATE | Opcodes.ACC_VOLATILE)
-                .implement(CustomContextAccessor.class)
-                .intercept(FieldAccessor.ofField(EXTRA_DATA));
+//        return builder.defineField(
+//                        EXTRA_DATA, Object.class, Opcodes.ACC_PRIVATE | Opcodes.ACC_VOLATILE)
+//                .implement(CustomContextAccessor.class)
+//                .intercept(FieldAccessor.ofField(EXTRA_DATA));
+        return builder.defineField(EXTRA_DATA, Object.class).implement(CustomContextAccessor.class).intercept(FieldAccessor.ofField(EXTRA_DATA));
     }
 
 }

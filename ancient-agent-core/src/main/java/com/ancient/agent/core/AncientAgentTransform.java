@@ -31,7 +31,6 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
 
         Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
-
         return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
                 new MethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, classLoader));
     }
