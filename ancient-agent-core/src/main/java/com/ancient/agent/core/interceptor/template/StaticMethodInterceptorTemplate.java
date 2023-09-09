@@ -27,31 +27,44 @@ public class StaticMethodInterceptorTemplate implements MethodInterceptorOperato
         Object result = null;
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
         try {
-            for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (StaticMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.beforeMethod(klass, method, allArguments, instantMethodInterceptorResult);
-                }
-            }
+            instantMethodInterceptorResult = beforeMethod(klass, method, allArguments, instantMethodInterceptorResult);
             if (!instantMethodInterceptorResult.isContinue()) {
                 return instantMethodInterceptorResult.getResult();
             }
             result = callable.call();
             return result;
         } catch (Throwable e) {
-            for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (StaticMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.exceptionMethod(klass, method, allArguments, e);
-                }
-            }
+            exceptionMethod(klass, method, allArguments, e);
             throw e;
         } finally {
-            for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (StaticMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.afterMethod(klass, method, allArguments, result);
-                }
+            afterMethod(klass, method, allArguments, result);
+        }
+    }
+
+
+    private InstantMethodInterceptorResult beforeMethod(Class<?> klass, Method method, Object[] allArguments, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+        for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (StaticMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.beforeMethod(klass, method, allArguments, instantMethodInterceptorResult);
             }
         }
+        return instantMethodInterceptorResult;
+    }
 
+    private void afterMethod(Class<?> klass, Method method, Object[] allArguments, Object result) {
+        for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (StaticMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.afterMethod(klass, method, allArguments, result);
+            }
+        }
+    }
+
+    private void exceptionMethod(Class<?> klass, Method method, Object[] allArguments, Throwable throwable) {
+        for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (StaticMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.exceptionMethod(klass, method, allArguments, throwable);
+            }
+        }
     }
 
 

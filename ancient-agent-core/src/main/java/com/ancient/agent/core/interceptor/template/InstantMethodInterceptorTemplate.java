@@ -36,31 +36,46 @@ public class InstantMethodInterceptorTemplate implements MethodInterceptorOperat
         Object result = null;
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
         try {
-            for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (InstantMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.beforeMethod(customContextAccessor, allArguments, callable, method, instantMethodInterceptorResult);
-                }
-            }
+            instantMethodInterceptorResult = beforeMethod(customContextAccessor, allArguments, callable, method, instantMethodInterceptorResult);
             if (!instantMethodInterceptorResult.isContinue()) {
                 return instantMethodInterceptorResult.getResult();
             }
             result = callable.call();
             return result;
         } catch (Throwable e) {
-            for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (InstantMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.exceptionMethod(customContextAccessor, allArguments, callable, method, e);
-                }
-            }
+            exceptionMethod(customContextAccessor, allArguments, callable, method, e);
             throw e;
         } finally {
-            for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
-                for (InstantMethodInterceptor interceptor : entry.getValue()) {
-                    interceptor.afterMethod(customContextAccessor, allArguments, callable, method, result);
-                }
+            afterMethod(customContextAccessor, allArguments, callable, method, result);
+        }
+    }
+
+    private void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable,
+                             Method method, Object result) {
+        for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (InstantMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.afterMethod(customContextAccessor, allArguments, callable, method, result);
             }
         }
+    }
 
+    private InstantMethodInterceptorResult beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable,
+                                                        Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+        for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (InstantMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.beforeMethod(customContextAccessor, allArguments, callable, method, instantMethodInterceptorResult);
+            }
+        }
+        return instantMethodInterceptorResult;
+    }
+
+    private void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable,
+                                 Method method, Throwable e) {
+        for (Map.Entry<String, List<InstantMethodInterceptor>> entry : interceptorMap.entrySet()) {
+            for (InstantMethodInterceptor interceptor : entry.getValue()) {
+                interceptor.exceptionMethod(customContextAccessor, allArguments, callable, method, e);
+            }
+        }
     }
 
 

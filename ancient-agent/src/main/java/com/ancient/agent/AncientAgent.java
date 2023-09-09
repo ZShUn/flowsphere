@@ -29,8 +29,9 @@ public class AncientAgent {
     public static void premain(String agentArgs, Instrumentation inst) {
         LOGGER.info("-------------------AncientAgent开始启动-------------------");
         AncientBootstrap.loadRule();
+
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap =  AncientBootstrap.loadPlugins();
-        //解析pointcut配置
+
         new AgentBuilder.Default()
                 .type(new AncientAgentJunction(methodPointcutConfigMap))
                 .transform(new AncientAgentTransform(methodPointcutConfigMap))

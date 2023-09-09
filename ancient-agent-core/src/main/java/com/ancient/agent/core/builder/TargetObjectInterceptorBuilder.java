@@ -8,15 +8,11 @@ import net.bytebuddy.jar.asm.Opcodes;
 
 public class TargetObjectInterceptorBuilder implements InterceptorBuilder {
 
-    private static final String EXTRA_DATA = "_$EXTRA_DATA$_";
+    public static final String CONTEXT_ATTR_NAME = "_$CustomContextAccessorField_ws";
 
     @Override
     public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder) {
-//        return builder.defineField(
-//                        EXTRA_DATA, Object.class, Opcodes.ACC_PRIVATE | Opcodes.ACC_VOLATILE)
-//                .implement(CustomContextAccessor.class)
-//                .intercept(FieldAccessor.ofField(EXTRA_DATA));
-        return builder.defineField(EXTRA_DATA, Object.class).implement(CustomContextAccessor.class).intercept(FieldAccessor.ofField(EXTRA_DATA));
+        return builder.defineField(CONTEXT_ATTR_NAME, Object.class).implement(CustomContextAccessor.class).intercept(FieldAccessor.ofField(CONTEXT_ATTR_NAME));
     }
 
 }
