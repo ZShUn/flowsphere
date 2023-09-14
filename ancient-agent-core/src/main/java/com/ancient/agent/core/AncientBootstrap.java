@@ -38,9 +38,9 @@ public class AncientBootstrap {
         }
     }
 
-    public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins() {
+    public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(List<URL> urlList) {
         //解析plugins配置
-        URL[] pluginUrls = PluginsConfigLoader.getPluginURL().toArray(new URL[]{});
+        URL[] pluginUrls = urlList.toArray(new URL[]{});
         ClassLoader classLoader = URLClassLoaderFactory.createClassLoader(pluginUrls, AncientBootstrap.class.getClassLoader());
         InputStream agentYamlInputStream = classLoader.getResourceAsStream(String.join(File.separator, "agent.yaml"));
         List<String> pluginNames = PluginsConfigLoader.load(agentYamlInputStream);

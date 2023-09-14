@@ -1,5 +1,7 @@
 package com.ancient.agent.core.builder;
 
+import com.ancient.agent.core.AncientBootstrap;
+import com.ancient.agent.core.classloader.AgentClassLoaderContext;
 import com.ancient.agent.core.config.MethodMatcherConfig;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.interceptor.MethodInterceptorFactory;
@@ -10,6 +12,8 @@ import com.ancient.agent.core.utils.MethodTypeUtils;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,45 +22,51 @@ import java.util.Map;
 
 public class MethodInterceptorBuilder implements InterceptorBuilder {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AncientBootstrap.class);
+
     private final List<MethodMatcherConfig> methodMatcherConfigs;
 
     private final TypeDescription typePointcut;
 
-    private final ClassLoader classLoader;
+    private final AgentClassLoaderContext agentClassLoaderContext;
 
-    public MethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, ClassLoader classLoader) {
+    public MethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, AgentClassLoaderContext agentClassLoaderContext) {
         this.methodMatcherConfigs = methodMatcherConfigs;
         this.typePointcut = typePointcut;
-        this.classLoader = classLoader;
+        this.agentClassLoaderContext = agentClassLoaderContext;
     }
 
     @Override
     public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder) {
 
-        for (MethodDescription.InDefinedShape each : typePointcut.getDeclaredMethods()) {
-            Map<String, List<MethodInterceptor>> methodInterceptorMap = new HashMap<>();
+        try {
+            for (MethodDescription.InDefinedShape each : typePointcut.getDeclaredMethods()) {
+                Map<String, List<MethodInterceptor>> methodInterceptorMap = new HashMap<>();
 
-            for (MethodMatcherConfig methodMatcherConfig : methodMatcherConfigs) {
-                if (methodMatcherConfig.getPointcut().matches(each)) {
-                    methodInterceptorMap.computeIfAbsent(methodMatcherConfig.getType(), key -> new LinkedList<>());
-                    methodInterceptorMap.get(methodMatcherConfig.getType()).add(MethodInterceptorFactory.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), classLoader));
+                for (MethodMatcherConfig methodMatcherConfig : methodMatcherConfigs) {
+                    if (methodMatcherConfig.getPointcut().matches(each)) {
+                        methodInterceptorMap.computeIfAbsent(methodMatcherConfig.getType(), key -> new LinkedList<>());
+                        methodInterceptorMap.get(methodMatcherConfig.getType()).add(MethodInterceptorFactory.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), agentClassLoaderContext));
+                    }
                 }
-            }
 
-            if (methodInterceptorMap.isEmpty()) {
-                continue;
-            }
+                if (methodInterceptorMap.isEmpty()) {
+                    continue;
+                }
 
-            if (MethodTypeUtils.isInstantMethod(each)) {
-                builder = new InstantMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
-            }
-            if (MethodTypeUtils.isStaticMethod(each)) {
-                builder = new ConstructorInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
-            }
-            if (MethodTypeUtils.isConstructorMethod(each)) {
-                builder = new StaticMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
-            }
+                if (MethodTypeUtils.isInstantMethod(each)) {
+                    builder = new InstantMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
+                }
+                if (MethodTypeUtils.isStaticMethod(each)) {
+                    builder = new ConstructorInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
+                }
+                if (MethodTypeUtils.isConstructorMethod(each)) {
+                    builder = new StaticMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
+                }
 
+            }
+        } catch (Exception e) {
+            LOGGER.error("[MethodInterceptorBuilder] init interceptor error", e);
         }
         return builder;
     }

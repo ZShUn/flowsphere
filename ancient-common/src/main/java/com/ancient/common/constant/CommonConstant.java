@@ -10,4 +10,6 @@ public interface CommonConstant {
 
     String RULE_KEY = "ruleKey";
 
+    String PLUGIN = "plugin";
+
 }

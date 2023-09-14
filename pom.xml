@@ -30,6 +30,7 @@
         <jackson.annotations.version>2.12.6</jackson.annotations.version>
         <jackson-core-asl.version>1.9.13</jackson-core-asl.version>
         <snakeyaml.version>1.33</snakeyaml.version>
+        <guava.version>30.0-jre</guava.version>
 
         <junit.version>5.9.2</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
@@ -54,6 +55,12 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.yaml</groupId>

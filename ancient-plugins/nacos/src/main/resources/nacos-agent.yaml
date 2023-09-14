@@ -3,3 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: getEligibleServers
         type: instant
+        interceptorName: com.ancient.plugin.nacos.NacosInstantMethodInterceptor
