@@ -3,3 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: doFilterInternal
         type: instant
+        interceptorName: com.ancient.plugin.spring.mvc.SpringMvcInstantMethodInterceptor

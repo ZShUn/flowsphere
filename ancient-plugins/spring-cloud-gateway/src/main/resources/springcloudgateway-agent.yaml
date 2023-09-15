@@ -3,3 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: filter
         type: instant
+        interceptorName: com.ancient.plugin.spring.cloud.gateway.SpringCloudGatewayInstantMethodInterceptor

@@ -3,11 +3,14 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: pullKernelImpl
         type: instant
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
   - className: org.apache.rocketmq.client.latency.MQFaultStrategy
     methodPointcutConfigs:
       - methodName: selectOneMessageQueue
         type: instant
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
   - className: org.apache.rocketmq.client.impl.consumer.PullMessageService
     methodPointcutConfigs:
       - methodName: executePullRequestImmediately
         type: instant
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor

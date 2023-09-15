@@ -3,3 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: execute
         type: instant
+        interceptorName: com.ancient.plugin.feign.FeignInstantMethodInterceptor
