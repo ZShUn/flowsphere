@@ -1,17 +1,17 @@
 package com.ancient.agent.core.interceptor;
 
-import com.ancient.agent.core.classloader.AgentClassLoaderContext;
+import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MethodInterceptorFactory {
+public class MethodInterceptorManager {
 
     private static final Map<String, MethodInterceptor> METHOD_INTERCEPTOR_MAP = new HashMap<>();
 
-    public static MethodInterceptor getMethodInterceptor(String methodInterceptorClassName, AgentClassLoaderContext agentClassLoaderContext) {
-        return METHOD_INTERCEPTOR_MAP.computeIfAbsent(methodInterceptorClassName, key -> createMethodInterceptor(methodInterceptorClassName, agentClassLoaderContext.getPluginClassLoader()));
+    public static MethodInterceptor getMethodInterceptor(String methodInterceptorClassName, AgentPluginClassLoader agentPluginClassLoader) {
+        return METHOD_INTERCEPTOR_MAP.computeIfAbsent(methodInterceptorClassName, key -> createMethodInterceptor(methodInterceptorClassName, agentPluginClassLoader));
     }
 
     private static MethodInterceptor createMethodInterceptor(String methodInterceptorClassName, ClassLoader classLoader) {

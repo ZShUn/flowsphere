@@ -4,7 +4,7 @@ import com.ancient.agent.core.config.PluginsConfigLoader;
 import com.ancient.agent.core.config.PointcutConfigLoader;
 import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
-import com.ancient.agent.core.utils.URLClassLoaderFactory;
+import com.ancient.agent.core.utils.URLClassLoaderManager;
 import com.ancient.common.cache.JsonPath;
 import com.ancient.common.cache.RuleCache;
 import com.ancient.common.constant.CommonConstant;
@@ -41,7 +41,7 @@ public class AncientBootstrap {
     public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(List<URL> urlList) {
         //解析plugins配置
         URL[] pluginUrls = urlList.toArray(new URL[]{});
-        ClassLoader classLoader = URLClassLoaderFactory.createClassLoader(pluginUrls, AncientBootstrap.class.getClassLoader());
+        ClassLoader classLoader = URLClassLoaderManager.createClassLoader(pluginUrls, AncientBootstrap.class.getClassLoader());
         InputStream agentYamlInputStream = classLoader.getResourceAsStream(String.join(File.separator, "agent.yaml"));
         List<String> pluginNames = PluginsConfigLoader.load(agentYamlInputStream);
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = new HashMap<>();

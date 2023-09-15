@@ -4,6 +4,8 @@ import com.ancient.agent.core.AncientAgentJunction;
 import com.ancient.agent.core.AncientAgentListener;
 import com.ancient.agent.core.AncientAgentTransform;
 import com.ancient.agent.core.AncientBootstrap;
+import com.ancient.agent.core.classloader.AgentClassLoaderManager;
+import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.jar.PluginsJarLoader;
 import com.ancient.agent.core.utils.URLUtils;
@@ -27,12 +29,11 @@ public class AncientAgent {
         AncientBootstrap.loadRule();
         List<URL> urlList = URLUtils.getPluginURL();
         List<JarFile> jarFileList = PluginsJarLoader.getJarFileList(urlList);
-
+        AgentPluginClassLoader agentPluginClassLoader = AgentClassLoaderManager.getAgentPluginClassLoader(AncientAgent.class.getClassLoader(),jarFileList);
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = AncientBootstrap.loadPlugins(urlList);
-
         new AgentBuilder.Default()
                 .type(new AncientAgentJunction(methodPointcutConfigMap))
-                .transform(new AncientAgentTransform(methodPointcutConfigMap, jarFileList))
+                .transform(new AncientAgentTransform(methodPointcutConfigMap, agentPluginClassLoader))
                 .with(new AncientAgentListener())
                 .installOn(inst);
         LOGGER.info("-------------------AncientAgent启动成功-------------------");

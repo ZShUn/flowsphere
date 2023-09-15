@@ -1,10 +1,10 @@
 package com.ancient.agent.core.builder;
 
 import com.ancient.agent.core.AncientBootstrap;
-import com.ancient.agent.core.classloader.AgentClassLoaderContext;
+import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.MethodMatcherConfig;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
-import com.ancient.agent.core.interceptor.MethodInterceptorFactory;
+import com.ancient.agent.core.interceptor.MethodInterceptorManager;
 import com.ancient.agent.core.interceptor.template.ConstructorInterceptorTemplate;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorTemplate;
 import com.ancient.agent.core.interceptor.template.StaticMethodInterceptorTemplate;
@@ -28,12 +28,12 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
 
     private final TypeDescription typePointcut;
 
-    private final AgentClassLoaderContext agentClassLoaderContext;
+    private final AgentPluginClassLoader agentPluginClassLoader;
 
-    public MethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, AgentClassLoaderContext agentClassLoaderContext) {
+    public MethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, AgentPluginClassLoader agentPluginClassLoader) {
         this.methodMatcherConfigs = methodMatcherConfigs;
         this.typePointcut = typePointcut;
-        this.agentClassLoaderContext = agentClassLoaderContext;
+        this.agentPluginClassLoader = agentPluginClassLoader;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
                 for (MethodMatcherConfig methodMatcherConfig : methodMatcherConfigs) {
                     if (methodMatcherConfig.getPointcut().matches(each)) {
                         methodInterceptorMap.computeIfAbsent(methodMatcherConfig.getType(), key -> new LinkedList<>());
-                        methodInterceptorMap.get(methodMatcherConfig.getType()).add(MethodInterceptorFactory.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), agentClassLoaderContext));
+                        methodInterceptorMap.get(methodMatcherConfig.getType()).add(MethodInterceptorManager.getMethodInterceptor(methodMatcherConfig.getInterceptorName(), agentPluginClassLoader));
                     }
                 }
 
