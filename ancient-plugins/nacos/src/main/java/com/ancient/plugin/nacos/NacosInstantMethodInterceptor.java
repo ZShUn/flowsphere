@@ -19,11 +19,7 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-
-    }
-
-    @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
+        Object result = allArguments[0];
         if (result instanceof List) {
             List<Server> serverList = (List<Server>) result;
             serverList = new ArrayList<>(serverList);
@@ -34,14 +30,19 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
                     String version = nacosServer.getInstance().getMetadata().get(CommonConstant.VERSION);
                     RuleEntity ruleEntity = RuleContext.get();
                     if (Objects.nonNull(ruleEntity)) {
-                        if (Objects.nonNull(ruleEntity.getVersionEntity()) &&
-                                !ruleEntity.getVersionEntity().getVersion().equals(version)) {
+                        if (Objects.nonNull(ruleEntity.getVersionEntity()) && !ruleEntity.getVersionEntity().getVersion().equals(version)) {
                             serverList.remove(server);
                         }
                     }
                 }
             }
+            instantMethodInterceptorResult.setContinue(false);
+            instantMethodInterceptorResult.setResult(serverList);
         }
+    }
+
+    @Override
+    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
     }
 
 
