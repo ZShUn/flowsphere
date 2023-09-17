@@ -1,9 +1,9 @@
-package com.ancient.agent.core.match;
+package com.ancient.agent.core.matcher;
 
 import net.bytebuddy.description.NamedElement;
 import net.bytebuddy.matcher.ElementMatcher;
 
-public class MultiThreadMatcher<T> extends ElementMatcher.Junction.AbstractBase<T> {
+public class MultiThreadMethodMatch<T> extends ElementMatcher.Junction.AbstractBase<T> {
 
     private static final String RUNNABLE_METHOD_NAME = "run";
 
