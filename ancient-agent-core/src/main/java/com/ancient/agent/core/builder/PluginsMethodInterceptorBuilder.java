@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class MethodInterceptorBuilder implements InterceptorBuilder {
+public class PluginsMethodInterceptorBuilder implements InterceptorBuilder {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AncientBootstrap.class);
 
@@ -30,7 +30,7 @@ public class MethodInterceptorBuilder implements InterceptorBuilder {
 
     private final AgentPluginClassLoader agentPluginClassLoader;
 
-    public MethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, AgentPluginClassLoader agentPluginClassLoader) {
+    public PluginsMethodInterceptorBuilder(List<MethodMatcherConfig> methodMatcherConfigs, TypeDescription typePointcut, AgentPluginClassLoader agentPluginClassLoader) {
         this.methodMatcherConfigs = methodMatcherConfigs;
         this.typePointcut = typePointcut;
         this.agentPluginClassLoader = agentPluginClassLoader;

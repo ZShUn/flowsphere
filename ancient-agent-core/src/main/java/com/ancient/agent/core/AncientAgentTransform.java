@@ -1,7 +1,8 @@
 package com.ancient.agent.core;
 
 import com.ancient.agent.core.builder.InterceptorBuilderChain;
-import com.ancient.agent.core.builder.MethodInterceptorBuilder;
+import com.ancient.agent.core.builder.MultiThreadMethodInterceptorBuilder;
+import com.ancient.agent.core.builder.PluginsMethodInterceptorBuilder;
 import com.ancient.agent.core.builder.TargetObjectInterceptorBuilder;
 import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.MethodMatcherConfigCreator;
@@ -33,11 +34,11 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
 
     @Override
     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
-
         LOGGER.info("[AncientAgentTransform] init interceptor typeName={}", typeDescription.getTypeName());
         Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
         return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
-                new MethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader));
+                new MultiThreadMethodInterceptorBuilder(),
+                new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader));
     }
 
 }
