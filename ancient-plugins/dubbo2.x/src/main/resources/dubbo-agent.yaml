@@ -1,0 +1,6 @@
+pointcutConfigs:
+  - className: org.apache.dubbo.rpc.cluster.loadbalance.AbstractLoadBalance
+    methodPointcutConfigs:
+      - methodName: select
+        type: instant
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboMethodInterceptor

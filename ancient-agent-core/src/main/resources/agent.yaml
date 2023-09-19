@@ -4,3 +4,4 @@ plugins:
   - springmvc
   - springcloudgateway
   - feign
+  - dubbo
