@@ -1,5 +1,6 @@
 package com.ancient.agent.core.builder;
 
+import com.ancient.agent.core.interceptor.MultiThreadConstructorInterceptor;
 import com.ancient.agent.core.interceptor.MultiThreadMethodInterceptor;
 import com.ancient.agent.core.matcher.MultiThreadMethodMatch;
 import net.bytebuddy.dynamic.DynamicType;
@@ -12,9 +13,9 @@ public class MultiThreadMethodInterceptorBuilder implements InterceptorBuilder {
     @Override
     public DynamicType.Builder<?> intercept(DynamicType.Builder<?> builder) {
         builder.method(new MultiThreadMethodMatch())
-                .intercept(MethodDelegation.to(MultiThreadMethodInterceptor.class))
+                .intercept(MethodDelegation.withDefaultConfiguration().to(new MultiThreadMethodInterceptor()))
                 .constructor(ElementMatchers.isConstructor())
-                .intercept(SuperMethodCall.INSTANCE.andThen(MethodDelegation.withDefaultConfiguration().to(MultiThreadMethodInterceptor.class)));
+                .intercept(SuperMethodCall.INSTANCE.andThen(MethodDelegation.withDefaultConfiguration().to(new MultiThreadConstructorInterceptor())));
         return builder;
     }
 

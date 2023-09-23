@@ -32,10 +32,13 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
     }
 
 
+    public static final String CONTEXT_ATTR_NAME = "_$CustomContextAccessorField_ws";
+
     @Override
     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
         LOGGER.info("[AncientAgentTransform] init interceptor typeName={}", typeDescription.getTypeName());
         Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
+
         return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
                 new MultiThreadMethodInterceptorBuilder(),
                 new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader));

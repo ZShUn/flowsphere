@@ -65,7 +65,7 @@ public class PluginsMethodInterceptorBuilder implements InterceptorBuilder {
                 }
 
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             LOGGER.error("[MethodInterceptorBuilder] init interceptor error", e);
         }
         return builder;

@@ -9,10 +9,14 @@ import net.bytebuddy.matcher.ElementMatchers;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class MethodMatcherConfigCreator {
 
     public static List<MethodMatcherConfig> create(Collection<YamlMethodPointcutConfig> yamlMethodPointcutConfigs) {
+        if (Objects.isNull(yamlMethodPointcutConfigs)) {
+            return new ArrayList<>();
+        }
         List<MethodMatcherConfig> result = new ArrayList<>(yamlMethodPointcutConfigs.size());
         for (YamlMethodPointcutConfig yamlConfig : yamlMethodPointcutConfigs) {
             result.add(new MethodMatcherConfig(createPointcut(yamlConfig),
