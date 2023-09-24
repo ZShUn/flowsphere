@@ -40,7 +40,7 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
     @Override
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-
+        RuleContext.remove();
     }
 
     @Override

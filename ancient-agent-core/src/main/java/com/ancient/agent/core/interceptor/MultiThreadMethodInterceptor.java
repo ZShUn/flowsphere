@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
 public class MultiThreadMethodInterceptor {
 
     @RuntimeType
-    public static Object instantMethodIntercept(@This Object obj, @AllArguments Object[] allArguments, @SuperCall Callable<?> callable, @Origin Method method) throws Exception {
+    public Object instantMethodIntercept(@This Object obj, @AllArguments Object[] allArguments, @SuperCall Callable<?> callable, @Origin Method method) throws Exception {
         try {
             CustomContextAccessor customContextAccessor = (CustomContextAccessor) obj;
             Object object = customContextAccessor.getCustomContext();

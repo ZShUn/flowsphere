@@ -11,7 +11,7 @@ public class RuleContext {
     }
 
     public static void remove() {
-        if (RULE_LOCAL.get() != null && !RULE_LOCAL.get().equals("")) {
+        if (RULE_LOCAL.get() != null) {
             RULE_LOCAL.remove();
         }
     }
