@@ -17,6 +17,7 @@
         <module>ancient-agent-core</module>
         <module>ancient-plugins</module>
         <module>ancient-common</module>
+        <module>ancient-test</module>
     </modules>
 
     <properties>
@@ -118,6 +119,18 @@
 
             <dependency>
                 <groupId>com.ancient</groupId>
+                <artifactId>ancient-agent</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ancient</groupId>
+                <artifactId>ancient-agent-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.ancient</groupId>
                 <artifactId>ancient-plugin-nacos</artifactId>
                 <version>${revision}</version>
             </dependency>
@@ -131,24 +144,6 @@
             <dependency>
                 <groupId>com.ancient</groupId>
                 <artifactId>ancient-plugin-spring-mvc</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-plugin-async-rule-context</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-agent</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-agent-core</artifactId>
                 <version>${revision}</version>
             </dependency>
 

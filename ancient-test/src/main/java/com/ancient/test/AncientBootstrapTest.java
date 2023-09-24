@@ -1,5 +1,6 @@
-package com.ancient.agent.core;
+package com.ancient.test;
 
+import com.ancient.agent.core.AncientBootstrap;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.utils.URLUtils;
 import org.junit.jupiter.api.Test;

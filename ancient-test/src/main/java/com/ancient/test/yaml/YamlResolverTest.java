@@ -1,4 +1,4 @@
-package com.ancient.agent.core;
+package com.ancient.test.yaml;
 
 import com.ancient.agent.core.config.yaml.YamlPluginConfig;
 import com.ancient.agent.core.yaml.YamlResolver;

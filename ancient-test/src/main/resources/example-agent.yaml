@@ -1,0 +1,6 @@
+pointcutConfigs:
+  - className: com.ancient.test.AgentProxyCore
+    methodPointcutConfigs:
+      - methodName: instantHelloWord
+        type: instant
+        interceptorName: com.ancient.agent.CustomInterceptor

@@ -1,6 +1,0 @@
-pointcutConfigs:
-  - className: com.ancient.agent.MyHelloWord
-    methodPointcutConfigs:
-      - methodName: instantHelloWord
-        type: instant
-        interceptorName: com.ancient.agent.MyInterceptor

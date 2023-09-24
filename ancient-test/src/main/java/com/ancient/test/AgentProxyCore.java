@@ -1,8 +1,8 @@
-package com.ancient.agent;
+package com.ancient.test;
 
 import org.junit.jupiter.api.Test;
 
-public class MyHelloWord {
+public class AgentProxyCore {
 
     public void instantHelloWord() {
         System.out.println("instantHelloWord");
@@ -10,7 +10,7 @@ public class MyHelloWord {
 
     @Test
     public void instantHelloWordTest() {
-        MyHelloWord myHelloWord = new MyHelloWord();
+        AgentProxyCore myHelloWord = new AgentProxyCore();
         myHelloWord.instantHelloWord();
     }
 

@@ -1,4 +1,4 @@
-package com.ancient.agent;
+package com.ancient.test.interceptor;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
@@ -7,7 +7,7 @@ import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-public class MyInterceptor implements InstantMethodInterceptor {
+public class CustomInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {

@@ -1,4 +1,4 @@
-package com.ancient.agent.core;
+package com.ancient.test.config;
 
 import com.ancient.agent.core.config.PluginsConfigLoader;
 import org.junit.jupiter.api.Test;
