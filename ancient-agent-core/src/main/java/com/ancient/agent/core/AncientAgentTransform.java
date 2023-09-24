@@ -21,7 +21,6 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AncientAgentTransform.class);
 
-
     private final Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap;
 
     private final AgentPluginClassLoader agentPluginClassLoader;
@@ -31,17 +30,19 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
         this.agentPluginClassLoader = agentPluginClassLoader;
     }
 
-
-    public static final String CONTEXT_ATTR_NAME = "_$CustomContextAccessorField_ws";
-
     @Override
     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
-        LOGGER.info("[AncientAgentTransform] init interceptor typeName={}", typeDescription.getTypeName());
-        Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
+        try {
+            LOGGER.info("[AncientAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
+            Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
 
-        return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
-                new MultiThreadMethodInterceptorBuilder(),
-                new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader));
+            return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
+                    new MultiThreadMethodInterceptorBuilder(),
+                    new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader));
+        } catch (Throwable e) {
+            LOGGER.error("AncientAgentTransform load error", e);
+            return builder;
+        }
     }
 
 }
