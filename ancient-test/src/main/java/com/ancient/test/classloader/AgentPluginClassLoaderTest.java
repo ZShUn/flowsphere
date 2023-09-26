@@ -1,9 +1,9 @@
 package com.ancient.test.classloader;
 
 import com.ancient.agent.core.classloader.AgentPluginClassLoader;
-import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.jar.PluginsJarLoader;
 import com.ancient.agent.core.utils.URLUtils;
+import com.ancient.test.interceptor.CustomInterceptor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class AgentPluginClassLoaderTest {
         List<JarFile> jarFileList = PluginsJarLoader.getJarFileList(URLUtils.getPluginURL());
         AgentPluginClassLoader classLoader = new AgentPluginClassLoader(AgentPluginClassLoaderTest.class.getClassLoader(), jarFileList);
 
-        MethodInterceptor methodInterceptor = (MethodInterceptor) Class.forName("com.ancient.plugin.nacos.NacosInstantMethodInterceptor", true, classLoader).newInstance();
+        CustomInterceptor methodInterceptor = (CustomInterceptor) Class.forName("com.ancient.test.interceptor.CustomInterceptor", true, classLoader).newInstance();
         assertNotNull(methodInterceptor);
     }
 
