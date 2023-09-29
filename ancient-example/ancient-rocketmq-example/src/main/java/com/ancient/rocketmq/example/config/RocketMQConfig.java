@@ -1,4 +1,4 @@
-package com.ancient.spring.cloud.service.example.config;
+package com.ancient.rocketmq.example.config;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
