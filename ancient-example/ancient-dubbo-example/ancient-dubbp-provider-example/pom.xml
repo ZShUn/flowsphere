@@ -4,37 +4,18 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.ancient</groupId>
-        <artifactId>ancient-example</artifactId>
+        <artifactId>ancient-dubbo-example</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>ancient-dubbo-example</artifactId>
+    <artifactId>ancient-dubbp-provider-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ancient-dubbo-example</name>
-    <packaging>pom</packaging>
-    <description>ancient-dubbo-example</description>
+    <name>ancient-dubbp-provider-example</name>
+    <description>ancient-dubbp-provider-example</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.2.7.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-
-
     <dependencies>
-
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -54,6 +35,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ancient-dubbo-api-example</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

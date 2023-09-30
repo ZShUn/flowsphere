@@ -16,7 +16,6 @@
     <modules>
         <module>ancient-dubbo-example</module>
         <module>ancient-rocketmq-example</module>
-        <module>ancient-springcloud-gateway-example</module>
         <module>ancient-springcloud-example</module>
     </modules>
 
