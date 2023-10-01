@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AncientDubboConsumerClient {
 
-    @DubboReference(check = false)
+    @DubboReference(check = false, version = "1.0.0")
     private AncientDubboApi ancientDubboApi;
 
     public String helloword(String str) {

@@ -1,9 +1,9 @@
 package com.ancient.dubbo.provider.example.client;
 
 import com.ancient.dubbo.api.AncientDubboApi;
-import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.DubboService;
 
-@Service
+@DubboService(version = "1.0.0")
 public class AncientDubboProviderApiImpl implements AncientDubboApi {
 
     public String helloword(String str) {
