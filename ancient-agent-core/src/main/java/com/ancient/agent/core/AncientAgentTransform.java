@@ -42,22 +42,10 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
         try {
             LOGGER.info("[AncientAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
             Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
-//            InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
-//                    new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader),
-//                    new MultiThreadMethodInterceptorBuilder());
-
-
             return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
                     new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader),
                     new MultiThreadMethodInterceptorBuilder()
             );
-
-//            return builder
-//                    .method(new MultiThreadMethodMatch<NamedElement>())
-//                    .intercept(MethodDelegation.withDefaultConfiguration().to(new MultiThreadMethodInterceptor()))
-//                    .constructor(ElementMatchers.isConstructor())
-//                    .intercept(SuperMethodCall.INSTANCE.andThen(MethodDelegation.withDefaultConfiguration().to(new MultiThreadConstructorInterceptor())));
-
         } catch (Throwable e) {
             LOGGER.error("AncientAgentTransform load error", e);
             return builder;

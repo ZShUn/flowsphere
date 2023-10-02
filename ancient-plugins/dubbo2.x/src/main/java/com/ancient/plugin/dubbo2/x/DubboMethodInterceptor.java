@@ -12,6 +12,7 @@ import org.apache.dubbo.rpc.Invoker;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -29,10 +30,12 @@ public class DubboMethodInterceptor implements InstantMethodInterceptor {
                 return;
             }
             RuleEntity ruleEntity = RuleContext.get();
+            if (Objects.isNull(ruleEntity)) {
+                return;
+            }
             VersionEntity versionEntity = ruleEntity.getVersionEntity();
-            List<Invoker> result = filterInvoker(invokers, invoker -> versionEntity.getVersion().equals(invoker.getUrl().getParameter("version")));
-            instantMethodInterceptorResult.setContinue(false);
-            instantMethodInterceptorResult.setResult(result);
+            List<Invoker> result = filterInvoker(invokers, invoker -> versionEntity.getVersion().equals(invoker.getUrl().getParameter("grayVersion")));
+            allArguments[0] = result;
         }
 
     }

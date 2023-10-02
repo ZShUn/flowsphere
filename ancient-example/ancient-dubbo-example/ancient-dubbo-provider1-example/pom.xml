@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ancient-dubbp-provider-example</artifactId>
+    <artifactId>ancient-dubbo-provider1-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ancient-dubbp-provider-example</name>
-    <description>ancient-dubbp-provider-example</description>
+    <name>ancient-dubbo-provider1-example</name>
+    <description>ancient-dubbo-provider1-example</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
