@@ -3,6 +3,7 @@ package com.ancient.plugin.dubbo2.x;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RuleEntity;
 import com.ancient.common.entity.VersionEntity;
@@ -34,7 +35,7 @@ public class DubboMethodInterceptor implements InstantMethodInterceptor {
                 return;
             }
             VersionEntity versionEntity = ruleEntity.getVersionEntity();
-            List<Invoker> result = filterInvoker(invokers, invoker -> versionEntity.getVersion().equals(invoker.getUrl().getParameter("grayVersion")));
+            List<Invoker> result = filterInvoker(invokers, invoker -> versionEntity.getVersion().equals(invoker.getUrl().getParameter(CommonConstant.GRAY_VERSION)));
             allArguments[0] = result;
         }
 

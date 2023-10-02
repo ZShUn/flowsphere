@@ -32,8 +32,8 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
         if (Objects.nonNull(httpRequest.getHeader(CommonConstant.REGION))) {
             ruleEntity.setRegionEntity(new RegionEntity(httpRequest.getHeader(CommonConstant.REGION)));
         }
-        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.VERSION))) {
-            ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.VERSION)));
+        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.GRAY_VERSION))) {
+            ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.GRAY_VERSION)));
         }
         RuleContext.set(ruleEntity);
     }

@@ -45,7 +45,7 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
             RuleContext.set(ruleEntity);
         }
 
-        List<String> versionList = request.getHeaders().get(CommonConstant.VERSION);
+        List<String> versionList = request.getHeaders().get(CommonConstant.GRAY_VERSION);
         if (!CollectionUtils.isEmpty(versionList)) {
             RuleEntity ruleEntity = new RuleEntity();
             ruleEntity.setVersionEntity(new VersionEntity(versionList.get(0)));

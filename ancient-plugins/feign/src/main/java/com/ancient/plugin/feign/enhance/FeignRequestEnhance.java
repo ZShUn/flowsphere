@@ -56,7 +56,7 @@ public class FeignRequestEnhance implements InstanceEnhance {
         if (Objects.nonNull(ruleEntity.getVersionEntity())) {
             List<String> versionList = new ArrayList<String>();
             versionList.add(ruleEntity.getVersionEntity().getVersion());
-            headers.put(CommonConstant.VERSION, versionList);
+            headers.put(CommonConstant.GRAY_VERSION, versionList);
         }
         if (Objects.nonNull(ruleEntity.getRegionEntity())) {
             List<String> regionList = new ArrayList<String>();

@@ -27,7 +27,7 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
                 Server server = serverList.get(i);
                 if (server instanceof NacosServer) {
                     NacosServer nacosServer = (NacosServer) server;
-                    String version = nacosServer.getInstance().getMetadata().get(CommonConstant.VERSION);
+                    String version = nacosServer.getInstance().getMetadata().get(CommonConstant.GRAY_VERSION);
                     RuleEntity ruleEntity = RuleContext.get();
                     if (Objects.nonNull(ruleEntity)) {
                         if (Objects.nonNull(ruleEntity.getVersionEntity()) && !ruleEntity.getVersionEntity().getVersion().equals(version)) {
