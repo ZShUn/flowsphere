@@ -15,7 +15,14 @@
     <name>ancient-springcloud-service-example</name>
     <description>Demo project for Spring Boot</description>
 
-
+    <modules>
+        <module>ancient-springcloud-api-example</module>
+        <module>ancient-springcloud-gateway-example</module>
+        <module>ancient-springcloud-service-a-example</module>
+        <module>ancient-springcloud-service-a1-example</module>
+        <module>ancient-springcloud-service-b-example</module>
+        <module>ancient-springcloud-service-b1-example</module>
+    </modules>
 
 
 </project>
