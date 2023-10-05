@@ -6,6 +6,7 @@ import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResul
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
 import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.util.JacksonUtils;
 import feign.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ public class FeignRequestEnhance implements InstanceEnhance {
     private static final String METHOD_NAME = "execute";
 
     private static final String DECLARED_FIELD_NAME = "headers";
-
 
 
     public static FeignRequestEnhance getInstance() {
@@ -53,15 +53,10 @@ public class FeignRequestEnhance implements InstanceEnhance {
 
     private void resolver(Map<String, Collection<String>> headers) {
         RuleEntity ruleEntity = RuleContext.get();
-        if (Objects.nonNull(ruleEntity.getVersionEntity())) {
-            List<String> versionList = new ArrayList<String>();
-            versionList.add(ruleEntity.getVersionEntity().getVersion());
-            headers.put(CommonConstant.GRAY_VERSION, versionList);
-        }
-        if (Objects.nonNull(ruleEntity.getRegionEntity())) {
-            List<String> regionList = new ArrayList<String>();
-            regionList.add(ruleEntity.getRegionEntity().getRegion());
-            headers.put(CommonConstant.REGION, regionList);
+        if (Objects.nonNull(ruleEntity)) {
+            List<String> ruleList = new ArrayList<String>();
+            ruleList.add(JacksonUtils.toJson(ruleEntity));
+            headers.put(CommonConstant.GRAY_RULE, ruleList);
         }
     }
 

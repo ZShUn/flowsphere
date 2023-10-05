@@ -32,7 +32,7 @@ public class AncientBootstrap {
             }
             ObjectMapper objectMapper = new ObjectMapper();
             RuleEntity ruleEntity = objectMapper.readValue(file, RuleEntity.class);
-            RuleCache.put(CommonConstant.RULE_KEY, ruleEntity);
+            RuleCache.put(CommonConstant.GRAY_LOCAL_CACHE, ruleEntity);
         } catch (Exception e) {
             LOGGER.error("load rule config error", e);
         }

@@ -6,7 +6,9 @@ public interface CommonConstant {
 
     String REGION = "region";
 
-    String RULE_KEY = "ruleKey";
+    String GRAY_LOCAL_CACHE = "grayLocalCache";
+
+    String GRAY_RULE = "grayRule";
 
     String PLUGIN = "plugin";
 

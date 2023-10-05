@@ -3,4 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: select
         type: instant
-        interceptorName: com.ancient.plugin.dubbo2.x.DubboMethodInterceptor
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboLoadBalanceInterceptor

@@ -1,18 +1,17 @@
 package com.ancient.plugin.spring.mvc;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
-import com.ancient.common.entity.RegionEntity;
 import com.ancient.common.entity.RuleEntity;
-import com.ancient.common.entity.VersionEntity;
+import com.ancient.common.util.JacksonUtils;
+import com.google.common.base.Strings;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class SpringMvcInstantMethodInterceptor implements InstantMethodInterceptor {
@@ -28,14 +27,11 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
 
     private void resolver(HttpServletRequest httpRequest) {
-        RuleEntity ruleEntity = new RuleEntity();
-        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.REGION))) {
-            ruleEntity.setRegionEntity(new RegionEntity(httpRequest.getHeader(CommonConstant.REGION)));
+        String grayRule = httpRequest.getHeader(CommonConstant.GRAY_RULE);
+        if (!Strings.isNullOrEmpty(grayRule)) {
+            RuleEntity ruleEntity = JacksonUtils.toObj(grayRule, RuleEntity.class);
+            RuleContext.set(ruleEntity);
         }
-        if (Objects.nonNull(httpRequest.getHeader(CommonConstant.GRAY_VERSION))) {
-            ruleEntity.setVersionEntity(new VersionEntity(httpRequest.getHeader(CommonConstant.GRAY_VERSION)));
-        }
-        RuleContext.set(ruleEntity);
     }
 
     @Override

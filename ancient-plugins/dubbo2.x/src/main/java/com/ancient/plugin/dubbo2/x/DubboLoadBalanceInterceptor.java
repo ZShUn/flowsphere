@@ -10,6 +10,7 @@ import com.ancient.common.entity.VersionEntity;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Invoker;
+import org.apache.dubbo.rpc.RpcContext;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class DubboMethodInterceptor implements InstantMethodInterceptor {
+public class DubboLoadBalanceInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
@@ -37,6 +38,10 @@ public class DubboMethodInterceptor implements InstantMethodInterceptor {
             VersionEntity versionEntity = ruleEntity.getVersionEntity();
             List<Invoker> result = filterInvoker(invokers, invoker -> versionEntity.getVersion().equals(invoker.getUrl().getParameter(CommonConstant.GRAY_VERSION)));
             allArguments[0] = result;
+
+            RpcContext context = RpcContext.getContext();
+            context.set(CommonConstant.GRAY_RULE, ruleEntity);
+
         }
 
     }

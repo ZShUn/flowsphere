@@ -1,8 +1,8 @@
 package com.ancient.plugin.feign;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.plugin.feign.enhance.FeignRequestEnhance;
 
 import java.lang.reflect.Method;
@@ -12,9 +12,7 @@ public class FeignInstantMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-//        if (FeignInterceptorManager.isInterceptorMethod(method.getName())) {
-            FeignRequestEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, instantMethodInterceptorResult);
-//        }
+        FeignRequestEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, instantMethodInterceptorResult);
     }
 
     @Override

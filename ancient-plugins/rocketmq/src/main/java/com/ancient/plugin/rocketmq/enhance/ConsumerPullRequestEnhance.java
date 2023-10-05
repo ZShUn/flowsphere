@@ -34,7 +34,7 @@ public class ConsumerPullRequestEnhance implements InstanceEnhance {
 
             String topic = messageQueue.getTopic();
 
-            RuleEntity ruleEntity = RuleCache.get(CommonConstant.RULE_KEY);
+            RuleEntity ruleEntity = RuleCache.get(CommonConstant.GRAY_LOCAL_CACHE);
 
             if (Objects.nonNull(ruleEntity)
                     && Objects.nonNull(ruleEntity.getRocketMQEntity())

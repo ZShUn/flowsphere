@@ -1,13 +1,12 @@
 package com.ancient.plugin.spring.cloud.gateway;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
+import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
-import com.ancient.common.entity.RegionEntity;
 import com.ancient.common.entity.RuleEntity;
-import com.ancient.common.entity.VersionEntity;
+import com.ancient.common.util.JacksonUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
@@ -38,17 +37,9 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
     }
 
     private void resolver(ServerHttpRequest request) {
-        List<String> regionList = request.getHeaders().get(CommonConstant.REGION);
-        if (!CollectionUtils.isEmpty(regionList)) {
-            RuleEntity ruleEntity = new RuleEntity();
-            ruleEntity.setRegionEntity(new RegionEntity(regionList.get(0)));
-            RuleContext.set(ruleEntity);
-        }
-
-        List<String> versionList = request.getHeaders().get(CommonConstant.GRAY_VERSION);
-        if (!CollectionUtils.isEmpty(versionList)) {
-            RuleEntity ruleEntity = new RuleEntity();
-            ruleEntity.setVersionEntity(new VersionEntity(versionList.get(0)));
+        List<String> grayRuleList = request.getHeaders().get(CommonConstant.GRAY_RULE);
+        if (!CollectionUtils.isEmpty(grayRuleList)) {
+            RuleEntity ruleEntity = JacksonUtils.toObj(grayRuleList.get(0), RuleEntity.class);
             RuleContext.set(ruleEntity);
         }
     }
