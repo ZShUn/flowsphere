@@ -14,3 +14,8 @@ pointcutConfigs:
       - methodName: executePullRequestImmediately
         type: instant
         interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
+  - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
+    methodPointcutConfigs:
+      - methodName: sendHearbeat
+        type: instant
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQHeartbeatRequestRewriteInterceptor
