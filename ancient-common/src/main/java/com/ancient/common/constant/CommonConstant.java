@@ -12,4 +12,6 @@ public interface CommonConstant {
 
     String PLUGIN = "plugin";
 
+    String TAG = "tag";
+
 }

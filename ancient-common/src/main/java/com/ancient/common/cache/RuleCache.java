@@ -1,6 +1,6 @@
 package com.ancient.common.cache;
 
-import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.rule.entity.RuleEntity;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;

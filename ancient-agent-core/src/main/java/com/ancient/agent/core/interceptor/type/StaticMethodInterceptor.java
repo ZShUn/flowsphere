@@ -4,10 +4,11 @@ import com.ancient.agent.core.interceptor.MethodInterceptor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.Callable;
 
 public interface StaticMethodInterceptor extends MethodInterceptor {
 
-    void beforeMethod(Class<?> clazz, Method method, Object[] args, InstantMethodInterceptorResult instantMethodInterceptorResult);
+    void beforeMethod(Class<?> clazz, Method method, Object[] args, Callable<?> callable, InstantMethodInterceptorResult instantMethodInterceptorResult);
 
     void afterMethod(Class<?> clazz, Method method, Object[] args, Object result);
 

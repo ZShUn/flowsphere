@@ -1,7 +1,7 @@
 package com.ancient.agent.core.context;
 
 
-import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.rule.entity.RuleEntity;
 
 public class CustomContext {
 

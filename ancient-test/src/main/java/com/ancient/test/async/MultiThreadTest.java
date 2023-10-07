@@ -1,8 +1,8 @@
 package com.ancient.test.async;
 
 import com.ancient.common.context.RuleContext;
-import com.ancient.common.entity.RuleEntity;
-import com.ancient.common.entity.VersionEntity;
+import com.ancient.common.rule.entity.RuleEntity;
+import com.ancient.common.rule.entity.VersionEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;

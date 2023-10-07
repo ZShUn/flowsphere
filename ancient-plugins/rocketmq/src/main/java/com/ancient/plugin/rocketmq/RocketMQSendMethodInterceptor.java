@@ -3,18 +3,19 @@ package com.ancient.plugin.rocketmq;
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
-import com.ancient.plugin.rocketmq.enhance.ConsumerPullRequestEnhance;
-import com.ancient.plugin.rocketmq.enhance.ProducerMessageQueueEnhance;
+import com.ancient.common.constant.CommonConstant;
+import com.ancient.common.rule.TagManager;
+import org.apache.rocketmq.common.message.Message;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-public class RocketMQInstantMethodInterceptor implements InstantMethodInterceptor {
+public class RocketMQSendMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        ProducerMessageQueueEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, instantMethodInterceptorResult);
-        ConsumerPullRequestEnhance.getInstance().enhance(customContextAccessor, allArguments, callable, method, null, instantMethodInterceptorResult);
+        Message message = (Message) allArguments[0];
+        message.putUserProperty(CommonConstant.TAG, TagManager.getTag());
     }
 
     @Override

@@ -1,21 +1,21 @@
 pointcutConfigs:
-  - className: org.apache.rocketmq.client.impl.consumer.PullAPIWrapper
+  - className: org.apache.rocketmq.common.filter.FilterAPI
     methodPointcutConfigs:
-      - methodName: pullKernelImpl
-        type: instant
-        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
-  - className: org.apache.rocketmq.client.latency.MQFaultStrategy
+      - methodName: buildSubscriptionData
+        type: static
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQBuildSubscriptionDataMethodInterceptor
+  - className: org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl
     methodPointcutConfigs:
-      - methodName: selectOneMessageQueue
+      - methodName: subscribe
         type: instant
-        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
-  - className: org.apache.rocketmq.client.impl.consumer.PullMessageService
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQSubscribeMethodInterceptor
+  - className: org.apache.rocketmq.client.producer.DefaultMQProducer
     methodPointcutConfigs:
-      - methodName: executePullRequestImmediately
+      - methodName: send
         type: instant
-        interceptorName: com.ancient.plugin.rocketmq.RocketMQInstantMethodInterceptor
-  - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQSendMethodInterceptor
+  - className: org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService
     methodPointcutConfigs:
-      - methodName: sendHearbeat
+      - methodName: submitConsumeRequest
         type: instant
-        interceptorName: com.ancient.plugin.rocketmq.RocketMQHeartbeatRequestRewriteInterceptor
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQSubmitConsumeRequestMethodInterceptor

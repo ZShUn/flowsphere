@@ -1,6 +1,6 @@
 package com.ancient.common.context;
 
-import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.rule.entity.RuleEntity;
 
 public class RuleContext {
 

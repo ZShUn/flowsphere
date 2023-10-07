@@ -1,4 +1,4 @@
-package com.ancient.common.entity;
+package com.ancient.common.rule.entity;
 
 public class VersionEntity extends BaseEntity {
 

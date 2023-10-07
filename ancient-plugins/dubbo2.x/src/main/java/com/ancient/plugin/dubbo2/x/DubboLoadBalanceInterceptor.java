@@ -5,8 +5,8 @@ import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResul
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
-import com.ancient.common.entity.RuleEntity;
-import com.ancient.common.entity.VersionEntity;
+import com.ancient.common.rule.entity.RuleEntity;
+import com.ancient.common.rule.entity.VersionEntity;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Invoker;

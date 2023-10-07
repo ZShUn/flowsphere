@@ -8,7 +8,7 @@ import com.ancient.agent.core.utils.URLClassLoaderManager;
 import com.ancient.common.cache.JsonPath;
 import com.ancient.common.cache.RuleCache;
 import com.ancient.common.constant.CommonConstant;
-import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.rule.entity.RuleEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

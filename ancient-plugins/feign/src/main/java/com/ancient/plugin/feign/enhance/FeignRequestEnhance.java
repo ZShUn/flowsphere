@@ -5,7 +5,7 @@ import com.ancient.agent.core.enhance.InstanceEnhance;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
-import com.ancient.common.entity.RuleEntity;
+import com.ancient.common.rule.entity.RuleEntity;
 import com.ancient.common.util.JacksonUtils;
 import feign.Request;
 import org.slf4j.Logger;

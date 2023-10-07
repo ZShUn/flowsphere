@@ -27,7 +27,7 @@ public class StaticMethodInterceptorTemplate implements MethodInterceptorOperato
         Object result = null;
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
         try {
-            instantMethodInterceptorResult = beforeMethod(klass, method, allArguments, instantMethodInterceptorResult);
+            instantMethodInterceptorResult = beforeMethod(klass, method, allArguments, callable, instantMethodInterceptorResult);
             if (!instantMethodInterceptorResult.isContinue()) {
                 return instantMethodInterceptorResult.getResult();
             }
@@ -42,10 +42,10 @@ public class StaticMethodInterceptorTemplate implements MethodInterceptorOperato
     }
 
 
-    private InstantMethodInterceptorResult beforeMethod(Class<?> klass, Method method, Object[] allArguments, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    private InstantMethodInterceptorResult beforeMethod(Class<?> klass, Method method, Object[] allArguments, Callable<?> callable, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         for (Map.Entry<String, List<StaticMethodInterceptor>> entry : interceptorMap.entrySet()) {
             for (StaticMethodInterceptor interceptor : entry.getValue()) {
-                interceptor.beforeMethod(klass, method, allArguments, instantMethodInterceptorResult);
+                interceptor.beforeMethod(klass, method, allArguments, callable, instantMethodInterceptorResult);
             }
         }
         return instantMethodInterceptorResult;
