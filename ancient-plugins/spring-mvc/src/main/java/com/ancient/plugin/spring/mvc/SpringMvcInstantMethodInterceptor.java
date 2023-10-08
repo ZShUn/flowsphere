@@ -4,9 +4,7 @@ import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
-import com.ancient.common.context.RuleContext;
-import com.ancient.common.rule.entity.RuleEntity;
-import com.ancient.common.util.JacksonUtils;
+import com.ancient.common.rule.context.TagContext;
 import com.google.common.base.Strings;
 
 import javax.servlet.ServletRequest;
@@ -27,16 +25,15 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
 
     private void resolver(HttpServletRequest httpRequest) {
-        String grayRule = httpRequest.getHeader(CommonConstant.GRAY_RULE);
-        if (!Strings.isNullOrEmpty(grayRule)) {
-            RuleEntity ruleEntity = JacksonUtils.toObj(grayRule, RuleEntity.class);
-            RuleContext.set(ruleEntity);
+        String tag = httpRequest.getHeader(CommonConstant.TAG);
+        if (!Strings.isNullOrEmpty(tag)) {
+            TagContext.set(tag);
         }
     }
 
     @Override
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-        RuleContext.remove();
+        TagContext.remove();
     }
 
     @Override

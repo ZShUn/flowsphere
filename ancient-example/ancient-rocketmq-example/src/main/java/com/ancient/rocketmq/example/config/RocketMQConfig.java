@@ -1,6 +1,7 @@
 package com.ancient.rocketmq.example.config;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -26,9 +27,10 @@ public class RocketMQConfig {
 
     @Bean
     public DefaultMQPushConsumer consumer() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_2");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_3");
         consumer.setNamesrvAddr("127.0.0.1:9876");
-        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("TopicTest", MessageSelector.bySql("(tag is not null and tag='tagA')"));
+//        consumer.subscribe("TopicTest", "*");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 

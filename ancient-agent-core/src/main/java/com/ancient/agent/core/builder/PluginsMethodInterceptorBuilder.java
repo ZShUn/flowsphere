@@ -57,10 +57,10 @@ public class PluginsMethodInterceptorBuilder implements InterceptorBuilder {
                 if (MethodTypeUtils.isInstantMethod(each)) {
                     builder = new InstantMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
                 }
-                if (MethodTypeUtils.isStaticMethod(each)) {
+                if (MethodTypeUtils.isConstructorMethod(each)) {
                     builder = new ConstructorInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
                 }
-                if (MethodTypeUtils.isConstructorMethod(each)) {
+                if (MethodTypeUtils.isStaticMethod(each)) {
                     builder = new StaticMethodInterceptorTemplate(convert(methodInterceptorMap)).intercept(builder, each);
                 }
 

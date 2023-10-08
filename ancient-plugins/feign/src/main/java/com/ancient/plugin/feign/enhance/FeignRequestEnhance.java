@@ -5,8 +5,10 @@ import com.ancient.agent.core.enhance.InstanceEnhance;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.rule.context.TagContext;
 import com.ancient.common.rule.entity.RuleEntity;
 import com.ancient.common.util.JacksonUtils;
+import com.google.common.base.Strings;
 import feign.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,11 +54,11 @@ public class FeignRequestEnhance implements InstanceEnhance {
 
 
     private void resolver(Map<String, Collection<String>> headers) {
-        RuleEntity ruleEntity = RuleContext.get();
-        if (Objects.nonNull(ruleEntity)) {
+        String tag = TagContext.get();
+        if (!Strings.isNullOrEmpty(tag)) {
             List<String> ruleList = new ArrayList<String>();
-            ruleList.add(JacksonUtils.toJson(ruleEntity));
-            headers.put(CommonConstant.GRAY_RULE, ruleList);
+            ruleList.add(tag);
+            headers.put(CommonConstant.TAG, ruleList);
         }
     }
 

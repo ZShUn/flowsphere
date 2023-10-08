@@ -6,7 +6,9 @@ import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResul
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.rule.context.TagContext;
 import com.ancient.common.rule.entity.RuleEntity;
+import com.google.common.base.Strings;
 import com.netflix.loadbalancer.Server;
 
 import java.lang.reflect.Method;
@@ -27,12 +29,10 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
                 Server server = serverList.get(i);
                 if (server instanceof NacosServer) {
                     NacosServer nacosServer = (NacosServer) server;
-                    String version = nacosServer.getInstance().getMetadata().get(CommonConstant.GRAY_VERSION);
-                    RuleEntity ruleEntity = RuleContext.get();
-                    if (Objects.nonNull(ruleEntity)) {
-                        if (Objects.nonNull(ruleEntity.getVersionEntity()) && !ruleEntity.getVersionEntity().getVersion().equals(version)) {
-                            serverList.remove(server);
-                        }
+                    String serverTag = nacosServer.getInstance().getMetadata().get(CommonConstant.TAG);
+                    String ruleTag = TagContext.get();
+                    if (!Strings.isNullOrEmpty(ruleTag) && !ruleTag.equals(serverTag)) {
+                        serverList.remove(server);
                     }
                 }
             }

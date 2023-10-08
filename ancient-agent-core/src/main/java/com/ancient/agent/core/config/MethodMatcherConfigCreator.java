@@ -19,15 +19,14 @@ public class MethodMatcherConfigCreator {
         }
         List<MethodMatcherConfig> result = new ArrayList<>(yamlMethodPointcutConfigs.size());
         for (YamlMethodPointcutConfig yamlConfig : yamlMethodPointcutConfigs) {
-            result.add(new MethodMatcherConfig(createPointcut(yamlConfig),
-                    yamlConfig.getInterceptorName(), yamlConfig.getType()));
+            result.add(new MethodMatcherConfig(createPointcut(yamlConfig), yamlConfig.getInterceptorName(), yamlConfig.getType()));
         }
         return result;
     }
 
 
     private static ElementMatcher<? super MethodDescription> createPointcut(YamlMethodPointcutConfig yamlConfig) {
-        if (MethodTypeEnum.INSTANT.getType().equals(yamlConfig.getType())) {
+        if (MethodTypeEnum.INSTANT.getType().equals(yamlConfig.getType()) || MethodTypeEnum.STATIC.getType().equals(yamlConfig.getType())) {
             return ElementMatchers.named(yamlConfig.getMethodName());
         }
         if (MethodTypeEnum.CONSTRUCTOR.getType().equals(yamlConfig.getType())) {

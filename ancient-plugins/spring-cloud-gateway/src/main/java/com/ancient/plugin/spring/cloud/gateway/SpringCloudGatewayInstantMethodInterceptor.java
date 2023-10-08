@@ -5,6 +5,7 @@ import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResul
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.context.RuleContext;
+import com.ancient.common.rule.context.TagContext;
 import com.ancient.common.rule.entity.RuleEntity;
 import com.ancient.common.util.JacksonUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -28,7 +29,7 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
 
     @Override
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-        RuleContext.remove();
+        TagContext.remove();
     }
 
     @Override
@@ -37,10 +38,10 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
     }
 
     private void resolver(ServerHttpRequest request) {
-        List<String> grayRuleList = request.getHeaders().get(CommonConstant.GRAY_RULE);
-        if (!CollectionUtils.isEmpty(grayRuleList)) {
-            RuleEntity ruleEntity = JacksonUtils.toObj(grayRuleList.get(0), RuleEntity.class);
-            RuleContext.set(ruleEntity);
+        //TODO 需要支持网关下发规则
+        List<String> tagList = request.getHeaders().get(CommonConstant.TAG);
+        if (!CollectionUtils.isEmpty(tagList)) {
+            TagContext.set(tagList.get(0));
         }
     }
 

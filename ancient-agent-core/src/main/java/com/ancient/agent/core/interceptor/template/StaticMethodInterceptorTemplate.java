@@ -22,7 +22,7 @@ public class StaticMethodInterceptorTemplate implements MethodInterceptorOperato
     }
 
     @RuntimeType
-    public Object intercept(@Origin final Class<?> klass, @This Object obj, @AllArguments Object[] allArguments, @SuperCall Callable<?> callable, @Origin Method method) throws Exception {
+    public Object intercept(@Origin final Class<?> klass, @Origin final Method method, @AllArguments final Object[] allArguments, @SuperCall final Callable<?> callable) throws Exception {
         //类似拦截器效果
         Object result = null;
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
