@@ -7,11 +7,6 @@ pointcutConfigs:
       - methodName: build
         type: static
         interceptorName: com.ancient.plugin.rocketmq.RocketMQBuildMethodInterceptor
-#  - className: org.apache.rocketmq.client.impl.consumer.DefaultMQPushConsumerImpl
-#    methodPointcutConfigs:
-#      - methodName: subscribe
-#        type: instant
-#        interceptorName: com.ancient.plugin.rocketmq.RocketMQSubscribeMethodInterceptor
   - className: org.apache.rocketmq.client.producer.DefaultMQProducer
     methodPointcutConfigs:
       - methodName: send
