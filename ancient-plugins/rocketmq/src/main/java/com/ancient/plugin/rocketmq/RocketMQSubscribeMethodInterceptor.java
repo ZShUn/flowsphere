@@ -1,5 +1,4 @@
 package com.ancient.plugin.rocketmq;
-import com.google.common.collect.Sets;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
@@ -32,23 +31,6 @@ public class RocketMQSubscribeMethodInterceptor implements InstantMethodIntercep
                 subscriptionData.setSubString(tagExpression.toString());
             }
         }
-//        if (allArguments[1] instanceof String && ((String) allArguments[1]).equals("*")) {
-//            SubscriptionData subscriptionData = new SubscriptionData();
-//            subscriptionData.setTopic((String) allArguments[0]);
-//            subscriptionData.setExpressionType(ExpressionType.SQL92);
-//            //(tag is not null and tag = xxx)
-//            StringBuffer subString = new StringBuffer();
-//            subString.append("(tag is not null and tag='");
-//            subString.append(TagManager.getTag());
-//            subString.append("')");
-//            if(subString.toString().equals("(tag is not null and tag='tagA')")){
-//                System.out.println("3");
-//            }
-//
-//            subscriptionData.setSubString("(tag is not null and tag='tagA')");
-//            instantMethodInterceptorResult.setContinue(false);
-//            instantMethodInterceptorResult.setResult(subscriptionData);
-//        }
     }
 
     @Override
