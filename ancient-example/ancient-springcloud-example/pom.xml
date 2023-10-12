@@ -22,6 +22,8 @@
         <module>ancient-springcloud-service-a1-example</module>
         <module>ancient-springcloud-service-b-example</module>
         <module>ancient-springcloud-service-b1-example</module>
+        <module>ancient-springcloud-service-c-example</module>
+        <module>ancient-springcloud-service-c1-example</module>
     </modules>
 
 

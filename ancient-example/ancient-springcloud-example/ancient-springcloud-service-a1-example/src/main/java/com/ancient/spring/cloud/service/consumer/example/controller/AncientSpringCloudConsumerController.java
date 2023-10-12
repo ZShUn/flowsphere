@@ -1,6 +1,6 @@
 package com.ancient.spring.cloud.service.consumer.example.controller;
 
-import com.ancient.spring.cloud.service.api.AncientSpringCloudApi;
+import com.ancient.spring.cloud.service.api.AncientSpringCloudBApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +16,14 @@ import java.util.concurrent.Executors;
 public class AncientSpringCloudConsumerController {
 
     @Autowired
-    private AncientSpringCloudApi myClient;
+    private AncientSpringCloudBApi myClient;
 
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @PostMapping("/myClient")
     public String myClient(String str) {
-        return "ok:" + str;
+        return "AncientSpringCloudProviderA1:" + str;
     }
 
 
@@ -35,7 +35,7 @@ public class AncientSpringCloudConsumerController {
                 myClient.helloword(str);
             }
         }).start();
-        return "ok";
+        return "AncientSpringCloudProviderA1";
     }
 
     @GetMapping("/myCallableThreadClient")
@@ -49,7 +49,7 @@ public class AncientSpringCloudConsumerController {
             }
 
         });
-        return "ok";
+        return "AncientSpringCloudProviderA1";
     }
 
     @PostMapping("/myThreadPoolClient")
@@ -60,7 +60,7 @@ public class AncientSpringCloudConsumerController {
                 myClient.helloword(str);
             }
         });
-        return "ok";
+        return "AncientSpringCloudProviderA1";
     }
 
 

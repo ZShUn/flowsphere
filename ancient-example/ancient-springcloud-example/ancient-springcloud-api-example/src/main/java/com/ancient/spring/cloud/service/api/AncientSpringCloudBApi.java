@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(name = "service-b")
-public interface AncientSpringCloudApi {
+public interface AncientSpringCloudBApi {
 
     @PostMapping("/helloword")
     String helloword(String str);
