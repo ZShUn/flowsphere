@@ -6,10 +6,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients(basePackages = "com.ancient")
 @SpringBootApplication
-public class AncientSpringCloudServiceA1ConsumerExampleApplication {
+public class AncientSpringCloudServiceConsumerAExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AncientSpringCloudServiceA1ConsumerExampleApplication.class, args);
+        SpringApplication.run(AncientSpringCloudServiceConsumerAExampleApplication.class, args);
     }
 
 }

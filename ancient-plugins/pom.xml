@@ -32,7 +32,6 @@
         <module>spring-cloud-gateway</module>
         <module>feign</module>
         <module>dubbo2.x</module>
-<!--        <module>resttemplate</module>-->
     </modules>
 
 

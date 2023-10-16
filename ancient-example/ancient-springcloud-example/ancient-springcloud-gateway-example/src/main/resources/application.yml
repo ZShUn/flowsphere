@@ -7,7 +7,7 @@ spring:
     gateway:
       routes:
         - id: test1
-          uri: lb://insight-example
+          uri: lb://service-a
           predicates:
             - Path=/myClient
       discovery:
