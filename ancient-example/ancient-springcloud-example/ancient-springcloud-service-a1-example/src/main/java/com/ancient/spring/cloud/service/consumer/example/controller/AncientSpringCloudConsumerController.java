@@ -23,7 +23,7 @@ public class AncientSpringCloudConsumerController {
 
     @PostMapping("/myClient")
     public String myClient(String str) {
-        return "AncientSpringCloudProviderA1:" + str;
+        return "AncientSpringCloudProviderA1:" + ancientSpringCloudBApi.helloword(str);
     }
 
 

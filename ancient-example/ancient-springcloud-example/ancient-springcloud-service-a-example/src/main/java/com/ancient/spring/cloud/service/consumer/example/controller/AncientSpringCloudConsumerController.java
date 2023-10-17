@@ -16,14 +16,14 @@ import java.util.concurrent.Executors;
 public class AncientSpringCloudConsumerController {
 
     @Autowired
-    private AncientSpringCloudBApi myClient;
+    private AncientSpringCloudBApi ancientSpringCloudBApi;
 
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    @PostMapping("/myClient")
-    public String myClient(String str) {
-        return "AncientSpringCloudProviderA:" + str;
+    @PostMapping("/ancientSpringCloudBApi")
+    public String ancientSpringCloudBApi(String str) {
+        return "AncientSpringCloudProviderA:" + ancientSpringCloudBApi.helloword(str);
     }
 
 
@@ -32,7 +32,7 @@ public class AncientSpringCloudConsumerController {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                myClient.helloword(str);
+                ancientSpringCloudBApi.helloword(str);
             }
         }).start();
         return "AncientSpringCloudProviderA";
@@ -44,7 +44,7 @@ public class AncientSpringCloudConsumerController {
 
             @Override
             public Object call() throws Exception {
-                myClient.helloword(str);
+                ancientSpringCloudBApi.helloword(str);
                 return null;
             }
 
@@ -57,7 +57,7 @@ public class AncientSpringCloudConsumerController {
         threadPoolTaskExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                myClient.helloword(str);
+                ancientSpringCloudBApi.helloword(str);
             }
         });
         return "AncientSpringCloudProviderA";

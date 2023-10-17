@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class AncientSpringCloudProviderC1Feign implements AncientSpringCloudCApi {
 
-    @PostMapping("/helloword")
+
+    @PostMapping("/service-c/helloword")
     public String helloword(String str) {
         return "AncientSpringCloudProviderC1:" + str;
     }
