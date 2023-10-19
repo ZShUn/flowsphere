@@ -1,5 +1,6 @@
 package com.ancient.agent.core.config;
 
+import com.ancient.agent.core.config.yaml.YamlMethodParameterPointcutConfig;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.enums.MethodTypeEnum;
 import net.bytebuddy.description.method.MethodDescription;
@@ -27,12 +28,20 @@ public class MethodMatcherConfigCreator {
 
     private static ElementMatcher<? super MethodDescription> createPointcut(YamlMethodPointcutConfig yamlConfig) {
         if (MethodTypeEnum.INSTANT.getType().equals(yamlConfig.getType()) || MethodTypeEnum.STATIC.getType().equals(yamlConfig.getType())) {
-            return ElementMatchers.named(yamlConfig.getMethodName());
+            return addMethodParams(yamlConfig.getParameterPointcutConfigs(), ElementMatchers.named(yamlConfig.getMethodName()));
         }
         if (MethodTypeEnum.CONSTRUCTOR.getType().equals(yamlConfig.getType())) {
-            return ElementMatchers.isConstructor();
+            return addMethodParams(yamlConfig.getParameterPointcutConfigs(), ElementMatchers.isConstructor());
         }
         return null;
+    }
+
+
+    private static ElementMatcher<? super MethodDescription> addMethodParams(Collection<YamlMethodParameterPointcutConfig> parameterPointcutConfigs, ElementMatcher.Junction<MethodDescription> matcher) {
+        for (YamlMethodParameterPointcutConfig parameterPointcutConfig : parameterPointcutConfigs) {
+            matcher.and(ElementMatchers.takesArgument(parameterPointcutConfig.getIndex(), ElementMatchers.named(parameterPointcutConfig.getType())));
+        }
+        return matcher;
     }
 
 }

@@ -17,3 +17,17 @@ pointcutConfigs:
       - methodName: submitConsumeRequest
         type: instant
         interceptorName: com.ancient.plugin.rocketmq.RocketMQSubmitConsumeRequestMethodInterceptor
+  - className: org.apache.rocketmq.client.consumer.DefaultMQPushConsumer
+    methodPointcutConfigs:
+      - methodName:
+        type: constructor
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQPushConsumerMethodInterceptor
+        parameterPointcutConfigs:
+          - index: 0
+            type: java.lang.String
+          - index: 1
+            type: java.lang.String
+          - index: 2
+            type: org.apache.rocketmq.remoting.RPCHook
+          - index: 3
+            type: org.apache.rocketmq.client.consumer.AllocateMessageQueueStrategy

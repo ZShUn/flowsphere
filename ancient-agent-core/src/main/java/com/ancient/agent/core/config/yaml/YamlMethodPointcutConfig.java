@@ -1,5 +1,8 @@
 package com.ancient.agent.core.config.yaml;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 public class YamlMethodPointcutConfig {
 
     private String methodName;
@@ -7,6 +10,8 @@ public class YamlMethodPointcutConfig {
     private String type;
 
     private String interceptorName;
+
+    private Collection<YamlMethodParameterPointcutConfig> parameterPointcutConfigs = new LinkedList<>();
 
     public String getInterceptorName() {
         return interceptorName;
@@ -32,4 +37,11 @@ public class YamlMethodPointcutConfig {
         this.type = type;
     }
 
+    public Collection<YamlMethodParameterPointcutConfig> getParameterPointcutConfigs() {
+        return parameterPointcutConfigs;
+    }
+
+    public void setParameterPointcutConfigs(Collection<YamlMethodParameterPointcutConfig> parameterPointcutConfigs) {
+        this.parameterPointcutConfigs = parameterPointcutConfigs;
+    }
 }

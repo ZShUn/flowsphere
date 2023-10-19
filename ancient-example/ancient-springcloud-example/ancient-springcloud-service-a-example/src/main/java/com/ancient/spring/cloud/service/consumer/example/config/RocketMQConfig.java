@@ -19,7 +19,7 @@ public class RocketMQConfig {
     public DefaultMQPushConsumer consumer() throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_3");
         consumer.setNamesrvAddr("127.0.0.1:9876");
-        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("TopicTest", "test1");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
