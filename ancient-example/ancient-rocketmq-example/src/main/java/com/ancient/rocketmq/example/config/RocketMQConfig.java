@@ -5,6 +5,7 @@ import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
@@ -27,7 +28,8 @@ public class RocketMQConfig {
 
     @Bean
     public DefaultMQPushConsumer consumer() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_3");
+//        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(null, "default_test_consumer_group", null, new AllocateMessageQueueAveragely());
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("default_test_consumer_group");
         consumer.setNamesrvAddr("127.0.0.1:9876");
 //        consumer.subscribe("TopicTest", MessageSelector.bySql("(user is not null and user='zhangsan')"));
 //        consumer.subscribe("TopicTest", "*");
