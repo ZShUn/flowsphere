@@ -1,26 +1,23 @@
-package com.ancient.plugin.spring.cloud.gateway;
+package com.ancient.plugin.dubbo2.x;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.rule.context.TagContext;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.server.ServerWebExchange;
+import com.google.common.base.Strings;
+import org.apache.dubbo.rpc.RpcContext;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.concurrent.Callable;
 
-public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethodInterceptor {
+public class DubboGenericFilterInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        if (allArguments.length > 0 && allArguments[0] instanceof ServerWebExchange) {
-            ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
-            ServerHttpRequest request = exchange.getRequest();
-            resolver(request);
+        String tag = TagContext.get();
+        if (!Strings.isNullOrEmpty(tag)) {
+            RpcContext.getContext().setAttachment(CommonConstant.TAG, tag);
         }
     }
 
@@ -33,14 +30,5 @@ public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethod
     public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
 
     }
-
-    private void resolver(ServerHttpRequest request) {
-        //TODO 需要支持网关下发规则
-        List<String> tagList = request.getHeaders().get(CommonConstant.TAG);
-        if (!CollectionUtils.isEmpty(tagList)) {
-            TagContext.set(tagList.get(0));
-        }
-    }
-
 
 }

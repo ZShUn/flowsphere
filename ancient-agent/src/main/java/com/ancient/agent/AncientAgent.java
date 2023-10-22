@@ -26,7 +26,6 @@ public class AncientAgent {
 
     public static void premain(String agentArgs, Instrumentation inst) {
         LOGGER.info("-------------------AncientAgent开始启动-------------------");
-        AncientBootstrap.loadRule();
         List<URL> urlList = URLUtils.getPluginURL();
         List<JarFile> jarFileList = PluginsJarLoader.getJarFileList(urlList);
         AgentPluginClassLoader agentPluginClassLoader = AgentClassLoaderManager.getAgentPluginClassLoader(AncientAgent.class.getClassLoader(),jarFileList);

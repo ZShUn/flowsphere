@@ -1,11 +1,10 @@
 package com.ancient.rocketmq.example.config;
 
+import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
@@ -28,12 +27,11 @@ public class RocketMQConfig {
 
     @Bean
     public DefaultMQPushConsumer consumer() throws MQClientException {
-//        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(null, "default_test_consumer_group", null, new AllocateMessageQueueAveragely());
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("default_test_consumer_group");
         consumer.setNamesrvAddr("127.0.0.1:9876");
 //        consumer.subscribe("TopicTest", MessageSelector.bySql("(user is not null and user='zhangsan')"));
 //        consumer.subscribe("TopicTest", "*");
-        consumer.subscribe("TopicTest","TagB");
+        consumer.subscribe("TopicTest", "TagB");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
@@ -45,6 +43,24 @@ public class RocketMQConfig {
         });
         consumer.start();
         return consumer;
+    }
+
+    @Bean
+    public DefaultMQPullConsumer pullConsumer() throws MQClientException {
+        DefaultMQPullConsumer consumer = new DefaultMQPullConsumer("default_test_consumer_group");
+        consumer.setNamesrvAddr("127.0.0.1:9876");
+//        consumer.subscribe("TopicTest", "TagB");
+//        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+//        consumer.registerMessageListener(new MessageListenerConcurrently() {
+//
+//            @Override
+//            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+//                System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+//                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+//            }
+//        });
+        consumer.start();
+        return new DefaultMQPullConsumer();
     }
 
 }

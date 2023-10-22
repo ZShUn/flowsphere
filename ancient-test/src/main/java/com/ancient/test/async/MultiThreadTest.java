@@ -1,8 +1,6 @@
 package com.ancient.test.async;
 
-import com.ancient.common.context.RuleContext;
-import com.ancient.common.rule.entity.RuleEntity;
-import com.ancient.common.rule.entity.VersionEntity;
+import com.ancient.common.rule.context.TagContext;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.*;
@@ -12,32 +10,32 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MultiThreadTest {
 
-    private static final String VERSION_STR = "1.0.2";
+    private static final String TAG = "1.0.2";
 
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(5);
 
     @Test
     public void runnableTest() {
-        versionRuleReady();
+        tagRuleReady();
         EXECUTOR_SERVICE.execute(new Runnable() {
             @Override
             public void run() {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
             }
         });
     }
 
     @Test
     public void nestedRunnableTest() {
-        versionRuleReady();
+        tagRuleReady();
         EXECUTOR_SERVICE.execute(new Runnable() {
             @Override
             public void run() {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        asyncVersionRuleValidate();
+                        asyncTagRuleValidate();
                     }
                 }).start();
             }
@@ -46,15 +44,15 @@ public class MultiThreadTest {
 
     @Test
     public void runnableMixCallableTest() throws ExecutionException, InterruptedException {
-        versionRuleReady();
+        tagRuleReady();
         Future future = EXECUTOR_SERVICE.submit(new Runnable() {
             @Override
             public void run() {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
                 EXECUTOR_SERVICE.submit(new Callable<String>() {
                     @Override
                     public String call() throws Exception {
-                        asyncVersionRuleValidate();
+                        asyncTagRuleValidate();
                         return null;
                     }
                 });
@@ -66,11 +64,11 @@ public class MultiThreadTest {
 
     @Test
     public void callableTest() {
-        versionRuleReady();
+        tagRuleReady();
         EXECUTOR_SERVICE.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
                 return null;
             }
         });
@@ -79,16 +77,16 @@ public class MultiThreadTest {
 
     @Test
     public void nestedCallableTest() throws ExecutionException, InterruptedException {
-        versionRuleReady();
+        tagRuleReady();
         Future future = EXECUTOR_SERVICE.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
 
                 EXECUTOR_SERVICE.submit(new Callable<String>() {
                     @Override
                     public String call() throws Exception {
-                        asyncVersionRuleValidate();
+                        asyncTagRuleValidate();
                         return null;
                     }
                 });
@@ -101,16 +99,16 @@ public class MultiThreadTest {
 
     @Test
     public void callableMixRunnableTest() {
-        versionRuleReady();
+        tagRuleReady();
         EXECUTOR_SERVICE.submit(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                asyncVersionRuleValidate();
+                asyncTagRuleValidate();
 
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        asyncVersionRuleValidate();
+                        asyncTagRuleValidate();
                     }
                 }).start();
 
@@ -120,19 +118,15 @@ public class MultiThreadTest {
     }
 
 
-    private void versionRuleReady() {
-        RuleEntity ruleEntity = new RuleEntity();
-        ruleEntity.setVersionEntity(new VersionEntity(VERSION_STR));
-        RuleContext.set(ruleEntity);
+    private void tagRuleReady() {
+        TagContext.set(TAG);
     }
 
 
-    private void asyncVersionRuleValidate() {
-        RuleEntity result = RuleContext.get();
-        assertNotNull(result);
-        VersionEntity versionEntity = result.getVersionEntity();
-        assertNotNull(versionEntity);
-        assertEquals(versionEntity.getVersion(), VERSION_STR);
+    private void asyncTagRuleValidate() {
+        String tag = TagContext.get();
+        assertNotNull(tag);
+        assertEquals(tag, TAG);
     }
 
 

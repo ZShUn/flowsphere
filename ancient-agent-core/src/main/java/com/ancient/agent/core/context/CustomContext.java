@@ -1,21 +1,19 @@
 package com.ancient.agent.core.context;
 
 
-import com.ancient.common.rule.entity.RuleEntity;
-
 public class CustomContext {
 
-    private RuleEntity ruleEntity;
+    private String tag;
 
     private Thread originThread;
 
-    public CustomContext(RuleEntity ruleContextStr) {
-        this.ruleEntity = ruleContextStr;
+    public CustomContext(String tag) {
+        this.tag = tag;
         this.originThread = Thread.currentThread();
     }
 
-    public RuleEntity getRuleContextStr() {
-        return ruleEntity;
+    public String getTag() {
+        return tag;
     }
 
     public Thread getOriginThread() {

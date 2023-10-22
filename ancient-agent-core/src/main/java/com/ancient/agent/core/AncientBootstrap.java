@@ -5,38 +5,21 @@ import com.ancient.agent.core.config.PointcutConfigLoader;
 import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.utils.URLClassLoaderManager;
-import com.ancient.common.cache.JsonPath;
-import com.ancient.common.cache.RuleCache;
-import com.ancient.common.constant.CommonConstant;
-import com.ancient.common.rule.entity.RuleEntity;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AncientBootstrap {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AncientBootstrap.class);
 
-
-    public static void loadRule() {
-        try {
-            File file = JsonPath.getPath();
-            if (Objects.isNull(file)) {
-                LOGGER.warn("rule.json file is null");
-                return;
-            }
-            ObjectMapper objectMapper = new ObjectMapper();
-            RuleEntity ruleEntity = objectMapper.readValue(file, RuleEntity.class);
-            RuleCache.put(CommonConstant.GRAY_LOCAL_CACHE, ruleEntity);
-        } catch (Exception e) {
-            LOGGER.error("load rule config error", e);
-        }
-    }
 
     public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(List<URL> urlList) {
         //解析plugins配置

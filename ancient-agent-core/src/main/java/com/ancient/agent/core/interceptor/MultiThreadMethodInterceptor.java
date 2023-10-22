@@ -2,7 +2,7 @@ package com.ancient.agent.core.interceptor;
 
 import com.ancient.agent.core.context.CustomContext;
 import com.ancient.agent.core.context.CustomContextAccessor;
-import com.ancient.common.context.RuleContext;
+import com.ancient.common.rule.context.TagContext;
 import net.bytebuddy.implementation.bind.annotation.*;
 
 import java.lang.reflect.Method;
@@ -18,12 +18,12 @@ public class MultiThreadMethodInterceptor {
             Object object = customContextAccessor.getCustomContext();
             if (Objects.nonNull(object) && object instanceof CustomContext) {
                 CustomContext customContext = (CustomContext) object;
-                RuleContext.set(customContext.getRuleContextStr());
+                TagContext.set(customContext.getTag());
             }
             Object result = callable.call();
             return result;
         } finally {
-            RuleContext.remove();
+            TagContext.remove();
         }
     }
 

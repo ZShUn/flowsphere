@@ -4,3 +4,18 @@ pointcutConfigs:
       - methodName: select
         type: instant
         interceptorName: com.ancient.plugin.dubbo2.x.DubboLoadBalanceInterceptor
+  - className: org.apache.dubbo.rpc.filter.ConsumerContextFilter
+    methodPointcutConfigs:
+      - methodName: invoke
+        type: instant
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
+  - className: org.apache.dubbo.rpc.filter.ConsumerContextFilter
+    methodPointcutConfigs:
+      - methodName: invoke
+        type: instant
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
+  - className: org.apache.dubbo.rpc.filter.GenericFilter
+    methodPointcutConfigs:
+      - methodName: invoke
+        type: instant
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboGenericFilterInterceptor
