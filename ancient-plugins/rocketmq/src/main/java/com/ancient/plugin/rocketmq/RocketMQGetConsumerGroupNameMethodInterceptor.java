@@ -8,13 +8,18 @@ import com.ancient.common.rule.TagManager;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
-public class RocketMQSetConsumerGroupNameMethodInterceptor implements InstantMethodInterceptor {
+public class RocketMQGetConsumerGroupNameMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        String consumerGroupName = (String) allArguments[0];
-        consumerGroupName += TagManager.getTag();
-        allArguments[0] = consumerGroupName;
+        try {
+            String consumerGroupName = (String) callable.call();
+            consumerGroupName += TagManager.getTag();
+            instantMethodInterceptorResult.setContinue(false);
+            instantMethodInterceptorResult.setResult(consumerGroupName);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

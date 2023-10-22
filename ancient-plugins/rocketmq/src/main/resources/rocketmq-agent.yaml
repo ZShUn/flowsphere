@@ -19,6 +19,6 @@ pointcutConfigs:
         interceptorName: com.ancient.plugin.rocketmq.RocketMQSubmitConsumeRequestMethodInterceptor
   - className: org.apache.rocketmq.client.consumer.DefaultMQPushConsumer
     methodPointcutConfigs:
-      - methodName: setConsumerGroup
+      - methodName: getConsumerGroup
         type: instant
-        interceptorName: com.ancient.plugin.rocketmq.RocketMQSetConsumerGroupNameMethodInterceptor
+        interceptorName: com.ancient.plugin.rocketmq.RocketMQGetConsumerGroupNameMethodInterceptor
