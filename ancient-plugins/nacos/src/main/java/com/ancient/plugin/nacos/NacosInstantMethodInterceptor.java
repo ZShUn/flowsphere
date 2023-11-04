@@ -28,13 +28,14 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
                     NacosServer nacosServer = (NacosServer) server;
                     String serverTag = nacosServer.getInstance().getMetadata().get(CommonConstant.TAG);
                     String ruleTag = TagContext.get();
-                    if (!Strings.isNullOrEmpty(ruleTag) && !ruleTag.equals(serverTag)) {
+                    if (!Strings.isNullOrEmpty(ruleTag) && !ruleTag.equals(serverTag) && !Strings.isNullOrEmpty(serverTag)) {
                         serverList.remove(server);
                     }
                 }
             }
             instantMethodInterceptorResult.setContinue(false);
             instantMethodInterceptorResult.setResult(serverList);
+
         }
     }
 

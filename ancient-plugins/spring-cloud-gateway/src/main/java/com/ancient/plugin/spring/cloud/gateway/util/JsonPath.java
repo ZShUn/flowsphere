@@ -1,4 +1,4 @@
-package com.ancient.common.cache;
+package com.ancient.plugin.spring.cloud.gateway.util;
 
 import java.io.File;
 import java.net.URL;
@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class JsonPath {
 
-    private static final String JSON_FILE_NAME = "rule.json";
+    private static final String JSON_FILE_NAME = "instantWeight.json";
 
     public static File getPath() {
         URL url = JsonPath.class.getClassLoader().getResource(JSON_FILE_NAME);

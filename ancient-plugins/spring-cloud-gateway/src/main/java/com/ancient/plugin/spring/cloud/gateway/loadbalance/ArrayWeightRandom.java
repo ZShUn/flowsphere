@@ -1,4 +1,4 @@
-package com.ancient.plugin.spring.cloud.gateway;
+package com.ancient.plugin.spring.cloud.gateway.loadbalance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,25 +11,25 @@ public class ArrayWeightRandom {
     private final List<String> items = new ArrayList<>();
     private double[] weights;
 
-    public ArrayWeightRandom(List<InstantWeight> instantWeights) {
-        this.calWeights(instantWeights);
+    public ArrayWeightRandom(List<TagWeight> tagWeights) {
+        this.calWeights(tagWeights);
     }
 
     /**
      * 计算权重，初始化或者重新定义权重时使用
      */
-    public void calWeights(List<InstantWeight> instantWeights) {
+    public void calWeights(List<TagWeight> tagWeights) {
         items.clear();
 
         // 计算权重总和
         double originWeightSum = 0;
-        for (InstantWeight itemWithWeight : instantWeights) {
+        for (TagWeight itemWithWeight : tagWeights) {
             double weight = itemWithWeight.getWeight();
             if (weight <= 0) {
                 continue;
             }
 
-            items.add(itemWithWeight.getServiceId());
+            items.add(itemWithWeight.getTag());
             if (Double.isInfinite(weight)) {
                 weight = 10000.0D;
             }
@@ -42,7 +42,7 @@ public class ArrayWeightRandom {
         // 计算每个item的实际权重比例
         double[] actualWeightRatios = new double[items.size()];
         int index = 0;
-        for (InstantWeight itemWithWeight : instantWeights) {
+        for (TagWeight itemWithWeight : tagWeights) {
             double weight = itemWithWeight.getWeight();
             if (weight <= 0) {
                 continue;

@@ -19,3 +19,8 @@ pointcutConfigs:
       - methodName: invoke
         type: instant
         interceptorName: com.ancient.plugin.dubbo2.x.DubboGenericFilterInterceptor
+  - className: org.apache.dubbo.config.ApplicationConfig
+    methodPointcutConfigs:
+      - methodName: setParameters
+        type: instant
+        interceptorName: com.ancient.plugin.dubbo2.x.DubboApplicationConfigInterceptor

@@ -21,6 +21,11 @@ public class AncientSpringCloudConsumerController {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    @PostMapping("/myClient")
+    public String myClient(String str) {
+        return "AncientSpringCloudProviderA1:" + str;
+    }
+
     @PostMapping("/ancientSpringCloudBApi")
     public String ancientSpringCloudBApi(String str) {
         return "AncientSpringCloudProviderA:" + ancientSpringCloudBApi.helloword(str);

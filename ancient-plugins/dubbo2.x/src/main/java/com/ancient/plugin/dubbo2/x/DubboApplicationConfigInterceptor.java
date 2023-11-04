@@ -1,46 +1,31 @@
-package com.ancient.plugin.spring.cloud.gateway;
+package com.ancient.plugin.dubbo2.x;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.ancient.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.ancient.common.constant.CommonConstant;
 import com.ancient.common.rule.context.TagContext;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.server.ServerWebExchange;
 
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
-public class SpringCloudGatewayInstantMethodInterceptor implements InstantMethodInterceptor {
+public class DubboApplicationConfigInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        if (allArguments.length > 0 && allArguments[0] instanceof ServerWebExchange) {
-            ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
-            ServerHttpRequest request = exchange.getRequest();
-            resolver(request);
-        }
+        Map<String, String> parameters = (Map<String, String>) allArguments[0];
+        parameters.put(CommonConstant.TAG, TagContext.get());
     }
 
     @Override
     public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-        TagContext.remove();
+
     }
 
     @Override
     public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
 
     }
-
-    private void resolver(ServerHttpRequest request) {
-        //TODO 需要支持网关下发规则
-        List<String> tagList = request.getHeaders().get(CommonConstant.TAG);
-        if (!CollectionUtils.isEmpty(tagList)) {
-            TagContext.set(tagList.get(0));
-        }
-    }
-
 
 }
