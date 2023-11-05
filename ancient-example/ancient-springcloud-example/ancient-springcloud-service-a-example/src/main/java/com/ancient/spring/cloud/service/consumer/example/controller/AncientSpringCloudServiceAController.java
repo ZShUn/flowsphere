@@ -1,5 +1,6 @@
 package com.ancient.spring.cloud.service.consumer.example.controller;
 
+import com.ancient.common.rule.TagManager;
 import com.ancient.spring.cloud.service.api.AncientSpringCloudBApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -13,7 +14,7 @@ import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping
-public class AncientSpringCloudConsumerController {
+public class AncientSpringCloudServiceAController {
 
     @Autowired
     private AncientSpringCloudBApi ancientSpringCloudBApi;
@@ -21,51 +22,46 @@ public class AncientSpringCloudConsumerController {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    @PostMapping("/myClient")
-    public String myClient(String str) {
-        return "AncientSpringCloudProviderA1:" + str;
-    }
-
-    @PostMapping("/ancientSpringCloudBApi")
-    public String ancientSpringCloudBApi(String str) {
-        return "AncientSpringCloudProviderA:" + ancientSpringCloudBApi.helloword(str);
+    @PostMapping("/helloWrod")
+    public String hellowrod(String str) {
+        return "[App=AncientSpringCloudProviderA Tag=" + TagManager.getTag() + "] -> " + ancientSpringCloudBApi.helloWord(str);
     }
 
 
-    @PostMapping("/myRunnableThreadClient")
-    public String myRunnableThreadClient(final String str) {
+    @PostMapping("/myRunnableThreadHelloWord")
+    public String myRunnableThreadHelloWord(final String str) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ancientSpringCloudBApi.helloword(str);
+                ancientSpringCloudBApi.helloWord(str);
             }
         }).start();
-        return "AncientSpringCloudProviderA";
+        return "myRunnableThreadHelloWord";
     }
 
-    @GetMapping("/myCallableThreadClient")
-    public String myCallableThreadClient(final String str) {
+    @GetMapping("/myCallableThreadHelloWord")
+    public String myCallableThreadHelloWord(final String str) {
         Executors.newFixedThreadPool(4).submit(new Callable() {
 
             @Override
             public Object call() throws Exception {
-                ancientSpringCloudBApi.helloword(str);
+                ancientSpringCloudBApi.helloWord(str);
                 return null;
             }
 
         });
-        return "AncientSpringCloudProviderA";
+        return "myCallableThreadHelloWord";
     }
 
-    @PostMapping("/myThreadPoolClient")
-    public String myThreadPoolClient(final String str) {
+    @PostMapping("/myThreadPoolHelloWord")
+    public String myThreadPoolHelloWord(final String str) {
         threadPoolTaskExecutor.submit(new Runnable() {
             @Override
             public void run() {
-                ancientSpringCloudBApi.helloword(str);
+                ancientSpringCloudBApi.helloWord(str);
             }
         });
-        return "AncientSpringCloudProviderA";
+        return "myThreadPoolHelloWord";
     }
 
 

@@ -7,6 +7,7 @@ import com.ancient.plugin.spring.cloud.gateway.util.JsonPath;
 import com.ancient.plugin.spring.cloud.gateway.cache.InstantWeightCache;
 import com.ancient.plugin.spring.cloud.gateway.loadbalance.InstantWeight;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,10 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.ancient.plugin.spring.cloud.gateway.cache.InstantWeightCache.INSTANT_WEIGHT_CACHE_KEY;
 
+@Slf4j
 public class MatchesInstantMethodInterceptor implements InstantMethodInterceptor {
-
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(InstantWeightCache.class);
 
     private static final AtomicBoolean STARTER = new AtomicBoolean(false);
 
@@ -64,7 +63,7 @@ public class MatchesInstantMethodInterceptor implements InstantMethodInterceptor
             InstantWeight instantWeight = objectMapper.readValue(file, InstantWeight.class);
             InstantWeightCache.put(INSTANT_WEIGHT_CACHE_KEY, instantWeight);
         } catch (Exception e) {
-            LOGGER.error("", e);
+            log.error("", e);
         }
     }
 

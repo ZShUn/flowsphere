@@ -1,5 +1,7 @@
 package com.ancient.spring.cloud.service.consumer.example.config;
 
+import com.ancient.common.rule.TagManager;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+@Slf4j
 @Configuration
 public class RocketMQConfig {
 
@@ -25,7 +28,7 @@ public class RocketMQConfig {
 
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+                log.info("接收到的消息 tag={} threadName={} msgs={} ", TagManager.getTag(), Thread.currentThread().getName(), msgs);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });

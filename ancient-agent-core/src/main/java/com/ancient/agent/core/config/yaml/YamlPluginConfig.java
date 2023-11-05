@@ -1,17 +1,12 @@
 package com.ancient.agent.core.config.yaml;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class YamlPluginConfig {
 
     private List<String> plugins;
-
-    public List<String> getPlugins() {
-        return plugins;
-    }
-
-    public void setPlugins(List<String> plugins) {
-        this.plugins = plugins;
-    }
 
 }

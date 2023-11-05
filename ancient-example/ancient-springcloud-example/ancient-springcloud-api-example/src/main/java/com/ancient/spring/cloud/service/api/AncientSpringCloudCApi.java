@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @FeignClient(name = "service-c")
 public interface AncientSpringCloudCApi {
 
-    @PostMapping("/service-c/helloword")
-    String helloword(String str);
+    @PostMapping("/service-c/helloWord")
+    String helloWord(String str);
 
 }

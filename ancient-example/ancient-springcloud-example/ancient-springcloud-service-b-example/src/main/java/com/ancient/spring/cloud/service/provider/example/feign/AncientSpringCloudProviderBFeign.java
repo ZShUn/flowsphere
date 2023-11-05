@@ -1,5 +1,6 @@
 package com.ancient.spring.cloud.service.provider.example.feign;
 
+import com.ancient.common.rule.TagManager;
 import com.ancient.spring.cloud.service.api.AncientSpringCloudBApi;
 import com.ancient.spring.cloud.service.api.AncientSpringCloudCApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ public class AncientSpringCloudProviderBFeign implements AncientSpringCloudBApi 
     @Autowired
     private AncientSpringCloudCApi ancientSpringCloudCApi;
 
-    @PostMapping("/helloword")
-    public String helloword(@RequestBody String str) {
-        return "AncientSpringCloudProviderB:" + ancientSpringCloudCApi.helloword(str);
+    @PostMapping("/helloWord")
+    public String helloWord(@RequestBody String str) {
+
+        return "[App=AncientSpringCloudProviderB Tag=" + TagManager.getTag() + "] -> " + ancientSpringCloudCApi.helloWord(str);
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "service-b")
 public interface AncientSpringCloudBApi {
 
-    @PostMapping("/service-b/helloword")
-    String helloword(@RequestBody String str);
+    @PostMapping("/service-b/helloWord")
+    String helloWord(@RequestBody String str);
 
 }

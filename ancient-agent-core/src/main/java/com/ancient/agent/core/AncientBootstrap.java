@@ -5,8 +5,7 @@ import com.ancient.agent.core.config.PointcutConfigLoader;
 import com.ancient.agent.core.config.yaml.YamlClassPointcutConfig;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.utils.URLClassLoaderManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.InputStream;
@@ -16,10 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class AncientBootstrap {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AncientBootstrap.class);
-
 
     public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(List<URL> urlList) {
         //解析plugins配置

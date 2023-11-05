@@ -1,5 +1,10 @@
 package com.ancient.plugin.rocketmq.consumer;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum ExpressionTypeEnum {
 
     SQL92("SQL92"),
@@ -8,15 +13,6 @@ public enum ExpressionTypeEnum {
 
     ALL("*");
 
-
-    ExpressionTypeEnum(String value) {
-        this.value = value;
-    }
-
     private String value;
-
-    public String getValue() {
-        return value;
-    }
 
 }

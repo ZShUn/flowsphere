@@ -7,6 +7,7 @@ import com.ancient.agent.core.builder.TargetObjectInterceptorBuilder;
 import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.MethodMatcherConfigCreator;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
@@ -17,9 +18,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.Map;
 
+@Slf4j
 public class AncientAgentTransform implements AgentBuilder.Transformer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AncientAgentTransform.class);
 
     private final Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap;
 
@@ -33,14 +33,14 @@ public class AncientAgentTransform implements AgentBuilder.Transformer {
     @Override
     public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
         try {
-            LOGGER.info("[AncientAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
+            log.info("[AncientAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
             Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
             return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
                     new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader),
                     new MultiThreadMethodInterceptorBuilder()
             );
         } catch (Throwable e) {
-            LOGGER.error("AncientAgentTransform load error", e);
+            log.error("AncientAgentTransform load error", e);
             return builder;
         }
     }

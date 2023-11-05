@@ -1,6 +1,9 @@
 package com.ancient.agent.core.context;
 
 
+import lombok.Getter;
+
+@Getter
 public class CustomContext {
 
     private String tag;
@@ -12,11 +15,5 @@ public class CustomContext {
         this.originThread = Thread.currentThread();
     }
 
-    public String getTag() {
-        return tag;
-    }
 
-    public Thread getOriginThread() {
-        return originThread;
-    }
 }

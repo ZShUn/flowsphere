@@ -23,6 +23,12 @@
 
         <dependency>
             <groupId>com.ancient</groupId>
+            <artifactId>ancient-plugin-spring-cloud-gateway</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ancient</groupId>
             <artifactId>ancient-common</artifactId>
         </dependency>
 

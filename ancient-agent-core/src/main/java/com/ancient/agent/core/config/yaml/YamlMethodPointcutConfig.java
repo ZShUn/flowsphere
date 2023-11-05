@@ -1,8 +1,11 @@
 package com.ancient.agent.core.config.yaml;
 
+import lombok.Data;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
+@Data
 public class YamlMethodPointcutConfig {
 
     private String methodName;
@@ -13,35 +16,4 @@ public class YamlMethodPointcutConfig {
 
     private Collection<YamlMethodParameterPointcutConfig> parameterPointcutConfigs = new LinkedList<>();
 
-    public String getInterceptorName() {
-        return interceptorName;
-    }
-
-    public void setInterceptorName(String interceptorName) {
-        this.interceptorName = interceptorName;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Collection<YamlMethodParameterPointcutConfig> getParameterPointcutConfigs() {
-        return parameterPointcutConfigs;
-    }
-
-    public void setParameterPointcutConfigs(Collection<YamlMethodParameterPointcutConfig> parameterPointcutConfigs) {
-        this.parameterPointcutConfigs = parameterPointcutConfigs;
-    }
 }

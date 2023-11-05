@@ -1,6 +1,5 @@
 package com.ancient.agent.core.builder;
 
-import com.ancient.agent.core.AncientBootstrap;
 import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.MethodMatcherConfig;
 import com.ancient.agent.core.interceptor.MethodInterceptor;
@@ -9,20 +8,18 @@ import com.ancient.agent.core.interceptor.template.ConstructorInterceptorTemplat
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorTemplate;
 import com.ancient.agent.core.interceptor.template.StaticMethodInterceptorTemplate;
 import com.ancient.agent.core.utils.MethodTypeUtils;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.description.method.MethodDescription;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 public class PluginsMethodInterceptorBuilder implements InterceptorBuilder {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(AncientBootstrap.class);
 
     private final List<MethodMatcherConfig> methodMatcherConfigs;
 
@@ -66,7 +63,7 @@ public class PluginsMethodInterceptorBuilder implements InterceptorBuilder {
 
             }
         } catch (Throwable e) {
-            LOGGER.error("[MethodInterceptorBuilder] init interceptor error", e);
+            log.error("[MethodInterceptorBuilder] init interceptor error", e);
         }
         return builder;
     }

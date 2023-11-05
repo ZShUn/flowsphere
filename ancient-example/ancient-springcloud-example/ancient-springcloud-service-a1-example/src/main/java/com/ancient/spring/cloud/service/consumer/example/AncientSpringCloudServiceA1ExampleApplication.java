@@ -1,15 +1,15 @@
-package com.ancient.spring.cloud.service.provider.example;
+package com.ancient.spring.cloud.service.consumer.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.ancient")
 @SpringBootApplication
-public class AncientSpringCloudServiceProviderCExampleApplication {
+public class AncientSpringCloudServiceA1ExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AncientSpringCloudServiceProviderCExampleApplication.class, args);
+        SpringApplication.run(AncientSpringCloudServiceA1ExampleApplication.class, args);
     }
 
 }

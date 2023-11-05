@@ -9,6 +9,7 @@ import com.ancient.agent.core.classloader.AgentPluginClassLoader;
 import com.ancient.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.ancient.agent.core.jar.PluginsJarLoader;
 import com.ancient.agent.core.utils.URLUtils;
+import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarFile;
 
+@Slf4j
 public class AncientAgent {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AncientAgent.class);
 
     public static void premain(String agentArgs, Instrumentation inst) {
-        LOGGER.info("-------------------AncientAgent开始启动-------------------");
+        log.info("-------------------AncientAgent开始启动-------------------");
         List<URL> urlList = URLUtils.getPluginURL();
         List<JarFile> jarFileList = PluginsJarLoader.getJarFileList(urlList);
         AgentPluginClassLoader agentPluginClassLoader = AgentClassLoaderManager.getAgentPluginClassLoader(AncientAgent.class.getClassLoader(),jarFileList);
@@ -35,7 +36,7 @@ public class AncientAgent {
                 .transform(new AncientAgentTransform(methodPointcutConfigMap, agentPluginClassLoader))
                 .with(new AncientAgentListener())
                 .installOn(inst);
-        LOGGER.info("-------------------AncientAgent启动成功-------------------");
+        log.info("-------------------AncientAgent启动成功-------------------");
 
     }
 

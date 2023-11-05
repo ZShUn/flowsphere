@@ -4,12 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = "com.ancient")
+@EnableFeignClients
 @SpringBootApplication
-public class AncientSpringCloudServiceProviderB1ExampleApplication {
+public class AncientSpringCloudServiceCExampleApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AncientSpringCloudServiceProviderB1ExampleApplication.class, args);
+        SpringApplication.run(AncientSpringCloudServiceCExampleApplication.class, args);
     }
 
 }

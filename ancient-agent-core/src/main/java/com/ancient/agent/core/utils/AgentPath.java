@@ -1,16 +1,15 @@
 package com.ancient.agent.core.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+@Slf4j
 public class AgentPath {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AgentPath.class);
 
     private static File AGENT_PACKAGE_PATH;
 
@@ -39,7 +38,7 @@ public class AgentPath {
                 try {
                     agentJarFile = new File(new URL(urlString).toURI());
                 } catch (MalformedURLException | URISyntaxException e) {
-                    LOGGER.error("", e);
+                    log.error("", e);
                 }
                 if (agentJarFile.exists()) {
                     return agentJarFile.getParentFile();
