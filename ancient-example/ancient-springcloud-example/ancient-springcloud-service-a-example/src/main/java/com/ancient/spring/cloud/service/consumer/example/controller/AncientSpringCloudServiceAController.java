@@ -22,7 +22,7 @@ public class AncientSpringCloudServiceAController {
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
-    @PostMapping("/helloWrod")
+    @PostMapping("/helloWord")
     public String hellowrod(String str) {
         return "[App=AncientSpringCloudProviderA Tag=" + TagManager.getTag() + "] -> " + ancientSpringCloudBApi.helloWord(str);
     }

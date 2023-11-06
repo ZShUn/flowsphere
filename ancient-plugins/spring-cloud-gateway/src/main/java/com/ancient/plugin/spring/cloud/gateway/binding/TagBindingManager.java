@@ -1,6 +1,7 @@
 package com.ancient.plugin.spring.cloud.gateway.binding;
 
 import com.ancient.plugin.spring.cloud.gateway.resolver.HeaderResolver;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,9 +16,9 @@ public class TagBindingManager {
         TAG_BINDING_LIST.add(new RegionTagBinding());
     }
 
-    public static void binding(HeaderResolver headerResolver) {
+    public static void binding(HeaderResolver headerResolver, ServerHttpRequest request) {
         for (TagBinding tagBinding : TAG_BINDING_LIST) {
-            if (tagBinding.binding(headerResolver)) {
+            if (tagBinding.binding(headerResolver, request)) {
                 break;
             }
         }
