@@ -16,7 +16,7 @@ public class RegionTagBinding extends AttributeTagBinding {
     }
 
     @Override
-    public boolean validRouterTag(InstantWeight instantWeight, HeaderResolver headerResolver) {
+    public boolean validInstantWeight(InstantWeight instantWeight, HeaderResolver headerResolver) {
         RegionWeight regionWeight = instantWeight.getRegionWeight();
         if (Objects.isNull(regionWeight)) {
             return false;

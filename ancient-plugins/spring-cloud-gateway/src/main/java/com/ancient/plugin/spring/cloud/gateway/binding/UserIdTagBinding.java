@@ -16,7 +16,7 @@ public class UserIdTagBinding extends AttributeTagBinding {
     }
 
     @Override
-    public boolean validRouterTag(InstantWeight instantWeight, HeaderResolver headerResolver) {
+    public boolean validInstantWeight(InstantWeight instantWeight, HeaderResolver headerResolver) {
         UserWeight userWeight = instantWeight.getUserWeight();
         if (Objects.isNull(userWeight)) {
             return false;

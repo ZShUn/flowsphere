@@ -20,12 +20,13 @@ public abstract class AttributeTagBinding implements TagBinding {
         if (Objects.isNull(instantWeight)) {
             return false;
         }
-        if (validRouterTag(instantWeight,headerResolver)){
+        if (validInstantWeight(instantWeight, headerResolver)) {
             List<TagWeight> tagWeight = getTagWeight(instantWeight);
             ArrayWeightRandom arrayWeightRandom = new ArrayWeightRandom(tagWeight);
             String tag = arrayWeightRandom.choose();
             TagContext.set(tag);
-            request.getHeaders().add(CommonConstant.TAG, tag);
+            ServerHttpRequest.Builder requsetBuilder = request.mutate();
+            requsetBuilder.headers(headers -> headers.add(CommonConstant.TAG, tag));
             return true;
         }
         return false;
@@ -34,7 +35,7 @@ public abstract class AttributeTagBinding implements TagBinding {
 
     public abstract List<TagWeight> getTagWeight(InstantWeight instantWeight);
 
-    public abstract boolean validRouterTag(InstantWeight instantWeight, HeaderResolver headerResolver);
+    public abstract boolean validInstantWeight(InstantWeight instantWeight, HeaderResolver headerResolver);
 
 
 }

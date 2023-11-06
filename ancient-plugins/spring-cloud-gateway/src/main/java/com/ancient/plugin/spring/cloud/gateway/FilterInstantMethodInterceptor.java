@@ -30,7 +30,7 @@ public class FilterInstantMethodInterceptor implements InstantMethodInterceptor 
             ServerWebExchange exchange = (ServerWebExchange) allArguments[0];
             ServerHttpRequest request = exchange.getRequest();
             HeaderResolver headerResolver = new SimpleHeaderResolver(request);
-            TagBindingManager.binding(headerResolver);
+            TagBindingManager.binding(headerResolver, request);
         }
     }
 
