@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.stream.Collectors;
 
 public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
 
@@ -22,18 +23,10 @@ public class NacosInstantMethodInterceptor implements InstantMethodInterceptor {
         Object serverListObj = allArguments[0];
         if (serverListObj instanceof List) {
             List<Server> servers = (List<Server>) serverListObj;
-            List<Server> result = new ArrayList<>(servers);
-            for (int i = result.size() - 1; i >= 0; i--) {
-                Server server = result.get(i);
-                if (server instanceof NacosServer) {
-                    NacosServer nacosServer = (NacosServer) server;
-                    String serverTag = nacosServer.getInstance().getMetadata().get(CommonConstant.TAG);
-                    String ruleTag = TagContext.get();
-                    if (!Strings.isNullOrEmpty(ruleTag) && !ruleTag.equals(serverTag) && !Strings.isNullOrEmpty(serverTag)) {
-                        result.remove(server);
-                    }
-                }
-            }
+            List<Server> result = servers.stream().map(server -> (NacosServer) server)
+                            .filter(new NacosPredicate())
+                            .collect(Collectors.toList());
+
             instantMethodInterceptorResult.setContinue(false);
             //兜底路由
             if (CollectionUtils.isEmpty(result)) {
