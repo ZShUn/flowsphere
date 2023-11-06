@@ -1,7 +1,7 @@
-package com.ancient.plugin.rocketmq;
+package com.ancient.plugin.rocketmq.consumer;
 
 import com.ancient.agent.core.interceptor.type.StaticMethodInterceptor;
-import com.ancient.plugin.rocketmq.consumer.ConsumerMetadata;
+import com.ancient.plugin.rocketmq.consumer.expression.ConsumerMetadata;
 
 import java.lang.reflect.Method;
 

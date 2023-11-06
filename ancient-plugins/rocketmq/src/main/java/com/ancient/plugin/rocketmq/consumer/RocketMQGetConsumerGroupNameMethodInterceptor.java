@@ -1,4 +1,4 @@
-package com.ancient.plugin.rocketmq;
+package com.ancient.plugin.rocketmq.consumer;
 
 import com.ancient.agent.core.context.CustomContextAccessor;
 import com.ancient.agent.core.interceptor.template.InstantMethodInterceptorResult;

@@ -1,4 +1,4 @@
-package com.ancient.plugin.rocketmq.consumer;
+package com.ancient.plugin.rocketmq.consumer.expression;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

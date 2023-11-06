@@ -1,8 +1,8 @@
-package com.ancient.plugin.rocketmq;
+package com.ancient.plugin.rocketmq.consumer;
 
 import com.ancient.agent.core.interceptor.type.StaticMethodInterceptor;
-import com.ancient.plugin.rocketmq.consumer.ConsumerMetadata;
-import com.ancient.plugin.rocketmq.consumer.ExpressionTypeEnum;
+import com.ancient.plugin.rocketmq.consumer.expression.ConsumerMetadata;
+import com.ancient.plugin.rocketmq.consumer.expression.ExpressionTypeEnum;
 
 import java.lang.reflect.Method;
 
