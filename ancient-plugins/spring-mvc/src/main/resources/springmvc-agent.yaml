@@ -1,6 +1,0 @@
-pointcutConfigs:
-  - className: org.springframework.web.filter.RequestContextFilter
-    methodPointcutConfigs:
-      - methodName: doFilterInternal
-        type: instant
-        interceptorName: com.ancient.plugin.spring.mvc.SpringMvcInstantMethodInterceptor

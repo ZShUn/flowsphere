@@ -3,21 +3,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ancient</groupId>
-    <artifactId>ancient</artifactId>
+    <groupId>com.flowsphere</groupId>
+    <artifactId>flowsphere</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>ancient</name>
+    <name>flowsphere</name>
 
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>ancient-agent</module>
-        <module>ancient-agent-core</module>
-        <module>ancient-plugins</module>
-        <module>ancient-common</module>
-        <module>ancient-test</module>
+        <module>flowsphere-agent</module>
+        <module>flowsphere-agent-core</module>
+        <module>flowsphere-plugins</module>
+        <module>flowsphere-common</module>
+        <module>flowsphere-test</module>
     </modules>
 
     <properties>
@@ -112,38 +112,38 @@
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-common</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-common</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-agent</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-agent</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-agent-core</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-agent-core</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-plugin-nacos</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-nacos</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-plugin-rocketmq</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-rocketmq</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.ancient</groupId>
-                <artifactId>ancient-plugin-spring-mvc</artifactId>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-spring-mvc</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -284,6 +284,7 @@
         </dependencies>
 
     </dependencyManagement>
+
 
 
 </project>
