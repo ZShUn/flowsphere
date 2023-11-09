@@ -1,17 +1,17 @@
-package com.ancient.dubbo.consumer.example.client;
+package com.flowsphere.dubbo.consumer.example.client;
 
-import com.ancient.dubbo.api.AncientDubboApi;
+import com.flowsphere.dubbo.api.DubboApi;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AncientDubboConsumerClient {
+public class DubboConsumerClient {
 
     @DubboReference(check = false, version = "1.0.0")
-    private AncientDubboApi ancientDubboApi;
+    private DubboApi dubboApi;
 
     public String helloword(String str) {
-        return ancientDubboApi.helloword(str);
+        return dubboApi.helloword(str);
     }
 
 }

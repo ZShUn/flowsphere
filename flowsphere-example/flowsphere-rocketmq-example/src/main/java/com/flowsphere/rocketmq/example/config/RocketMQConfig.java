@@ -1,4 +1,4 @@
-package com.ancient.rocketmq.example.config;
+package com.flowsphere.rocketmq.example.config;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

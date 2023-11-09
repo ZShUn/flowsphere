@@ -1,4 +1,4 @@
-package com.ancient.rocketmq.example.controller;
+package com.flowsphere.rocketmq.example.controller;
 
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
