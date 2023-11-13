@@ -17,6 +17,7 @@
         <module>flowsphere-agent-core</module>
         <module>flowsphere-plugins</module>
         <module>flowsphere-common</module>
+        <module>flowsphere-distribution</module>
         <module>flowsphere-test</module>
     </modules>
 
@@ -46,10 +47,14 @@
         <rocketmq-client.version>4.8.0</rocketmq-client.version>
         <dubbo.version>2.7.22</dubbo.version>
 
-        <spring-cloud-starter-alibaba-nacos-discovery.version>2.2.9.RELEASE</spring-cloud-starter-alibaba-nacos-discovery.version>
+        <spring-cloud-starter-alibaba-nacos-discovery.version>2.2.9.RELEASE
+        </spring-cloud-starter-alibaba-nacos-discovery.version>
         <spring-cloud-starter-openfeign.version>2.2.5.RELEASE</spring-cloud-starter-openfeign.version>
         <spring-cloud-starter-gateway.version>2.2.5.RELEASE</spring-cloud-starter-gateway.version>
         <spring-webmvc.version>5.0.0.RELEASE</spring-webmvc.version>
+
+
+        <maven-assembly-plugin.version>3.0.0</maven-assembly-plugin.version>
 
     </properties>
 
@@ -113,14 +118,20 @@
 
             <dependency>
                 <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-common</artifactId>
+                <artifactId>flowsphere-agent</artifactId>
                 <version>${revision}</version>
             </dependency>
 
+<!--            <dependency>-->
+<!--                <groupId>com.flowsphere</groupId>-->
+<!--                <artifactId>flowsphere-common</artifactId>-->
+<!--                <version>${revision}</version>-->
+<!--            </dependency>-->
+
             <dependency>
                 <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-agent</artifactId>
-                <version>${revision}</version>
+                <artifactId>flowsphere-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
@@ -144,6 +155,24 @@
             <dependency>
                 <groupId>com.flowsphere</groupId>
                 <artifactId>flowsphere-plugin-spring-mvc</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-dubbo2</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-fegin</artifactId>
+                <version>${revision}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-plugin-spring-cloud-gateway</artifactId>
                 <version>${revision}</version>
             </dependency>
 
@@ -285,6 +314,158 @@
 
     </dependencyManagement>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <!--                <configuration>-->
+                <!--                    &lt;!&ndash;G:\IdeaWorkspace\sic_platform\probe\chromProbe\src\assembly\assembly.xml&ndash;&gt;-->
+                <!--                    &lt;!&ndash;描述文件路径&ndash;&gt;-->
+                <!--&lt;!&ndash;                    <descriptor>src/assembly/assembly.xml</descriptor>&ndash;&gt;-->
+                <!--                    &lt;!&ndash; 生成的tar.gz文件的名字,如果没有设置就默认用pom文件里的artifactId+version&ndash;&gt;-->
+                <!--                    <descriptors>-->
+                <!--                        <descriptor>assembly/assembly.xml</descriptor>-->
+                <!--                    </descriptors>-->
+                <!--                    <finalName>${project.name}-${project.version}</finalName>-->
+                <!--                    &lt;!&ndash;属性控制是否在生成的打包文件的文件名中包含assembly id&ndash;&gt;-->
+                <!--                    <appendAssemblyId>false</appendAssemblyId>-->
+                <!--                </configuration>-->
+                <!--                <executions>-->
+                <!--                    <execution>-->
+                <!--                        <id>make-assembly</id>-->
+                <!--                        &lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
+                <!--                        <phase>package</phase>-->
+                <!--                        <goals>-->
+                <!--                            <goal>single</goal>-->
+                <!--                        </goals>-->
+                <!--                    </execution>-->
+                <!--                </executions>-->
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.7.0</version>
+                    <configuration>
+                        <compilerVersion>${java.version}</compilerVersion>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <additionalJOptions>
+                            <additionalJOption>-Xdoclint:none</additionalJOption>
+                        </additionalJOptions>
+                    </configuration>
+                </plugin>
+
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <inherited>true</inherited>
+                    <version>2.7</version>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                            <configuration>
+                                <updatePomFile>true</updatePomFile>
+                                <flattenMode>oss</flattenMode>
+                                <pomElements>
+                                    <parent>expand</parent>
+                                    <distributionManagement>remove</distributionManagement>
+                                    <repositories>remove</repositories>
+                                </pomElements>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>8.7</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <configLocation>google_checks.xml</configLocation>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <consoleOutput>true</consoleOutput>
+                        <failsOnError>true</failsOnError>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.7</version>
+                    <configuration>
+                        <formats>
+                            <format>html</format>
+                            <format>xml</format>
+                        </formats>
+                        <check/>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
 
 </project>
