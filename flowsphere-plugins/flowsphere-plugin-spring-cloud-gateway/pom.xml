@@ -5,14 +5,12 @@
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere-plugins</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>flowsphere-plugin-spring-cloud-gateway</artifactId>
-    <version>${revision}</version>
-    <name>spring-cloud-gateway</name>
-    <description>flowsphere-spring-cloud-gateway</description>
+    <name>flowsphere-plugin-spring-cloud-gateway</name>
+    <description>flowsphere-plugin-spring-cloud-gateway</description>
     <properties>
         <java.version>8</java.version>
     </properties>
@@ -20,13 +18,13 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>com.flowsphere</groupId>
+            <artifactId>flowsphere-agent-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
-            <artifactId>flowsphere-agent-core</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
 
     </dependencies>
@@ -46,5 +44,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

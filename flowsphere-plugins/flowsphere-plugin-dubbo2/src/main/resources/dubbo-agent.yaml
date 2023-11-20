@@ -3,24 +3,24 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: select
         type: instant
-        interceptorName: com.flowsphere.plugin.dubbo2.x.DubboLoadBalanceInterceptor
+        interceptorName: com.flowsphere.agent.plugin.dubbo2.x.DubboLoadBalanceInterceptor
   - className: org.apache.dubbo.rpc.filter.ConsumerContextFilter
     methodPointcutConfigs:
       - methodName: invoke
         type: instant
-        interceptorName: com.flowsphere.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
+        interceptorName: com.flowsphere.agent.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
   - className: org.apache.dubbo.rpc.filter.ConsumerContextFilter
     methodPointcutConfigs:
       - methodName: invoke
         type: instant
-        interceptorName: com.flowsphere.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
+        interceptorName: com.flowsphere.agent.plugin.dubbo2.x.DubboConsumerContextFilterInterceptor
   - className: org.apache.dubbo.rpc.filter.GenericFilter
     methodPointcutConfigs:
       - methodName: invoke
         type: instant
-        interceptorName: com.flowsphere.plugin.dubbo2.x.DubboGenericFilterInterceptor
+        interceptorName: com.flowsphere.agent.plugin.dubbo2.x.DubboGenericFilterInterceptor
   - className: org.apache.dubbo.config.ApplicationConfig
     methodPointcutConfigs:
       - methodName: setParameters
         type: instant
-        interceptorName: com.flowsphere.plugin.dubbo2.x.DubboApplicationConfigInterceptor
+        interceptorName: com.flowsphere.agent.plugin.dubbo2.x.DubboApplicationConfigInterceptor

@@ -5,22 +5,13 @@
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere-plugins</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>flowsphere-plugin-nacos</artifactId>
-    <version>${revision}</version>
-    <packaging>jar</packaging>
-
-    <name>nacos</name>
-
-    <description>nacos</description>
-
+    <name>flowsphere-plugin-nacos</name>
+    <description>flowsphere-plugin-nacos</description>
     <properties>
-
         <java.version>8</java.version>
-
     </properties>
 
     <dependencies>
@@ -47,7 +38,6 @@
 
     </dependencies>
 
-
     <build>
         <plugins>
             <plugin>
@@ -63,7 +53,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>

@@ -5,30 +5,27 @@
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere-plugins</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>flowsphere-plugin-dubbo2</artifactId>
-    <version>${revision}</version>
-
-    <name>dubbo2.x</name>
-    <description>dubbo2.x</description>
+    <name>flowsphere-plugin-dubbo2</name>
+    <description>flowsphere-plugin-dubbo2</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.flowsphere</groupId>
             <artifactId>flowsphere-agent-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
         </dependency>
 
     </dependencies>
@@ -48,5 +45,8 @@
             </plugin>
         </plugins>
     </build>
+
+
+
 
 </project>

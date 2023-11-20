@@ -2,37 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere-plugins</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>flowsphere-plugin-rocketmq</artifactId>
-    <version>${revision}</version>
-    <packaging>jar</packaging>
-    <name>rocketmq</name>
-    <description>rocketmq</description>
+    <name>flowsphere-plugin-rocketmq</name>
+    <description>flowsphere-plugin-rocketmq</description>
 
     <properties>
-
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
-
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
+            <groupId>com.flowsphere</groupId>
+            <artifactId>flowsphere-agent-core</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
-            <artifactId>flowsphere-agent-core</artifactId>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
         </dependency>
 
     </dependencies>

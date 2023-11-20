@@ -2,25 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <packaging>pom</packaging>
     <artifactId>flowsphere-distribution</artifactId>
-    <version>${revision}</version>
+    <name>flowsphere-distribution</name>
+    <description>flowsphere-distribution</description>
 
     <modules>
-        <module>flowsphere-distribution-agent</module>
+        <module>flowsphere-agent-distribution</module>
     </modules>
 
     <properties>
-        <java.version>8</java.version>
     </properties>
-
 
 
 </project>

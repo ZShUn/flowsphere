@@ -1,4 +1,4 @@
-package com.ancient.spring.cloud.service.consumer.example.config;
+package com.flowsphere.spring.cloud.service.consumer.example.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

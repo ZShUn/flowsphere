@@ -3,4 +3,4 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: doFilterInternal
         type: instant
-        interceptorName: com.flowsphere.plugin.spring.mvc.SpringMvcInstantMethodInterceptor
+        interceptorName: com.flowsphere.agent.plugin.spring.mvc.SpringMvcInstantMethodInterceptor

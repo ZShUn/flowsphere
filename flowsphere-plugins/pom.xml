@@ -2,36 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere</artifactId>
-        <version>${revision}</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>flowsphere-plugins</artifactId>
-    <version>${revision}</version>
     <packaging>pom</packaging>
+    <artifactId>flowsphere-plugins</artifactId>
     <name>flowsphere-plugins</name>
-    <description>Demo project for Spring Boot</description>
+    <description>flowsphere-plugins</description>
 
     <properties>
 
-        <java.version>1.8</java.version>
         <agent.package.dest.dir>../../agent</agent.package.dest.dir>
         <plugin.dest.dir>${agent.package.dest.dir}/plugin</plugin.dest.dir>
 
         <ant-contrib.version>1.0b3</ant-contrib.version>
         <ant-nodeps.version>1.8.1</ant-nodeps.version>
+
     </properties>
 
     <modules>
-        <module>flowsphere-plugin-rocketmq</module>
-        <module>flowsphere-plugin-nacos</module>
-        <module>flowsphere-plugin-spring-mvc</module>
-        <module>flowsphere-plugin-spring-cloud-gateway</module>
-        <module>flowsphere-plugin-fegin</module>
         <module>flowsphere-plugin-dubbo2</module>
+        <module>flowsphere-plugin-fegin</module>
+        <module>flowsphere-plugin-nacos</module>
+        <module>flowsphere-plugin-rocketmq</module>
+        <module>flowsphere-plugin-spring-cloud-gateway</module>
+        <module>flowsphere-plugin-spring-mvc</module>
     </modules>
 
 
@@ -84,6 +82,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
 
 </project>

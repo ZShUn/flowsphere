@@ -5,17 +5,16 @@
     <parent>
         <groupId>com.flowsphere</groupId>
         <artifactId>flowsphere-plugins</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>flowsphere-plugin-spring-mvc</artifactId>
-    <version>${revision}</version>
-    <name>spring-mvc</name>
-    <description>spring-mvc</description>
+    <name>flowsphere-plugin-spring-mvc</name>
+    <description>flowsphere-plugin-spring-mvc</description>
     <properties>
         <java.version>8</java.version>
     </properties>
+
 
     <dependencies>
 
@@ -53,5 +52,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

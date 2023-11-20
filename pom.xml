@@ -5,26 +5,13 @@
 
     <groupId>com.flowsphere</groupId>
     <artifactId>flowsphere</artifactId>
-    <version>${revision}</version>
-    <packaging>pom</packaging>
-
+    <version>0.0.1-SNAPSHOT</version>
     <name>flowsphere</name>
-
-    <description>Demo project for Spring Boot</description>
-
-    <modules>
-        <module>flowsphere-agent</module>
-        <module>flowsphere-agent-core</module>
-        <module>flowsphere-plugins</module>
-        <module>flowsphere-common</module>
-        <module>flowsphere-distribution</module>
-        <module>flowsphere-test</module>
-    </modules>
-
+    <packaging>pom</packaging>
+    <description>flowsphere</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>8</java.version>
 
-        <revision>0.0.1-SNAPSHOT</revision>
         <byte.buddy.version>1.10.9</byte.buddy.version>
         <lombok.version>1.18.24</lombok.version>
         <jackson-core.version>2.12.6</jackson-core.version>
@@ -58,9 +45,36 @@
 
     </properties>
 
+    <modules>
+        <module>flowsphere-agent</module>
+        <module>flowsphere-agent-core</module>
+        <module>flowsphere-common</module>
+        <module>flowsphere-plugins</module>
+        <module>flowsphere-distribution</module>
+        <module>flowsphere-test</module>
+    </modules>
+
     <dependencyManagement>
 
         <dependencies>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-agent</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-agent-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flowsphere</groupId>
+                <artifactId>flowsphere-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -114,66 +128,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet-api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-agent</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-<!--            <dependency>-->
-<!--                <groupId>com.flowsphere</groupId>-->
-<!--                <artifactId>flowsphere-common</artifactId>-->
-<!--                <version>${revision}</version>-->
-<!--            </dependency>-->
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-agent-core</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-nacos</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-rocketmq</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-spring-mvc</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-dubbo2</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-fegin</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.flowsphere</groupId>
-                <artifactId>flowsphere-plugin-spring-cloud-gateway</artifactId>
-                <version>${revision}</version>
             </dependency>
 
             <!-- Byte-buddy -->
@@ -315,37 +269,15 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>${maven-assembly-plugin.version}</version>
-                <!--                <configuration>-->
-                <!--                    &lt;!&ndash;G:\IdeaWorkspace\sic_platform\probe\chromProbe\src\assembly\assembly.xml&ndash;&gt;-->
-                <!--                    &lt;!&ndash;描述文件路径&ndash;&gt;-->
-                <!--&lt;!&ndash;                    <descriptor>src/assembly/assembly.xml</descriptor>&ndash;&gt;-->
-                <!--                    &lt;!&ndash; 生成的tar.gz文件的名字,如果没有设置就默认用pom文件里的artifactId+version&ndash;&gt;-->
-                <!--                    <descriptors>-->
-                <!--                        <descriptor>assembly/assembly.xml</descriptor>-->
-                <!--                    </descriptors>-->
-                <!--                    <finalName>${project.name}-${project.version}</finalName>-->
-                <!--                    &lt;!&ndash;属性控制是否在生成的打包文件的文件名中包含assembly id&ndash;&gt;-->
-                <!--                    <appendAssemblyId>false</appendAssemblyId>-->
-                <!--                </configuration>-->
-                <!--                <executions>-->
-                <!--                    <execution>-->
-                <!--                        <id>make-assembly</id>-->
-                <!--                        &lt;!&ndash; 绑定到package生命周期阶段上 &ndash;&gt;-->
-                <!--                        <phase>package</phase>-->
-                <!--                        <goals>-->
-                <!--                            <goal>single</goal>-->
-                <!--                        </goals>-->
-                <!--                    </execution>-->
-                <!--                </executions>-->
-            </plugin>
-        </plugins>
         <pluginManagement>
             <plugins>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${maven-assembly-plugin.version}</version>
+                </plugin>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -361,6 +293,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
@@ -380,6 +313,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -389,42 +323,31 @@
                         </execution>
                     </executions>
                 </plugin>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>flatten-maven-plugin</artifactId>
-                    <inherited>true</inherited>
-                    <version>2.7</version>
-                    <executions>
-                        <execution>
-                            <id>flatten</id>
-                            <phase>process-resources</phase>
-                            <goals>
-                                <goal>flatten</goal>
-                            </goals>
-                            <configuration>
-                                <updatePomFile>true</updatePomFile>
-                                <flattenMode>oss</flattenMode>
-                                <pomElements>
-                                    <parent>expand</parent>
-                                    <distributionManagement>remove</distributionManagement>
-                                    <repositories>remove</repositories>
-                                </pomElements>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+
+<!--                <plugin>-->
+<!--                    <groupId>org.codehaus.mojo</groupId>-->
+<!--                    <artifactId>flatten-maven-plugin</artifactId>-->
+<!--                    <inherited>true</inherited>-->
+<!--                    <version>2.7</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>flatten</id>-->
+<!--                            <phase>process-resources</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>flatten</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <updatePomFile>true</updatePomFile>-->
+<!--                                <flattenMode>oss</flattenMode>-->
+<!--                                <pomElements>-->
+<!--                                    <parent>expand</parent>-->
+<!--                                    <distributionManagement>remove</distributionManagement>-->
+<!--                                    <repositories>remove</repositories>-->
+<!--                                </pomElements>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-checkstyle-plugin</artifactId>
