@@ -22,7 +22,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-agent-core</artifactId>
         </dependency>
 

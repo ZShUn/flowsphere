@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 @RequestMapping
 public class SpringCloudProviderC1Feign implements SpringCloudCApi {
@@ -31,9 +30,7 @@ public class SpringCloudProviderC1Feign implements SpringCloudCApi {
                     "OrderID188",
                     str.getBytes(RemotingHelper.DEFAULT_CHARSET));
             msg.putUserProperty("user", "20");
-            log.info("发送消息时 tag={}", TagManager.getTag());
             SendResult sendResult = defaultMQProducer.send(msg);
-            log.info("发送结果 sendResult={}", sendResult);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

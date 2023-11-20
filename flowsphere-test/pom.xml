@@ -18,23 +18,23 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-spring-cloud-gateway</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-common</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-agent</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-agent-core</artifactId>
         </dependency>
 

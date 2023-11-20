@@ -59,19 +59,19 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.flowsphere</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>flowsphere-agent</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.flowsphere</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>flowsphere-agent-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.flowsphere</groupId>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>flowsphere-common</artifactId>
                 <version>${project.version}</version>
             </dependency>

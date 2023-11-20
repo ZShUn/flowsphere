@@ -16,37 +16,37 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-spring-mvc</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-dubbo2</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-fegin</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-nacos</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-rocketmq</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-plugin-spring-cloud-gateway</artifactId>
             <version>${project.version}</version>
         </dependency>
