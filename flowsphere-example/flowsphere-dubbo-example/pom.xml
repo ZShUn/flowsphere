@@ -20,13 +20,9 @@
 
     <modules>
         <module>flowsphere-dubbo-api-example</module>
-        <module>flowsphere-dubbo-service-a-example</module>
-        <module>flowsphere-dubbo-service-a1-example</module>
-        <module>flowsphere-dubbo-service-b-example</module>
-        <module>flowsphere-dubbo-service-b1-example</module>
-        <module>flowsphere-dubbo-service-c-example</module>
-        <module>flowsphere-dubbo-service-c1-example</module>
-        <module>flowsphere-web-example</module>
+        <module>flowsphere-dubbo-consumer-example</module>
+        <module>flowsphere-dubbo-provider-example</module>
+        <module>flowsphere-dubbo-provider1-example</module>
     </modules>
 
 
