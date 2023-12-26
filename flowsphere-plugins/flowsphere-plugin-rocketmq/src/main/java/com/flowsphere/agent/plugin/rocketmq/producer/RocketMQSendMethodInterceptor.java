@@ -14,6 +14,8 @@ public class RocketMQSendMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+        //TODO 特殊场景不需要传递tag
+        //TODO 需要读取本地配置
         Message message = (Message) allArguments[0];
         message.putUserProperty(CommonConstant.TAG, TagManager.getTag());
     }

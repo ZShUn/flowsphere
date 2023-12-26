@@ -15,10 +15,15 @@ public class DubboConsumerContextFilterInterceptor implements InstantMethodInter
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        RpcContext rpcContext = RpcContext.getContext();
-        String tag = rpcContext.getAttachment(CommonConstant.TAG);
+//        RpcContext rpcContext = RpcContext.getContext();
+//        String tag = rpcContext.getAttachment(CommonConstant.TAG);
+//        if (!Strings.isNullOrEmpty(tag)) {
+//            TagContext.set(tag);
+//        }
+
+        String tag = TagContext.get();
         if (!Strings.isNullOrEmpty(tag)) {
-            TagContext.set(tag);
+            RpcContext.getContext().setAttachment(CommonConstant.TAG, tag);
         }
 
     }

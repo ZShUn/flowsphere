@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.flowsphere</groupId>
+        <groupId>io.github.zshun</groupId>
         <artifactId>flowsphere-springcloud-example</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -45,13 +45,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>io.github.zshun</groupId>
             <artifactId>flowsphere-springcloud-api-example</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.flowsphere</groupId>
+            <groupId>io.github.zshun</groupId>
             <artifactId>flowsphere-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

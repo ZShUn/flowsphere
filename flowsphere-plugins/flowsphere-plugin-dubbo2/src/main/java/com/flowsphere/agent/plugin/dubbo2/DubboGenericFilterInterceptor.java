@@ -15,9 +15,14 @@ public class DubboGenericFilterInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        String tag = TagContext.get();
+//        String tag = TagContext.get();
+//        if (!Strings.isNullOrEmpty(tag)) {
+//            RpcContext.getContext().setAttachment(CommonConstant.TAG, tag);
+//        }
+        RpcContext rpcContext = RpcContext.getContext();
+        String tag = rpcContext.getAttachment(CommonConstant.TAG);
         if (!Strings.isNullOrEmpty(tag)) {
-            RpcContext.getContext().setAttachment(CommonConstant.TAG, tag);
+            TagContext.set(tag);
         }
     }
 

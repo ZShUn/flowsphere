@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.flowsphere</groupId>
+    <groupId>io.github.zshun</groupId>
     <artifactId>flowsphere</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>flowsphere</name>
@@ -381,8 +381,8 @@
                         <version>1.6.3</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>oss</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
@@ -430,12 +430,12 @@
 
             <distributionManagement>
                 <snapshotRepository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
                 </snapshotRepository>
                 <repository>
-                    <id>oss</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
         </profile>
@@ -445,28 +445,24 @@
         <license>
             <name>The Apache Software License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
-        <url>https://github.com/Nepxion/Discovery</url>
-        <connection>scm:git:https://github.com/Nepxion/Discovery.git</connection>
-        <developerConnection>scm:git:https://github.com/Nepxion/Discovery.git</developerConnection>
+        <url>https://github.com/ZShUn/flowsphere</url>
+        <connection>https://github.com/ZShUn/flowsphere</connection>
+        <developerConnection>https://github.com/ZShUn/flowsphere</developerConnection>
         <tag>v${project.version}</tag>
     </scm>
 
-    <organization>
-        <name>Nepxion</name>
-        <url>http://www.nepxion.com</url>
-    </organization>
-
     <developers>
         <developer>
-            <name>Haojun Ren</name>
-            <email>1394997@qq.com</email>
-            <url>http://www.nepxion.com</url>
+            <name>zhangshun</name>
+            <email>616394599@qq.com</email>
         </developer>
     </developers>
+
 
 
 </project>

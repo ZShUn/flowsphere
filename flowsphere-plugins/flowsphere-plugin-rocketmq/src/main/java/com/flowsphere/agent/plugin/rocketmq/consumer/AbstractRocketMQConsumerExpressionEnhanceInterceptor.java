@@ -14,6 +14,8 @@ public abstract class AbstractRocketMQConsumerExpressionEnhanceInterceptor imple
 
     @Override
     public void beforeMethod(Class<?> clazz, Method method, Object[] args, Callable<?> callable, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+        //TODO 特殊场景不需要带tag消费
+        //TODO 需要读取本地配置
         ConsumerMetadata consumerMetadata = generatorConsumerMetadata(args);
         if (consumerMetadata.getTopic().contains("%RETRY%")) {
             return;

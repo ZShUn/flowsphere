@@ -7,13 +7,13 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 
 @DubboService(version = "1.0.0")
-public class DubboProviderAApiImpl implements DubboServiceAApi {
+public class DubboServiceAApiImpl implements DubboServiceAApi {
 
     @DubboReference(version = "1.0.0")
     private DubboServiceBApi dubboServiceBApi;
 
     public String helloword(String str) {
-        return "FlowSphereDubboServiceAApiImpl Tag= " + TagManager.getTag() + "] ->" + dubboServiceBApi.helloword(str);
+        return "[FlowSphereDubboServiceAApiImpl Tag= " + TagManager.getTag() + "] ->" + dubboServiceBApi.helloword(str);
     }
 
 }
