@@ -1,7 +1,14 @@
 plugins:
-  - nacos
-  - rocketmq
-  - springmvc
-  - springcloudgateway
-  - feign
-  - dubbo
+  - pluginName: nacos
+  - pluginName: rocketmq
+  - pluginName: springmvc
+  - pluginName: springcloudgateway
+  - pluginName: feign
+  - pluginName: dubbo
+
+#  - nacos
+#  - rocketmq
+#  - springmvc
+#  - springcloudgateway
+#  - feign
+#  - dubbo

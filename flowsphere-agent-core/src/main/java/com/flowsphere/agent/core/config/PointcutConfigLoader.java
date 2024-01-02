@@ -11,8 +11,8 @@ import java.util.Optional;
 
 public class PointcutConfigLoader {
 
-    public static List<YamlClassPointcutConfig> load(InputStream inputStream) {
-        return Optional.ofNullable(YamlResolver.parsePointcutConfig(inputStream))
+    public static List<YamlClassPointcutConfig> load(String pluginName, ClassLoader classLoader) {
+        return Optional.ofNullable(YamlResolver.parsePointcutConfig(pluginName, classLoader))
                 .map(YamlPointcutConfig::getPointcutConfigs)
                 .orElse(new ArrayList<>());
     }

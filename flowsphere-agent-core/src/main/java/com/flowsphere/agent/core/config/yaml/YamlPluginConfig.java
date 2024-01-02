@@ -1,5 +1,6 @@
 package com.flowsphere.agent.core.config.yaml;
 
+import com.flowsphere.agent.core.config.PluginConfig;
 import lombok.Data;
 
 import java.util.List;
@@ -7,6 +8,6 @@ import java.util.List;
 @Data
 public class YamlPluginConfig {
 
-    private List<String> plugins;
+    private List<PluginConfig> plugins;
 
 }

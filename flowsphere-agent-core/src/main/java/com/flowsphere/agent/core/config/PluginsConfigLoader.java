@@ -1,20 +1,23 @@
 package com.flowsphere.agent.core.config;
 
 import com.flowsphere.agent.core.config.yaml.YamlPluginConfig;
+import com.flowsphere.agent.core.utils.AgentPath;
 import com.flowsphere.agent.core.yaml.YamlResolver;
+import lombok.SneakyThrows;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class PluginsConfigLoader {
 
-    public static List<String> load(InputStream inputStream) {
-        YamlPluginConfig yamlPluginConfig = YamlResolver.parsePluginConfig(inputStream);
-        return Optional.ofNullable(yamlPluginConfig)
-                .map(YamlPluginConfig::getPlugins)
-                .orElse(new ArrayList<>());
+    @SneakyThrows
+    public static YamlPluginConfig load(ClassLoader classLoader) {
+        return YamlResolver.parsePluginConfig(classLoader);
     }
+
 
 }
