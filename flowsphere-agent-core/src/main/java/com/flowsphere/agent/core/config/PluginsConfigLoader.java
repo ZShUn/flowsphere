@@ -16,6 +16,7 @@ public class PluginsConfigLoader {
 
     @SneakyThrows
     public static YamlPluginConfig load(ClassLoader classLoader) {
+        //TODO 根据环境变量考虑初始化本地配置、APOLLO配置、NACOS配置
         return YamlResolver.parsePluginConfig(classLoader);
     }
 
