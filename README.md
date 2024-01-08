@@ -7,7 +7,7 @@ flowsphere是一款无侵入agent流量治理库，主要基于byte-buddy进行�
 让程序员脱离熬夜发版，提高公司内部研发效率。
 
 ## 架构图
-![](https://github.com/ZShUn/ancient/blob/main/Resources/Architecture.png)
+
 
 ## 支持组件
 
