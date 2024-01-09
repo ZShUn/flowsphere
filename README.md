@@ -19,41 +19,20 @@ flowsphere是一款无侵入agent流量治理库，主要基于byte-buddy进行�
 
 ## 支持功能
 
-- 版本路由
+- 标签路由
 
-- RocketMQ队列路由
+- 标签百分比路由
 
 ## 使用方式
 ### JVM参数配置
--javaagent:xxx\agent\ancient-agent-0.0.1-SNAPSHOT.jar
+
 
 ### 异步使用方式
--Dasync.thread.package.path=packagePath
+
 
 ### RocketMQ使用方式
 ```
-{
-  "rocketMQEntity":{
-    "topic":"TopicTest",
-    "producerEntityList":[
-      {
-        "queueList":[ //Topic发送的队列
-          0,
-          1
-        ]
-      }
-    ],
-    "consumerEntityList":[
-      {
-        "groupName":"CID_JODIE_2",
-        "queueList":[ //消费者消费队列
-          3,
-          4
-        ]
-      }
-    ]
-  }
-}
+
 ```
 
 ## 版本规划
