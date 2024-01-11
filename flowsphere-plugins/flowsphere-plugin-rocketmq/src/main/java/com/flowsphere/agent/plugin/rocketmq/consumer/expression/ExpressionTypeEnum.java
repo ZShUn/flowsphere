@@ -9,7 +9,7 @@ public enum ExpressionTypeEnum {
 
     SQL92("SQL92"),
 
-    TAG("tag"),
+    TAG("TAG"),
 
     ALL("*");
 
