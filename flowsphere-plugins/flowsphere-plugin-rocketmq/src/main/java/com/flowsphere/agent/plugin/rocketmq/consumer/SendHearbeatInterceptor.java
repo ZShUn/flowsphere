@@ -4,6 +4,7 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ConsumerMetadata;
+import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ExpressionTypeEnum;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.SQL92Enhance;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.SQL92EnhanceManager;
 import com.flowsphere.common.rule.context.TagContext;
@@ -25,23 +26,38 @@ public class SendHearbeatInterceptor implements InstantMethodInterceptor {
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
-            Set<SubscriptionData> result = new HashSet<>();
-            for (SubscriptionData oldSubscriptionData : consumerData.getSubscriptionDataSet()) {
-                ConsumerMetadata consumerMetadata = new ConsumerMetadata();
-                consumerMetadata.setTopic(oldSubscriptionData.getTopic());
-                consumerMetadata.setSubString(oldSubscriptionData.getSubString());
-                consumerMetadata.setExpressionType(oldSubscriptionData.getExpressionType());
-
-                if (consumerMetadata.getTopic().contains("%RETRY%")) {
-                    result.add(oldSubscriptionData);
-                    continue;
-                }
-                SQL92Enhance sql92Enhance = SQL92EnhanceManager.getSQL92Enhance(consumerMetadata.getExpressionType());
-                SubscriptionData newSubscriptionData = sql92Enhance.enhance(consumerMetadata);
-                result.add(newSubscriptionData);
-            }
-            consumerData.setSubscriptionDataSet(result);
+            String groupName = consumerData.getGroupName();
+            //TODO 读取配置判断groupName是否在白名单里面
+            enhanceSQL92(consumerData);
         }
+    }
+
+
+    private void enhanceSQL92(ConsumerData consumerData) {
+        Set<SubscriptionData> result = new HashSet<>();
+        for (SubscriptionData oldSubscriptionData : consumerData.getSubscriptionDataSet()) {
+            if (oldSubscriptionData.getTopic().contains("%RETRY%")) {
+                result.add(oldSubscriptionData);
+                continue;
+            }
+            SubscriptionData newSubscriptionData = rewriteSQL92(oldSubscriptionData);
+            result.add(newSubscriptionData);
+        }
+        consumerData.setSubscriptionDataSet(result);
+    }
+
+    private SubscriptionData rewriteSQL92(SubscriptionData oldSubscriptionData) {
+        ConsumerMetadata consumerMetadata = new ConsumerMetadata();
+        consumerMetadata.setTopic(oldSubscriptionData.getTopic());
+        consumerMetadata.setSubString(oldSubscriptionData.getSubString());
+        consumerMetadata.setExpressionType(oldSubscriptionData.getExpressionType());
+        SQL92Enhance sql92Enhance = null;
+        if (oldSubscriptionData.getSubString().equals("*")) {
+            sql92Enhance = SQL92EnhanceManager.getSQL92Enhance(ExpressionTypeEnum.ALL.getValue());
+        } else {
+            sql92Enhance = SQL92EnhanceManager.getSQL92Enhance(consumerMetadata.getExpressionType());
+        }
+        return sql92Enhance.enhance(consumerMetadata);
     }
 
     @Override

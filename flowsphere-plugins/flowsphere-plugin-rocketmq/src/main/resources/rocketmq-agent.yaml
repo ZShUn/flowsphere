@@ -1,23 +1,15 @@
 pointcutConfigs:
-#  - className: org.apache.rocketmq.common.filter.FilterAPI
-#    methodPointcutConfigs:
-#      - methodName: buildSubscriptionData
-#        type: static
-#        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.RocketMQBuildSubscriptionDataMethodInterceptor
-#      - methodName: build
-#        type: static
-#        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.RocketMQBuildMethodInterceptor
-#  - className: org.apache.rocketmq.client.producer.DefaultMQProducer
-#    methodPointcutConfigs:
-#      - methodName: send
-#        type: instant
-#        interceptorName: com.flowsphere.agent.plugin.rocketmq.producer.RocketMQSendMethodInterceptor
-#  - className: org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService
-#    methodPointcutConfigs:
-#      - methodName: submitConsumeRequest
-#        type: instant
-#        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.RocketMQSubmitConsumeRequestMethodInterceptor
-#  - className: org.apache.rocketmq.client.consumer.DefaultMQPushConsumer
+  - className: org.apache.rocketmq.client.producer.DefaultMQProducer
+    methodPointcutConfigs:
+      - methodName: send
+        type: instant
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.producer.RocketMQSendMethodInterceptor
+  - className: org.apache.rocketmq.client.impl.consumer.ConsumeMessageConcurrentlyService
+    methodPointcutConfigs:
+      - methodName: submitConsumeRequest
+        type: instant
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.RocketMQSubmitConsumeRequestMethodInterceptor
+  - className: org.apache.rocketmq.client.consumer.DefaultMQPushConsumer
   - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
     methodPointcutConfigs:
       - methodName: sendHearbeat

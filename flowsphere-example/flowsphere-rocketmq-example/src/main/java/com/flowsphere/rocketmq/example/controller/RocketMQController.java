@@ -19,10 +19,10 @@ public class RocketMQController {
     @GetMapping("/myRocketMQ")
     public String myRocketMQ(String str) throws Exception {
         Message msg = new Message("TopicTest",
-                "TagA",
-                "OrderID188",
+                "tagA",
+//                "OrderID188",
                 str.getBytes(RemotingHelper.DEFAULT_CHARSET));
-        msg.putUserProperty("user", "20");
+        msg.putUserProperty("tag", "tagA");
         SendResult sendResult = defaultMQProducer.send(msg);
         return "ok";
     }
