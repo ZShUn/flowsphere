@@ -1,7 +1,7 @@
 package com.flowsphere.agent.plugin.rocketmq.lifecycle;
 
-import com.flowsphere.agent.core.config.PluginConfig;
-import com.flowsphere.agent.core.lifecycle.PluginLifecycleService;
+import com.flowsphere.agent.core.plugin.config.PluginConfig;
+import com.flowsphere.agent.core.plugin.lifecycle.PluginLifecycleService;
 import com.flowsphere.agent.plugin.rocketmq.config.RocketMQConfigManager;
 import com.flowsphere.agent.plugin.rocketmq.constant.RocketMQConstant;
 import lombok.extern.slf4j.Slf4j;

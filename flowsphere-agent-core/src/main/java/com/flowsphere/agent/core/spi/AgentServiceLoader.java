@@ -1,6 +1,6 @@
 package com.flowsphere.agent.core.spi;
 
-import com.flowsphere.agent.core.lifecycle.PluginLifecycleService;
+import com.flowsphere.agent.core.plugin.lifecycle.PluginLifecycleService;
 
 import java.util.Collection;
 import java.util.LinkedList;

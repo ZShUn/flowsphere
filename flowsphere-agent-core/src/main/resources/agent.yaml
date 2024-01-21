@@ -1,14 +1,1 @@
-plugins:
-  - pluginName: nacos
-  - pluginName: rocketmq
-  - pluginName: springmvc
-  - pluginName: springcloudgateway
-  - pluginName: feign
-  - pluginName: dubbo
-
-#  - nacos
-#  - rocketmq
-#  - springmvc
-#  - springcloudgateway
-#  - feign
-#  - dubbo
+pluginDataSourceType: local

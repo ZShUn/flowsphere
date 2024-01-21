@@ -1,0 +1,4 @@
+plugins:
+  - pluginName: nacos
+    props:
+      name: 1

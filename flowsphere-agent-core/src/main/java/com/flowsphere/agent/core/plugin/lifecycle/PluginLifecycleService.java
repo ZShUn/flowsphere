@@ -1,6 +1,6 @@
-package com.flowsphere.agent.core.lifecycle;
+package com.flowsphere.agent.core.plugin.lifecycle;
 
-import com.flowsphere.agent.core.config.PluginConfig;
+import com.flowsphere.agent.core.plugin.config.PluginConfig;
 
 public interface PluginLifecycleService {
 

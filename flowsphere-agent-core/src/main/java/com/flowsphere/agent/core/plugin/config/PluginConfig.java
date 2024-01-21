@@ -1,4 +1,4 @@
-package com.flowsphere.agent.core.config;
+package com.flowsphere.agent.core.plugin.config;
 
 import lombok.Data;
 
