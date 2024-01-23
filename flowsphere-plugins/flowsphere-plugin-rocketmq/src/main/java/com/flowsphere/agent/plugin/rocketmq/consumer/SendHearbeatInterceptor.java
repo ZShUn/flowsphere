@@ -3,6 +3,8 @@ package com.flowsphere.agent.plugin.rocketmq.consumer;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.plugin.rocketmq.constant.RocketMQConstant;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ConsumerMetadata;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ExpressionTypeEnum;
 import com.flowsphere.agent.plugin.rocketmq.consumer.expression.SQL92Enhance;
@@ -15,6 +17,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
@@ -27,8 +30,10 @@ public class SendHearbeatInterceptor implements InstantMethodInterceptor {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
             String groupName = consumerData.getGroupName();
-            //TODO 读取配置判断groupName是否在白名单里面
-            enhanceSQL92(consumerData);
+            List<String> groupNameList = (List<String>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.ROCKETMQ_CONSUMER_BLACK_LIST);
+            if (groupNameList.contains(groupName)) {
+                enhanceSQL92(consumerData);
+            }
         }
     }
 

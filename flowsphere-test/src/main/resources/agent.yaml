@@ -1,2 +1,7 @@
 pluginConfigDataSource:
-  type: local
+  type: nacos
+  pros:
+    dataId: default
+    groupId: DEFAULT_GROUP
+    timeout: 3000
+    serverAddr: 127.0.0.1:8848

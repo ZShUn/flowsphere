@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class PluginsConfigManager {
+public class PluginConfigManager {
 
     private static volatile List<PluginConfig> CONFIG_STORE = new CopyOnWriteArrayList<>();
 

@@ -7,7 +7,7 @@ import com.flowsphere.agent.core.plugin.config.nacos.NacosPluginConfigLoader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PluginsConfigLoaderManager {
+public class PluginConfigLoaderManager {
 
     private static final Map<String, PluginConfigLoader> LOADER_MAP = new HashMap<>();
 

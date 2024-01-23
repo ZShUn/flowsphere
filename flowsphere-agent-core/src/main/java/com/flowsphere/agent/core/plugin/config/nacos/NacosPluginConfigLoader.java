@@ -25,23 +25,10 @@ public class NacosPluginConfigLoader implements PluginConfigLoader {
         ConfigService configService = NacosFactory.createConfigService(properties);
         String jsonStr = configService.getConfig(dataId, groupId, DEFAULT_TIMEOUT);
         Map<String, Map<String, Object>> pluginMap = JacksonUtils.toObj(jsonStr, Map.class);
-        return convertPluginConfigList(pluginMap);
+        return NacosConfigConverter.convert(pluginMap);
     }
 
-    private List<PluginConfig> convertPluginConfigList(Map<String, Map<String, Object>> pluginMap) {
-        List<PluginConfig> result = new ArrayList<>();
-        for (String key : pluginMap.keySet()) {
-            PluginConfig pluginConfig = new PluginConfig();
-            pluginConfig.setPluginName(key);
 
-            Properties properties = new Properties();
-            properties.putAll(pluginMap.get(key));
-            pluginConfig.setProps(properties);
-
-            result.add(pluginConfig);
-        }
-        return result;
-    }
 
 
 }
