@@ -22,7 +22,7 @@ public class RocketMQController {
                 "tagA",
 //                "OrderID188",
                 str.getBytes(RemotingHelper.DEFAULT_CHARSET));
-        msg.putUserProperty("tag", "tagA");
+        msg.putUserProperty("user", "zhangsan");
         SendResult sendResult = defaultMQProducer.send(msg);
         return "ok";
     }

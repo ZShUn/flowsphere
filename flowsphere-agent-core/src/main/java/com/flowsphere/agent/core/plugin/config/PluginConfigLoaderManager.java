@@ -1,6 +1,5 @@
 package com.flowsphere.agent.core.plugin.config;
 
-import com.flowsphere.agent.core.plugin.config.apollo.ApolloPluginConfigLoader;
 import com.flowsphere.agent.core.plugin.config.local.LocalPluginConfigLoader;
 import com.flowsphere.agent.core.plugin.config.nacos.NacosPluginConfigLoader;
 
@@ -13,7 +12,6 @@ public class PluginConfigLoaderManager {
 
     static {
         LOADER_MAP.put(PluginConfigDataSourceTypeEnum.NACOS.getType(), new NacosPluginConfigLoader());
-        LOADER_MAP.put(PluginConfigDataSourceTypeEnum.APOLLO.getType(), new ApolloPluginConfigLoader());
         LOADER_MAP.put(PluginConfigDataSourceTypeEnum.LOCAL.getType(), new LocalPluginConfigLoader());
     }
 

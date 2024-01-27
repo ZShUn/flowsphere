@@ -19,3 +19,8 @@ pointcutConfigs:
       - methodName: checkClientInBroker
         type: instant
         interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.CheckClientInBrokerInterceptor
+  - className: org.apache.rocketmq.client.impl.consumer.PullAPIWrapper
+    methodPointcutConfigs:
+      - methodName: processPullResult
+        type: instant
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.ProcessPullResultInterceptor

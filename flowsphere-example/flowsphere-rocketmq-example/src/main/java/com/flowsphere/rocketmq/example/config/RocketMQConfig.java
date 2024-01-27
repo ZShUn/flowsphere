@@ -28,11 +28,11 @@ public class RocketMQConfig {
 
     @Bean
     public DefaultMQPushConsumer consumer() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("default_test_consumer_group_tagA6");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("default_test_consumer_group_tagA11");
         consumer.setNamesrvAddr("127.0.0.1:9876");
 //        consumer.subscribe("TopicTest", MessageSelector.bySql("(user is not null and user='zhangsan')"));
-        consumer.subscribe("TopicTest", "*");
-//        consumer.subscribe("TopicTest", "TagB");
+//        consumer.subscribe("TopicTest", "*");
+        consumer.subscribe("TopicTest", "tagA");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
