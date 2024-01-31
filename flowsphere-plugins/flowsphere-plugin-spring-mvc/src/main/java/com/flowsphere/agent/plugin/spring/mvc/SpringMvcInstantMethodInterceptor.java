@@ -6,12 +6,14 @@ import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.rule.context.TagContext;
 import com.google.common.base.Strings;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class SpringMvcInstantMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
@@ -26,6 +28,7 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
     private void resolver(HttpServletRequest httpRequest) {
         String tag = httpRequest.getHeader(CommonConstant.TAG);
+        log.info("springmvc tag={}", tag);
         if (!Strings.isNullOrEmpty(tag)) {
             TagContext.set(tag);
         }

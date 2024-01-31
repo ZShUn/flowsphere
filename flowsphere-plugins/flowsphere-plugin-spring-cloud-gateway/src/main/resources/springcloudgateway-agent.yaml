@@ -4,8 +4,3 @@ pointcutConfigs:
       - methodName: filter
         type: instant
         interceptorName: com.flowsphere.agent.plugin.spring.cloud.gateway.FilterInstantMethodInterceptor
-  - className: org.springframework.boot.autoconfigure.condition.SpringBootCondition
-    methodPointcutConfigs:
-      - methodName: matches
-        type: instant
-        interceptorName: com.flowsphere.agent.plugin.spring.cloud.gateway.MatchesInstantMethodInterceptor

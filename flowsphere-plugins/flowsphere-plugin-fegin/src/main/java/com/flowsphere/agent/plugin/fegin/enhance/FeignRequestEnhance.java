@@ -7,6 +7,7 @@ import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.rule.context.TagContext;
 import com.google.common.base.Strings;
 import feign.Request;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class FeignRequestEnhance implements InstanceEnhance {
 
     private static final FeignRequestEnhance INSTANCE = new FeignRequestEnhance();
@@ -52,6 +54,7 @@ public class FeignRequestEnhance implements InstanceEnhance {
 
     private void resolver(Map<String, Collection<String>> headers) {
         String tag = TagContext.get();
+        log.info("feign tag={}", tag);
         if (!Strings.isNullOrEmpty(tag)) {
             List<String> ruleList = new ArrayList<String>();
             ruleList.add(tag);
