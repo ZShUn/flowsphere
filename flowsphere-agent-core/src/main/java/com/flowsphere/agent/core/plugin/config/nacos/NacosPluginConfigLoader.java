@@ -27,6 +27,7 @@ public class NacosPluginConfigLoader implements PluginConfigLoader {
         int timeout = Integer.parseInt(Optional.ofNullable(properties.getProperty(TIMEOUT))
                 .orElse(DEFAULT_TIMEOUT));
         ConfigService configService = NacosFactory.createConfigService(properties);
+        configService.addListener(dataId, groupId, new NacosConfigListener());
         String jsonStr = configService.getConfig(dataId, groupId, timeout);
         Map<String, Map<String, Object>> pluginMap = JacksonUtils.toObj(jsonStr, Map.class);
         return NacosConfigConverter.convert(pluginMap);
