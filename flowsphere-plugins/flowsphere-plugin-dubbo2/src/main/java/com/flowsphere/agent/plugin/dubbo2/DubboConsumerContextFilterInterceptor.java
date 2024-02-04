@@ -6,11 +6,13 @@ import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.rule.context.TagContext;
 import com.google.common.base.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.rpc.RpcContext;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class DubboConsumerContextFilterInterceptor implements InstantMethodInterceptor {
 
     @Override
@@ -23,6 +25,9 @@ public class DubboConsumerContextFilterInterceptor implements InstantMethodInter
 
         String tag = TagContext.get();
         if (!Strings.isNullOrEmpty(tag)) {
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] DubboConsumerContextFilterInterceptor dubbo tag={}", tag);
+            }
             RpcContext.getContext().setAttachment(CommonConstant.TAG, tag);
         }
 

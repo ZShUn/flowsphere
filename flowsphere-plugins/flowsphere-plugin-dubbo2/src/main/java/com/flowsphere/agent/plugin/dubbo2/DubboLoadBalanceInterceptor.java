@@ -6,6 +6,7 @@ import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.rule.context.TagContext;
 import com.google.common.base.Strings;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.rpc.Invocation;
 import org.apache.dubbo.rpc.Invoker;
@@ -16,6 +17,7 @@ import java.util.concurrent.Callable;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class DubboLoadBalanceInterceptor implements InstantMethodInterceptor {
 
     @Override
@@ -28,6 +30,9 @@ public class DubboLoadBalanceInterceptor implements InstantMethodInterceptor {
             String tag = TagContext.get();
             if (Strings.isNullOrEmpty(tag)) {
                 return;
+            }
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] DubboLoadBalanceInterceptor dubbo tag={}", tag);
             }
             List<Invoker> result = filterInvoker(invokers, invoker -> tag.equals(invoker.getUrl().getParameter(CommonConstant.TAG)));
             allArguments[0] = result;

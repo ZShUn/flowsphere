@@ -6,17 +6,22 @@ import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorRe
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.rule.context.TagContext;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class DubboApplicationConfigInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         Map<String, String> parameters = (Map<String, String>) allArguments[0];
         parameters.put(CommonConstant.TAG, TagContext.get());
+        if (log.isDebugEnabled()) {
+            log.debug("[FlowSphere] DubboApplicationConfigInterceptor dubbo tag={}", TagContext.get());
+        }
     }
 
     @Override

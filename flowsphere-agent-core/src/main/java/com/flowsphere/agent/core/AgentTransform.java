@@ -8,7 +8,6 @@ import com.flowsphere.agent.core.classloader.AgentPluginClassLoader;
 import com.flowsphere.agent.core.config.MethodMatcherConfigCreator;
 import com.flowsphere.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.lifecycle.PluginLifecycleServiceManager;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
@@ -32,7 +31,6 @@ public class AgentTransform implements AgentBuilder.Transformer {
         this.classPointcutConfigMap = classPointcutConfigMap;
         this.agentPluginClassLoader = agentPluginClassLoader;
         this.pluginConfigListList = pluginConfigListList;
-        PluginLifecycleServiceManager.init(pluginConfigListList);
     }
 
     @Override

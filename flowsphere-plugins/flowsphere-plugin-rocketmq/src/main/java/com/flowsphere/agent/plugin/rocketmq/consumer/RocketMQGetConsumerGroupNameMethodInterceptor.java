@@ -5,10 +5,12 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.rule.TagManager;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
+@Slf4j
 public class RocketMQGetConsumerGroupNameMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
@@ -16,6 +18,9 @@ public class RocketMQGetConsumerGroupNameMethodInterceptor implements InstantMet
         try {
             String consumerGroupName = (String) callable.call();
             consumerGroupName += TagManager.getTag();
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] RocketMQGetConsumerGroupNameMethodInterceptor rocketMQ consumerGroupName={}", consumerGroupName);
+            }
             instantMethodInterceptorResult.setContinue(false);
             instantMethodInterceptorResult.setResult(consumerGroupName);
         } catch (Exception e) {

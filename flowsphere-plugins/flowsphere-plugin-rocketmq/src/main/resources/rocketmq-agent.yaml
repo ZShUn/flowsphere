@@ -24,3 +24,6 @@ pointcutConfigs:
       - methodName: getConsumerGroup
         type: instant
         interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.RocketMQGetConsumerGroupNameMethodInterceptor
+      - methodName: processPullResult
+        type: instant
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.ProcessPullResultInterceptor

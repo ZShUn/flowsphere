@@ -21,7 +21,7 @@ public class RocketMQSubmitConsumeRequestMethodInterceptor implements InstantMet
         MessageExt messageExt = msgList.get(0);
         String tag = messageExt.getUserProperty(CommonConstant.TAG);
         if (log.isDebugEnabled()) {
-            log.debug("consumer get messageExt tag={}", tag);
+            log.debug("[FlowSphere] RocketMQSubmitConsumeRequestMethodInterceptor rocketMQ consumer get messageExt  tag={}", tag);
         }
         TagContext.set(tag);
     }

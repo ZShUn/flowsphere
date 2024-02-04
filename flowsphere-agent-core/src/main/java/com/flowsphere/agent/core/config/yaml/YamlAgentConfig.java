@@ -9,7 +9,6 @@ public class YamlAgentConfig {
 
     private PluginConfigDataSource pluginConfigDataSource;
 
-
     @Data
     public static class PluginConfigDataSource {
 

@@ -28,8 +28,10 @@ public class SpringMvcInstantMethodInterceptor implements InstantMethodIntercept
 
     private void resolver(HttpServletRequest httpRequest) {
         String tag = httpRequest.getHeader(CommonConstant.TAG);
-        log.info("springmvc tag={}", tag);
         if (!Strings.isNullOrEmpty(tag)) {
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] SpringMvcInstantMethodInterceptor spring-mvc doFilterInternal tag={}", tag);
+            }
             TagContext.set(tag);
         }
     }

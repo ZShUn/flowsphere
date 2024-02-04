@@ -28,7 +28,9 @@ public abstract class AttributeTagBinding implements TagBinding {
             ArrayWeightRandom arrayWeightRandom = new ArrayWeightRandom(tagWeight);
             String tag = arrayWeightRandom.choose();
             TagContext.set(tag);
-            log.info("choose tag={}", tag);
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] AttributeTagBinding spring-cloud-gateway choose={}", tag);
+            }
             ServerHttpRequest.Builder requsetBuilder = request.mutate();
             requsetBuilder.headers(headers -> headers.add(CommonConstant.TAG, tag));
             return true;

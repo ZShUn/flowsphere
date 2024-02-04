@@ -24,13 +24,15 @@ import java.util.concurrent.Callable;
 @Slf4j
 public class SendHearbeatInterceptor implements InstantMethodInterceptor {
 
-    //org.apache.rocketmq.client.impl.consumer.PullAPIWrapper.processPullResult
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
             String groupName = consumerData.getGroupName();
             List<String> groupNameList = (List<String>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.ROCKETMQ_CONSUMER_BLACK_LIST);
+            if (log.isDebugEnabled()){
+                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ groupName={} groupNameList={}", groupName, groupNameList);
+            }
             if (groupNameList.contains(groupName)) {
                 enhanceSQL92(consumerData);
             }
@@ -46,6 +48,9 @@ public class SendHearbeatInterceptor implements InstantMethodInterceptor {
                 continue;
             }
             SubscriptionData newSubscriptionData = rewriteSQL92(oldSubscriptionData);
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ newSubscriptionData={}", newSubscriptionData);
+            }
             result.add(newSubscriptionData);
         }
         consumerData.setSubscriptionDataSet(result);
