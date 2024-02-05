@@ -1,4 +1,4 @@
-# ![](https://github.com/ZShUn/flowsphere/blob/main/Resources/logo.jpg ==100x100)
+# FlowSphere
 
 
 
@@ -10,7 +10,10 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 FlowSphere架构图如下：
 ![](https://github.com/ZShUn/flowsphere/blob/main/Resources/infrastructure.jpg)
 
+基于上图可以看出FlowSphere有两个核心能力：
 
+- 内核层
+- 插件层
 
 
 ## 支持组件
