@@ -1,12 +1,12 @@
 # flowsphere
 
 
-## 简介
+## flow-sphere
 
-flowsphere是一款无侵入agent流量治理库，主要基于byte-buddy进行开发，致力解决发布风险问题、内部环境多版本并行问题。
-让程序员脱离熬夜发版，提高公司内部研发效率。
+flow-sphere是基于Java字节码增强技术进行建设，其利用Java字节码增强技术为应用提供流量治理功能，
+以解决大规模微服务架构体系环境治理问题、灰度发布问题。
 
-## 架构图
+flow-sphere
 
 
 ## 支持组件
@@ -34,6 +34,3 @@ flowsphere是一款无侵入agent流量治理库，主要基于byte-buddy进行�
 ```
 
 ```
-
-## 版本规划
-![](https://github.com/ZShUn/ancient/blob/main/Resources/Planning.png)
