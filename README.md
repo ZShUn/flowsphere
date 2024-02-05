@@ -17,6 +17,7 @@ FlowSphere架构图如下：
 每个插件相互独立，互不干扰。
 
 FlowSphere组件交互图：
+
 ![](https://github.com/ZShUn/flowsphere/blob/main/Resources/plugin.jpg)
 
 
