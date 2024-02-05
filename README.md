@@ -1,4 +1,4 @@
-# ![](https://github.com/ZShUn/flowsphere/blob/main/Resources/logo.jpg)
+# ![](https://github.com/ZShUn/flowsphere/blob/main/Resources/logo.jpg ==100x100)
 
 
 
