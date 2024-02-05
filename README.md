@@ -7,7 +7,8 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 以解决大规模微服务架构体系环境治理问题、灰度发布问题。
 
 FlowSphere架构图如下：
-https://github.com/ZShUn/flowsphere/blob/main/Resources/infrastructure.jpg
+![](https://github.com/ZShUn/flowsphere/blob/main/Resources/infrastructure.jpg)
+
 
 
 
