@@ -16,8 +16,8 @@ FlowSphere架构图如下：
 - 插件层，插件为应用提供实际的流量治理能力，开发者也可以基于内核层规范轻松实现自己想要的业务插件，
 每个插件相互独立，互不干扰。
 
-FlowSphere基础交互图：
-![](https://github.com/ZShUn/flowsphere/blob/main/Resources/interaction.jpg)
+FlowSphere组件交互图：
+![](https://github.com/ZShUn/flowsphere/blob/main/Resources/plugin.jpg)
 
 
 ## 支持组件
