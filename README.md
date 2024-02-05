@@ -1,12 +1,14 @@
-# flowsphere
+# FlowSphere
 
 
-## flow-sphere
+## FlowSphere
 
-flow-sphere是基于Java字节码增强技术进行建设，其利用Java字节码增强技术为应用提供流量治理功能，
+FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节码增强技术为应用提供流量治理功能，
 以解决大规模微服务架构体系环境治理问题、灰度发布问题。
 
-flow-sphere
+FlowSphere架构图如下：
+https://github.com/ZShUn/flowsphere/blob/main/Resources/infrastructure.jpg
+
 
 
 ## 支持组件
