@@ -12,8 +12,12 @@ FlowSphere架构图如下：
 
 基于上图可以看出FlowSphere有两个核心能力：
 
-- 内核层
-- 插件层
+- 内核层，包含整个FlowSphere基础能力，如：插件注册、动态配置等
+- 插件层，插件为应用提供实际的流量治理能力，开发者也可以基于内核层规范轻松实现自己想要的业务插件，
+每个插件相互独立，互不干扰。
+
+FlowSphere基础交互图：
+![](https://github.com/ZShUn/flowsphere/blob/main/Resources/interaction.jpg)
 
 
 ## 支持组件
