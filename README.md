@@ -40,6 +40,7 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 - RocketMQ 4.8
 - OpenFeign
 - SpringMvc
+- Dubbo
 
 
 #### 支持功能
