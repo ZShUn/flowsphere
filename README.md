@@ -38,9 +38,9 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 - Spring Cloud Gateway 2.2.5.RELEASE
 - Spring Cloud Nacos 2.2.9.RELEASE
 - RocketMQ 4.8
-- OpenFeign
-- SpringMvc
-- Dubbo
+- OpenFeign 2.2.5.RELEASE
+- SpringMvc 5.0.0.RELEASE
+- Dubbo 2.7.22.RELEASE
 
 
 #### 支持功能
@@ -52,9 +52,60 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 ## 使用方式
 ### JVM参数配置
 
+-javaagent:xxx\flowsphere-agent-0.0.1-SNAPSHOT.jar -Dflow.shpere.tag=tagA
 
 ### 异步使用方式
 
-
+-javaagent:xxx\flowsphere-agent-0.0.1-SNAPSHOT.jar -Dflow.shpere.tag=tagA -Dasync.thread.package.path=xxx
 ### 组件配置
 
+```
+{
+    "nacos":{
+        
+    },
+    "feign":{
+        
+    },
+    "springmvc":{
+        
+    },
+    "rocketmq":{
+        "rocketMQConsumerBlackList":[
+            "groupName",
+            "tag"
+        ]
+    },
+    "springcloudgateway":{
+        "regionWeight":{
+            "regions":[
+                "xxx"
+            ],
+            "tagWeights":[
+                {
+                    "tag":"tagA",
+                    "weight":0.2
+                },
+                {
+                    "tag":"tagA1",
+                    "weight":0.8
+                }
+            ]
+        },
+        "userWeight":{
+            "userIds":[
+                "xxx"
+            ],
+            "tagWeights":[
+                {
+                    "tag":"tagA",
+                    "weight":0.2
+                },
+                {
+                    "tag":"tagA1",
+                    "weight":0.8
+                }
+            ]
+        }
+    }
+}
