@@ -1,3 +1,10 @@
+plugins:
+  - nacos
+  - rocketmq
+  - springmvc
+  - springcloudgateway
+  - feign
+  - dubbo
 pluginConfigDataSource:
   type: nacos
   pros:

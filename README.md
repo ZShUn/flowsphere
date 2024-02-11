@@ -57,26 +57,56 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
 ### 异步使用方式
 
 -javaagent:xxx\flowsphere-agent-0.0.1-SNAPSHOT.jar -Dflow.shpere.tag=tagA -Dasync.thread.package.path=xxx
-### 组件配置
+
+### Agent配置
+
+配置详解
+
+| 配置项                                | 配置值                                               | 配置说明                |
+|------------------------------------|---------------------------------------------------|---------------------|
+| plugins                            | nacos、rocketmq、springmvc、springcloudgateway、feign、dubbo | 加载生效组件配置项           |
+| pluginConfigDataSource.type        | nacos                                             | 组件元数据配置中心           |
+| pluginConfigDataSource.pros.dataId | default                                               | nacos配置中心dataId     |
+| pluginConfigDataSource.pros.groupId | DEFAULT_GROUP                                             | nacos配置中心groupId    |
+| pluginConfigDataSource.pros.timeout | 3000                                             | nacos配置中心timeout    |
+| pluginConfigDataSource.pros.serverAddr | 127.0.0.1:8848                                             | nacos配置中心serverAddr |
+
+配置示例
+```
+plugins:
+  - nacos
+  - rocketmq
+  - springmvc
+  - springcloudgateway
+  - feign
+  - dubbo
+pluginConfigDataSource:
+  type: nacos
+  pros:
+    dataId: default
+    groupId: DEFAULT_GROUP
+    timeout: 3000
+    serverAddr: 127.0.0.1:8848
 
 ```
+### 组件配置
+
+配置详解
+
+| 组件                                     | 配置项                                                               | 配置说明                          |
+|----------------------------------------|-------------------------------------------------------------------|-------------------------------|
+| rocketmq                                | rocketMQConsumerBlackList                                         | 配置灰度消费者组                      |
+| springcloudgateway            | regionWeight.regions=[xxx]<br/>regionWeight.tagWeights[0].tag=xxx<br/>regionWeight.tagWeights[0].weight=[xxx] | spring-cloug-gateway区域灰度权重配置项 |
+| springcloudgateway     | userWeight.userIds=[xxx]<br/>userWeight.tagWeights[0].tag=xxx<br/>userWeight.tagWeights[0].weight=[xxx]         | spring-cloug-gateway用户灰度权重配置项 |
+
+
+配置示例
+```
 {
-    "nacos":{
-        
-    },
-    "dubbo":{
-        
-    },
-    "feign":{
-        
-    },
-    "springmvc":{
-        
-    },
     "rocketmq":{
         "rocketMQConsumerBlackList":[
             "groupName",
-            "tag"
+            "groupName1"
         ]
     },
     "springcloudgateway":{
@@ -112,3 +142,4 @@ FlowSphere是基于Java字节码增强技术进行建设，其利用Java字节�
         }
     }
 }
+```

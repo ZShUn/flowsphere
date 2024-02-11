@@ -29,20 +29,24 @@ public class FlowSphereAgent {
         log.info("-------------------FlowSphereAgent开始启动-------------------");
         AgentPluginClassLoader agentPluginClassLoader = AgentClassLoaderManager.getAgentPluginClassLoader(FlowSphereAgent.class.getClassLoader());
         YamlAgentConfig yamlAgentConfig = YamlResolver.parseAgentConfig(agentPluginClassLoader);
-        List<PluginConfig> pluginConfigList = getPluginConfigList(agentPluginClassLoader, yamlAgentConfig);
+        List<PluginConfig> pluginConfigList = getValidPluginConfigList(agentPluginClassLoader, yamlAgentConfig);
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = getMethodPointcutConfig(agentPluginClassLoader, pluginConfigList);
         new AgentBuilder.Default()
                 .type(new AgentJunction(methodPointcutConfigMap))
-                .transform(new AgentTransform(methodPointcutConfigMap, agentPluginClassLoader, pluginConfigList))
+                .transform(new AgentTransform(methodPointcutConfigMap, agentPluginClassLoader))
                 .with(new AgentListener())
                 .installOn(inst);
         log.info("-------------------FlowSphereAgent启动成功-------------------");
 
     }
 
-    private static List<PluginConfig> getPluginConfigList(AgentPluginClassLoader agentPluginClassLoader, YamlAgentConfig yamlAgentConfig) {
+    private static List<PluginConfig> getValidPluginConfigList(AgentPluginClassLoader agentPluginClassLoader, YamlAgentConfig yamlAgentConfig) {
         List<PluginConfig> pluginConfigList = PluginConfigLoaderManager.getPluginConfigLoader(yamlAgentConfig.getPluginConfigDataSource().getType())
                 .load(agentPluginClassLoader, yamlAgentConfig.getPluginConfigDataSource().getPros());
+        pluginConfigList = filterPluginConfig(pluginConfigList, yamlAgentConfig.getPlugins());
+        if (pluginConfigList.isEmpty()) {
+            log.error("agent plugin config error...");
+        }
         PluginConfigManager.addAll(pluginConfigList);
         return pluginConfigList;
     }
@@ -53,6 +57,13 @@ public class FlowSphereAgent {
                 .loadPlugins(pluginConfigList.stream().map(PluginConfig::getPluginName)
                         .collect(Collectors.toSet()), agentPluginClassLoader);
         return methodPointcutConfigMap;
+    }
+
+
+    private static List<PluginConfig> filterPluginConfig(List<PluginConfig> pluginConfigList, List<String> plugins) {
+        return pluginConfigList.stream()
+                .filter(pluginConfig -> plugins.contains(pluginConfig.getPluginName()))
+                .collect(Collectors.toList());
     }
 
 }

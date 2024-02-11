@@ -9,6 +9,9 @@ public class PluginConfigManager {
     private static volatile List<PluginConfig> CONFIG_STORE = new CopyOnWriteArrayList<>();
 
     public static void addAll(List<PluginConfig> propertiesMap) {
+        if (propertiesMap.isEmpty()) {
+            return;
+        }
         CONFIG_STORE.addAll(propertiesMap);
     }
 
@@ -17,6 +20,9 @@ public class PluginConfigManager {
     }
 
     public static void refresh(List<PluginConfig> propertiesMap) {
+        if (propertiesMap.isEmpty()) {
+            return;
+        }
         clear();
         addAll(propertiesMap);
     }

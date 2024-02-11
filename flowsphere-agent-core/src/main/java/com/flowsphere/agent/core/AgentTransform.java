@@ -7,7 +7,6 @@ import com.flowsphere.agent.core.builder.TargetObjectInterceptorBuilder;
 import com.flowsphere.agent.core.classloader.AgentPluginClassLoader;
 import com.flowsphere.agent.core.config.MethodMatcherConfigCreator;
 import com.flowsphere.agent.core.config.yaml.YamlMethodPointcutConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfig;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.type.TypeDescription;
@@ -15,7 +14,6 @@ import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.utility.JavaModule;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -25,12 +23,9 @@ public class AgentTransform implements AgentBuilder.Transformer {
 
     private final AgentPluginClassLoader agentPluginClassLoader;
 
-    private final List<PluginConfig> pluginConfigListList;
-
-    public AgentTransform(Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap, AgentPluginClassLoader agentPluginClassLoader, List<PluginConfig> pluginConfigListList) {
+    public AgentTransform(Map<String, Collection<YamlMethodPointcutConfig>> classPointcutConfigMap, AgentPluginClassLoader agentPluginClassLoader) {
         this.classPointcutConfigMap = classPointcutConfigMap;
         this.agentPluginClassLoader = agentPluginClassLoader;
-        this.pluginConfigListList = pluginConfigListList;
     }
 
     @Override
@@ -38,10 +33,7 @@ public class AgentTransform implements AgentBuilder.Transformer {
         try {
             log.info("[FlowSphereAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
             Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
-            return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(),
-                    new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader),
-                    new MultiThreadMethodInterceptorBuilder()
-            );
+            return InterceptorBuilderChain.buildInterceptor(builder, new TargetObjectInterceptorBuilder(), new PluginsMethodInterceptorBuilder(MethodMatcherConfigCreator.create(methodPointcutConfigs), typeDescription, agentPluginClassLoader), new MultiThreadMethodInterceptorBuilder());
         } catch (Throwable e) {
             log.error("[FlowSphereAgentTransform] load error", e);
             return builder;
