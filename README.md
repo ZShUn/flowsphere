@@ -96,8 +96,8 @@ pluginConfigDataSource:
 | 组件                                     | 配置项                                                               | 配置说明                          |
 |----------------------------------------|-------------------------------------------------------------------|-------------------------------|
 | rocketmq                                | rocketMQConsumerBlackList                                         | 配置灰度消费者组                      |
-| springcloudgateway            | regionWeight.regions=[xxx]<br/>regionWeight.tagWeights[0].tag=xxx<br/>regionWeight.tagWeights[0].weight=[xxx] | spring-cloug-gateway区域灰度权重配置项 |
-| springcloudgateway     | userWeight.userIds=[xxx]<br/>userWeight.tagWeights[0].tag=xxx<br/>userWeight.tagWeights[0].weight=[xxx]         | spring-cloug-gateway用户灰度权重配置项 |
+| spring-cloug-gateway            | regionWeight.regions=[xxx]<br/>regionWeight.tagWeights[0].tag=xxx<br/>regionWeight.tagWeights[0].weight=[xxx] | spring-cloug-gateway区域灰度权重配置项 |
+| spring-cloug-gateway     | userWeight.userIds=[xxx]<br/>userWeight.tagWeights[0].tag=xxx<br/>userWeight.tagWeights[0].weight=[xxx]         | spring-cloug-gateway用户灰度权重配置项 |
 
 
 配置示例
