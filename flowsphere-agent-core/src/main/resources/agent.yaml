@@ -5,6 +5,7 @@ plugins:
   - springcloudgateway
   - feign
   - dubbo
+  - elasticjob
 pluginConfigDataSource:
   type: nacos
   pros:

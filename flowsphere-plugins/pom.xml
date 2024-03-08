@@ -30,6 +30,7 @@
         <module>flowsphere-plugin-rocketmq</module>
         <module>flowsphere-plugin-spring-cloud-gateway</module>
         <module>flowsphere-plugin-spring-mvc</module>
+        <module>flowsphere-plugin-elastic-job2</module>
     </modules>
 
 
