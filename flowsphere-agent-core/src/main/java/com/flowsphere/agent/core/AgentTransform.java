@@ -13,6 +13,7 @@ import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.utility.JavaModule;
 
+import java.security.ProtectionDomain;
 import java.util.Collection;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ public class AgentTransform implements AgentBuilder.Transformer {
     }
 
     @Override
-    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule module) {
+    public DynamicType.Builder<?> transform(DynamicType.Builder<?> builder, TypeDescription typeDescription, ClassLoader classLoader, JavaModule javaModule, ProtectionDomain protectionDomain) {
         try {
             log.info("[FlowSphereAgentTransform] load interceptor typeName={}", typeDescription.getTypeName());
             Collection<YamlMethodPointcutConfig> methodPointcutConfigs = classPointcutConfigMap.get(typeDescription.getTypeName());
@@ -39,5 +40,4 @@ public class AgentTransform implements AgentBuilder.Transformer {
             return builder;
         }
     }
-
 }

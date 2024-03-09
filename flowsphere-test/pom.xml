@@ -25,6 +25,12 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>flowsphere-plugin-elastic-job2</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>flowsphere-common</artifactId>
         </dependency>
 

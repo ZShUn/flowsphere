@@ -1,11 +1,11 @@
 package com.flowsphere.agent.plugin.elastic.job;
 
-import com.alibaba.nacos.api.utils.NetUtils;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
 import com.flowsphere.agent.plugin.elastic.job.constant.ElasticJobConstant;
+import com.flowsphere.common.util.NetUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,7 +21,7 @@ public class ElasticJobInstantMethodInterceptor implements InstantMethodIntercep
     @SneakyThrows
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        String localIp = NetUtils.localIP();
+        String localIp = NetUtils.getIpAddress();
         boolean elasticJobGrayEnabled = (boolean) PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_GRAY_ENABLED);
         String executeIp = (String) PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_EXECUTE_IP);
         if (elasticJobGrayEnabled && localIp.equals(executeIp)) {
@@ -33,7 +33,6 @@ public class ElasticJobInstantMethodInterceptor implements InstantMethodIntercep
             }
             instantMethodInterceptorResult.setResult(Arrays.asList(0));
         }
-
     }
 
     @Override
