@@ -36,4 +36,25 @@ public class ElasticJobInstantMethodInterceptorTest {
         }
     }
 
+    @Test
+    public void beforeInstantMethodInterceptorResultIsTrueTest() {
+        ElasticJobInstantMethodInterceptor interceptor = new ElasticJobInstantMethodInterceptor();
+        try (MockedStatic<PluginConfigManager> pluginConfigManagerMockedStatic = Mockito.mockStatic(PluginConfigManager.class);
+             MockedStatic<NetUtils> netUtilsMockedStatic = Mockito.mockStatic(NetUtils.class)) {
+            netUtilsMockedStatic.when(() -> NetUtils.getIpAddress()).thenReturn("127.0.0.1");
+            pluginConfigManagerMockedStatic.when(() -> PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_GRAY_ENABLED)).thenReturn(true);
+            pluginConfigManagerMockedStatic.when(() -> PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_EXECUTE_IP)).thenReturn("192.168.0.1");
+            InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
+            interceptor.beforeMethod(null, new Object[]{}, new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return null;
+                }
+            }, null, instantMethodInterceptorResult);
+            Assertions.assertTrue(instantMethodInterceptorResult.isContinue());
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

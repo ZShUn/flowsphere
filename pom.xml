@@ -33,6 +33,8 @@
 
         <rocketmq-client.version>4.8.0</rocketmq-client.version>
         <dubbo.version>2.7.22</dubbo.version>
+        <elastic-job.version>2.1.5</elastic-job.version>
+        <curator-test.version>2.10.0</curator-test.version>
 
         <spring-cloud-starter-alibaba-nacos-discovery.version>2.2.9.RELEASE
         </spring-cloud-starter-alibaba-nacos-discovery.version>
@@ -74,6 +76,25 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>flowsphere-common</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-test</artifactId>
+                <version>${curator-test.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-core</artifactId>
+                <version>${elastic-job.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-spring</artifactId>
+                <version>${elastic-job.version}</version>
             </dependency>
 
             <dependency>

@@ -13,7 +13,7 @@
     <description>flowsphere-plugin-elastic-job2</description>
     <properties>
         <java.version>8</java.version>
-        <elastic-job.version>2.1.5</elastic-job.version>
+
     </properties>
 
 
@@ -27,13 +27,11 @@
         <dependency>
             <groupId>com.dangdang</groupId>
             <artifactId>elastic-job-lite-core</artifactId>
-            <version>${elastic-job.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.dangdang</groupId>
             <artifactId>elastic-job-lite-spring</artifactId>
-            <version>${elastic-job.version}</version>
         </dependency>
 
     </dependencies>
