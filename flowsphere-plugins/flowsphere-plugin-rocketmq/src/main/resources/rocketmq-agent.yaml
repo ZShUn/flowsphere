@@ -8,22 +8,22 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: submitConsumeRequest
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql92.RocketMQSubmitConsumeRequestMethodInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.RocketMQSubmitConsumeRequestMethodInterceptor
   - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
     methodPointcutConfigs:
       - methodName: sendHearbeat
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql92.SendHearbeatInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.SendHearbeatInterceptor
   - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
     methodPointcutConfigs:
       - methodName: checkClientInBroker
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql92.CheckClientInBrokerInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.CheckClientInBrokerInterceptor
   - className: org.apache.rocketmq.client.consumer.DefaultMQPushConsumer
     methodPointcutConfigs:
       - methodName: getConsumerGroup
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql92.RocketMQGetConsumerGroupNameMethodInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.RocketMQGetConsumerGroupNameMethodInterceptor
       - methodName: processPullResult
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql92.ProcessPullResultInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.ProcessPullResultInterceptor
