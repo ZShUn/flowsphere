@@ -1,14 +1,15 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
 import com.flowsphere.agent.plugin.rocketmq.constant.RocketMQConstant;
-import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ConsumerMetadata;
-import com.flowsphere.agent.plugin.rocketmq.consumer.expression.ExpressionTypeEnum;
-import com.flowsphere.agent.plugin.rocketmq.consumer.expression.SQL92Enhance;
-import com.flowsphere.agent.plugin.rocketmq.consumer.expression.SQL92EnhanceManager;
+import com.flowsphere.agent.plugin.rocketmq.consumer.config.ConsumerGroupConfig;
+import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ConsumerMetadata;
+import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ExpressionTypeEnum;
+import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92Enhance;
+import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92EnhanceManager;
 import com.flowsphere.common.rule.context.TagContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.protocol.heartbeat.ConsumerData;
@@ -22,18 +23,19 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 
 @Slf4j
-public class SendHearbeatInterceptor implements InstantMethodInterceptor {
+public class SendHearbeatInterceptor extends AbstractSqlInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
-            String groupName = consumerData.getGroupName();
-            List<String> groupNameList = (List<String>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.ROCKETMQ_CONSUMER_BLACK_LIST);
-            if (log.isDebugEnabled()){
-                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ groupName={} groupNameList={}", groupName, groupNameList);
+            List<ConsumerGroupConfig> consumerGroupConfigs = (List<ConsumerGroupConfig>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.CONSUMER_GROUP_CONFIG);
+            if (log.isDebugEnabled()) {
+                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ groupName={} consumerGroupConfigs={}", consumerData.getGroupName(), consumerGroupConfigs);
             }
-            if (groupNameList.contains(groupName)) {
+            boolean consumerGroupMatchResult = consumerGroupConfigs.stream().anyMatch(consumerGroupConfig ->
+                    consumerGroupConfig.getConsumerGroupName().equals(consumerData.getGroupName()));
+            if (consumerGroupMatchResult) {
                 enhanceSQL92(consumerData);
             }
         }
@@ -75,9 +77,5 @@ public class SendHearbeatInterceptor implements InstantMethodInterceptor {
         TagContext.remove();
     }
 
-    @Override
-    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
-
-    }
 
 }

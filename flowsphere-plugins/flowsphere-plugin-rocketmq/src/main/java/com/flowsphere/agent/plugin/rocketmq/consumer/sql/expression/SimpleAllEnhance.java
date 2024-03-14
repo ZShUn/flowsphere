@@ -1,28 +1,31 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer.expression;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.agent.plugin.rocketmq.consumer.config.ConsumerGroupConfig;
 import org.apache.rocketmq.common.filter.ExpressionType;
 import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 
-public class SimpleSQL92Enhance implements SQL92Enhance {
+public class SimpleAllEnhance implements SQL92Enhance {
+
     @Override
     public SubscriptionData enhance(ConsumerMetadata consumerMetadata) {
         SubscriptionData subscriptionData = new SubscriptionData();
         subscriptionData.setTopic(consumerMetadata.getTopic());
         subscriptionData.setExpressionType(ExpressionType.SQL92);
+        ConsumerGroupConfig consumerGroupConfig = consumerMetadata.getConsumerGroupConfig();
 
         StringBuffer tagExpression = new StringBuffer();
-        tagExpression.append(consumerMetadata.getSubString())
-                .append(" and ")
-                .append("(tag is not null and tag='")
-                .append(TagManager.getTag())
-                .append("')");
+        tagExpression
+                .append("(TAGS is not null and TAGS in ('*')) and (flowSphereTag is not null and flowSphereTag in (")
+                .append(consumerGroupConfig.getTags())
+                .append("))");
+
         subscriptionData.setSubString(tagExpression.toString());
         return subscriptionData;
     }
 
     @Override
     public ExpressionTypeEnum getOriginExpressionType() {
-        return ExpressionTypeEnum.SQL92;
+        return ExpressionTypeEnum.ALL;
     }
+
 }

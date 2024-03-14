@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer.expression;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

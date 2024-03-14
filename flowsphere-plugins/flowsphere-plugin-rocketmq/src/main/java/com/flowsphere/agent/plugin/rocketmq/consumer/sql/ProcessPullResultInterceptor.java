@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
@@ -21,10 +21,10 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Slf4j
-public class ProcessPullResultInterceptor implements InstantMethodInterceptor {
+public class ProcessPullResultInterceptor extends AbstractSqlInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         PullResult pullResult = (PullResult) allArguments[1];
         PullResultExt pullResultExt = (PullResultExt) pullResult;
         if (PullStatus.FOUND == pullResult.getPullStatus()) {
@@ -39,17 +39,7 @@ public class ProcessPullResultInterceptor implements InstantMethodInterceptor {
                 subscriptionData.setTagsSet(new HashSet<>());
             }
         }
-
     }
 
-    @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-
-    }
-
-    @Override
-    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
-
-    }
 
 }

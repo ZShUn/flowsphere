@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer.expression;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression;
 
 import com.flowsphere.common.rule.TagManager;
 import org.apache.rocketmq.common.filter.ExpressionType;
@@ -29,9 +29,9 @@ public class SimpleTagEnhance implements SQL92Enhance {
             }
         }
         tagExpression.append(" and ")
-                .append("(tag is not null and tag='")
+                .append("(flowSphereTag is not null and flowSphereTag in (")
                 .append(TagManager.getTag())
-                .append("')");
+                .append("))");
         subscriptionData.setSubString(tagExpression.toString());
         return subscriptionData;
     }

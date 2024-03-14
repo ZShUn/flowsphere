@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 
 
 import com.flowsphere.agent.core.context.CustomContextAccessor;
@@ -11,10 +11,10 @@ import java.lang.reflect.Method;
 import java.util.concurrent.Callable;
 
 @Slf4j
-public class RocketMQGetConsumerGroupNameMethodInterceptor implements InstantMethodInterceptor {
+public class RocketMQGetConsumerGroupNameMethodInterceptor extends AbstractSqlInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         try {
             String consumerGroupName = (String) callable.call();
             consumerGroupName += TagManager.getTag();
@@ -28,13 +28,4 @@ public class RocketMQGetConsumerGroupNameMethodInterceptor implements InstantMet
         }
     }
 
-    @Override
-    public void afterMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Object result) {
-
-    }
-
-    @Override
-    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
-
-    }
 }

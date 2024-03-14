@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.rocketmq.consumer;
+package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 @Slf4j
-public class RocketMQSubmitConsumeRequestMethodInterceptor implements InstantMethodInterceptor {
+public class RocketMQSubmitConsumeRequestMethodInterceptor extends AbstractSqlInterceptor implements InstantMethodInterceptor {
 
     @Override
-    public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
+    protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         List<MessageExt> msgList = (List<MessageExt>) allArguments[0];
         MessageExt messageExt = msgList.get(0);
         String tag = messageExt.getUserProperty(CommonConstant.TAG);
@@ -31,9 +31,5 @@ public class RocketMQSubmitConsumeRequestMethodInterceptor implements InstantMet
         TagContext.remove();
     }
 
-    @Override
-    public void exceptionMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, Throwable e) {
-
-    }
 
 }
