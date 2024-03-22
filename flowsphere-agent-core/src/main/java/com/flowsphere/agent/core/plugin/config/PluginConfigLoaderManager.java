@@ -1,7 +1,7 @@
 package com.flowsphere.agent.core.plugin.config;
 
-import com.flowsphere.agent.core.plugin.config.local.LocalPluginConfigLoader;
-import com.flowsphere.agent.core.plugin.config.nacos.NacosPluginConfigLoader;
+import com.flowsphere.agent.core.plugin.config.datasource.local.LocalPluginConfigLoader;
+import com.flowsphere.agent.core.plugin.config.datasource.nacos.NacosPluginConfigLoader;
 
 import java.util.HashMap;
 import java.util.Map;

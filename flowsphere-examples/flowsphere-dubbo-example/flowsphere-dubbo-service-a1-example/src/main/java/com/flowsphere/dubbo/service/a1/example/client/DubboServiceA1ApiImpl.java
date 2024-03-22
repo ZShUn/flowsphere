@@ -1,6 +1,6 @@
 package com.flowsphere.dubbo.service.a1.example.client;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import com.flowsphere.dubbo.api.DubboServiceAApi;
 import com.flowsphere.dubbo.api.DubboServiceBApi;
 import org.apache.dubbo.config.annotation.DubboReference;

@@ -29,8 +29,8 @@ public class FlowSphereAgent {
         log.info("-------------------FlowSphereAgent开始启动-------------------");
         AgentPluginClassLoader agentPluginClassLoader = AgentClassLoaderManager.getAgentPluginClassLoader(FlowSphereAgent.class.getClassLoader());
         YamlAgentConfig yamlAgentConfig = YamlResolver.parseAgentConfig(agentPluginClassLoader);
-        List<PluginConfig> pluginConfigList = getValidPluginConfigList(agentPluginClassLoader, yamlAgentConfig);
-        Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = getMethodPointcutConfig(agentPluginClassLoader, pluginConfigList);
+        PluginConfig pluginConfig = getPluginConfig(agentPluginClassLoader, yamlAgentConfig);
+        Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = getMethodPointcutConfig(agentPluginClassLoader, yamlAgentConfig);
         new AgentBuilder.Default()
                 .type(new AgentJunction(methodPointcutConfigMap))
                 .transform(new AgentTransform(methodPointcutConfigMap, agentPluginClassLoader))
@@ -40,30 +40,17 @@ public class FlowSphereAgent {
 
     }
 
-    private static List<PluginConfig> getValidPluginConfigList(AgentPluginClassLoader agentPluginClassLoader, YamlAgentConfig yamlAgentConfig) {
-        List<PluginConfig> pluginConfigList = PluginConfigLoaderManager.getPluginConfigLoader(yamlAgentConfig.getPluginConfigDataSource().getType())
+    private static PluginConfig getPluginConfig(AgentPluginClassLoader agentPluginClassLoader, YamlAgentConfig yamlAgentConfig) {
+        return PluginConfigLoaderManager.getPluginConfigLoader(yamlAgentConfig.getPluginConfigDataSource().getType())
                 .load(agentPluginClassLoader, yamlAgentConfig.getPluginConfigDataSource().getPros());
-        pluginConfigList = filterPluginConfig(pluginConfigList, yamlAgentConfig.getPlugins());
-        if (pluginConfigList.isEmpty()) {
-            log.error("agent plugin config error...");
-        }
-        PluginConfigManager.addAll(pluginConfigList);
-        return pluginConfigList;
     }
 
     private static Map<String, Collection<YamlMethodPointcutConfig>> getMethodPointcutConfig(AgentPluginClassLoader agentPluginClassLoader,
-                                                                                             List<PluginConfig> pluginConfigList) {
+                                                                                             YamlAgentConfig yamlAgentConfig) {
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = AgentBootstrap
-                .loadPlugins(pluginConfigList.stream().map(PluginConfig::getPluginName)
-                        .collect(Collectors.toSet()), agentPluginClassLoader);
+                .loadPlugins(yamlAgentConfig.getPlugins(), agentPluginClassLoader);
         return methodPointcutConfigMap;
     }
 
-
-    private static List<PluginConfig> filterPluginConfig(List<PluginConfig> pluginConfigList, List<String> plugins) {
-        return pluginConfigList.stream()
-                .filter(pluginConfig -> plugins.contains(pluginConfig.getPluginName()))
-                .collect(Collectors.toList());
-    }
 
 }

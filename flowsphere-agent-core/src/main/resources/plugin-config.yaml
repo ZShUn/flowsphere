@@ -1,7 +1,4 @@
-plugins:
-  - pluginName: nacos
-  - pluginName: rocketmq
-  - pluginName: springmvc
-  - pluginName: springcloudgateway
-  - pluginName: feign
-  - pluginName: dubbo
+pluginConfig:
+  rocketMQConfig:
+    modelType: queue
+    - consumerGroupName: myTest

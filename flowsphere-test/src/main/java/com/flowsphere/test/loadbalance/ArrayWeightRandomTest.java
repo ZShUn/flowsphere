@@ -1,7 +1,7 @@
 package com.flowsphere.test.loadbalance;
 
-import com.flowsphere.agent.plugin.spring.cloud.gateway.loadbalance.ArrayWeightRandom;
-import com.flowsphere.agent.plugin.spring.cloud.gateway.loadbalance.TagWeight;
+import com.flowsphere.common.loadbalance.ArrayWeightRandom;
+import com.flowsphere.common.loadbalance.TagWeight;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

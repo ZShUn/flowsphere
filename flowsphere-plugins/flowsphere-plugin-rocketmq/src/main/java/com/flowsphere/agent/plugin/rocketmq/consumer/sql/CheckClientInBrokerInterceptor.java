@@ -3,9 +3,9 @@ package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.flowsphere.agent.core.plugin.config.PluginConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
-import com.flowsphere.agent.plugin.rocketmq.constant.RocketMQConstant;
-import com.flowsphere.agent.plugin.rocketmq.consumer.config.ConsumerGroupConfig;
+import com.flowsphere.agent.core.plugin.config.support.RocketMQConfig;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ConsumerMetadata;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92Enhance;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92EnhanceManager;
@@ -27,15 +27,15 @@ public class CheckClientInBrokerInterceptor extends AbstractSqlInterceptor imple
     @SneakyThrows
     @Override
     protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        ConsumerGroupConfig currentConsumerGroupConfig = getCurrentConsumerGroupConfig(allArguments);
-        if (Objects.isNull(currentConsumerGroupConfig)) {
+        RocketMQConfig.ConsumerConfig  currentConsumerConfig = getCurrentConsumerConfig(allArguments);
+        if (Objects.isNull(currentConsumerConfig)) {
             return;
         }
         Set<SubscriptionData> subscriptionDataSet = (Set<SubscriptionData>) allArguments[3];
         Set<SubscriptionData> result = new HashSet<>();
         for (SubscriptionData oldSubscriptionData : subscriptionDataSet) {
             if (!oldSubscriptionData.getSubString().equals("*") && oldSubscriptionData.getExpressionType().equals(ExpressionType.TAG)) {
-                ConsumerMetadata consumerMetadata = buildConsumerMetadata(oldSubscriptionData, currentConsumerGroupConfig);
+                ConsumerMetadata consumerMetadata = buildConsumerMetadata(oldSubscriptionData, currentConsumerConfig);
                 SQL92Enhance sql92Enhance = SQL92EnhanceManager.getSQL92Enhance(consumerMetadata.getExpressionType());
                 SubscriptionData newSubscriptionData = sql92Enhance.enhance(consumerMetadata);
                 if (log.isDebugEnabled()) {
@@ -51,20 +51,24 @@ public class CheckClientInBrokerInterceptor extends AbstractSqlInterceptor imple
         instantMethodInterceptorResult.setResult(result);
     }
 
-    private ConsumerGroupConfig getCurrentConsumerGroupConfig(Object[] allArguments) {
+    private RocketMQConfig.ConsumerConfig getCurrentConsumerConfig(Object[] allArguments) {
         String groupName = (String) allArguments[1];
-        List<ConsumerGroupConfig> consumerGroupConfigs = (List<ConsumerGroupConfig>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.CONSUMER_GROUP_CONFIG);
-        ConsumerGroupConfig consumerGroupConfigFilterResult = consumerGroupConfigs.stream().filter(consumerGroupConfig ->
-                consumerGroupConfig.getConsumerGroupName().equals(groupName)).findFirst().orElse(null);
+        PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
+        RocketMQConfig.ConsumerConfig consumerGroupConfigFilterResult = pluginConfig.getRocketMQConfig()
+                .getConsumerConfigList()
+                .stream()
+                .filter(consumerGroupConfig -> consumerGroupConfig.getConsumerGroupName().equals(groupName))
+                .findFirst()
+                .orElse(null);
         return consumerGroupConfigFilterResult;
     }
 
-    private ConsumerMetadata buildConsumerMetadata(SubscriptionData oldSubscriptionData, ConsumerGroupConfig consumerGroupConfigFilterResult) {
+    private ConsumerMetadata buildConsumerMetadata(SubscriptionData oldSubscriptionData, RocketMQConfig.ConsumerConfig consumerConfig) {
         ConsumerMetadata consumerMetadata = new ConsumerMetadata();
         consumerMetadata.setTopic(oldSubscriptionData.getTopic());
         consumerMetadata.setSubString(oldSubscriptionData.getSubString());
         consumerMetadata.setExpressionType(oldSubscriptionData.getExpressionType());
-        consumerMetadata.setConsumerGroupConfig(consumerGroupConfigFilterResult);
+        consumerMetadata.setConsumerConfig(consumerConfig);
         return consumerMetadata;
     }
 

@@ -1,6 +1,6 @@
 package com.flowsphere.dubbo.service.c1.example.client;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import com.flowsphere.dubbo.api.DubboServiceCApi;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;

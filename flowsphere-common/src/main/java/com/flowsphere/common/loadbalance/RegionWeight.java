@@ -1,4 +1,4 @@
-package com.flowsphere.agent.plugin.spring.cloud.gateway.loadbalance;
+package com.flowsphere.common.loadbalance;
 
 import lombok.Data;
 

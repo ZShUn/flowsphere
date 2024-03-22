@@ -2,7 +2,7 @@ package com.flowsphere.agent.core.interceptor;
 
 import com.flowsphere.agent.core.context.CustomContext;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 import net.bytebuddy.implementation.bind.annotation.AllArguments;
 import net.bytebuddy.implementation.bind.annotation.RuntimeType;
 import net.bytebuddy.implementation.bind.annotation.This;

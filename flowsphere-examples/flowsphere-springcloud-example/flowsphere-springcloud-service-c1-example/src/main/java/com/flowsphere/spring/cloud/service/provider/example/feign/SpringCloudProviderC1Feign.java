@@ -1,8 +1,7 @@
 package com.flowsphere.spring.cloud.service.provider.example.feign;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import com.flowsphere.spring.cloud.service.api.SpringCloudCApi;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;

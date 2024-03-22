@@ -1,6 +1,6 @@
 package com.flowsphere.spring.cloud.service.consumer.example.controller;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import com.flowsphere.spring.cloud.service.api.SpringCloudBApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;

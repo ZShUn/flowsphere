@@ -5,7 +5,7 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.common.constant.CommonConstant;
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;

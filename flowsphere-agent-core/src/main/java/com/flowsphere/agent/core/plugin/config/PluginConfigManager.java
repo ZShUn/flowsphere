@@ -27,14 +27,7 @@ public class PluginConfigManager {
         addAll(propertiesMap);
     }
 
-    public static void updateValue(String pluginName, String key, Object value) {
-        for (PluginConfig pluginConfig : CONFIG_STORE) {
-            if (pluginConfig.getPluginName().equals(pluginName)) {
-                Properties properties = pluginConfig.getProps();
-                properties.put(key, value);
-            }
-        }
-    }
+
 
 
     public static Object getConfig(String pluginName, String key) {
@@ -44,6 +37,10 @@ public class PluginConfigManager {
                 return properties.get(key);
             }
         }
+        return null;
+    }
+
+    public static PluginConfig getPluginConfig(){
         return null;
     }
 

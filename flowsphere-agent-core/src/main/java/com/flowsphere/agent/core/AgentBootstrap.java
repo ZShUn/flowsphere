@@ -10,10 +10,10 @@ import java.util.*;
 @Slf4j
 public class AgentBootstrap {
 
-    public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(Set<String> pluginNameSet, ClassLoader classLoader) {
+    public static Map<String, Collection<YamlMethodPointcutConfig>> loadPlugins(List<String> pluginNameList, ClassLoader classLoader) {
 
         Map<String, Collection<YamlMethodPointcutConfig>> methodPointcutConfigMap = new HashMap<>();
-        for (String pluginName : pluginNameSet) {
+        for (String pluginName : pluginNameList) {
             List<YamlClassPointcutConfig> classPointcutConfigs = PointcutConfigLoader.load(pluginName, classLoader);
             for (YamlClassPointcutConfig classPointcutConfig : classPointcutConfigs) {
                 methodPointcutConfigMap.computeIfAbsent(classPointcutConfig.getClassName(), key -> classPointcutConfig.getMethodPointcutConfigs());

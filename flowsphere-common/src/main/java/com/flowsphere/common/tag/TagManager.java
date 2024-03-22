@@ -1,6 +1,6 @@
-package com.flowsphere.common.rule;
+package com.flowsphere.common.tag;
 
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 
 import java.util.Optional;
 

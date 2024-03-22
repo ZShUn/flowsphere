@@ -3,14 +3,14 @@ package com.flowsphere.agent.plugin.rocketmq.consumer.sql;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
+import com.flowsphere.agent.core.plugin.config.PluginConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
-import com.flowsphere.agent.plugin.rocketmq.constant.RocketMQConstant;
-import com.flowsphere.agent.plugin.rocketmq.consumer.config.ConsumerGroupConfig;
+import com.flowsphere.agent.core.plugin.config.support.RocketMQConfig;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ConsumerMetadata;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ExpressionTypeEnum;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92Enhance;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92EnhanceManager;
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.protocol.heartbeat.ConsumerData;
 import org.apache.rocketmq.common.protocol.heartbeat.HeartbeatData;
@@ -28,12 +28,13 @@ public class SendHearbeatInterceptor extends AbstractSqlInterceptor implements I
     @Override
     protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
+        final PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
-            List<ConsumerGroupConfig> consumerGroupConfigs = (List<ConsumerGroupConfig>) PluginConfigManager.getConfig(RocketMQConstant.ROCKETMQ, RocketMQConstant.CONSUMER_GROUP_CONFIG);
+            List<RocketMQConfig.ConsumerConfig> consumerConfigList = pluginConfig.getRocketMQConfig().getConsumerConfigList();
             if (log.isDebugEnabled()) {
-                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ groupName={} consumerGroupConfigs={}", consumerData.getGroupName(), consumerGroupConfigs);
+                log.debug("[FlowSphere] SendHearbeatInterceptor rocketMQ groupName={} consumerConfigList={}", consumerData.getGroupName(), consumerConfigList);
             }
-            boolean consumerGroupMatchResult = consumerGroupConfigs.stream().anyMatch(consumerGroupConfig ->
+            boolean consumerGroupMatchResult = consumerConfigList.stream().anyMatch(consumerGroupConfig ->
                     consumerGroupConfig.getConsumerGroupName().equals(consumerData.getGroupName()));
             if (consumerGroupMatchResult) {
                 enhanceSQL92(consumerData);

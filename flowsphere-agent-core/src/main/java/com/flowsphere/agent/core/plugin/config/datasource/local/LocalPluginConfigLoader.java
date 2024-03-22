@@ -1,4 +1,4 @@
-package com.flowsphere.agent.core.plugin.config.local;
+package com.flowsphere.agent.core.plugin.config.datasource.local;
 
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfigLoader;
@@ -11,9 +11,9 @@ import java.util.Properties;
 public class LocalPluginConfigLoader implements PluginConfigLoader {
 
     @Override
-    public List<PluginConfig> load(ClassLoader classLoader, Properties properties) {
+    public PluginConfig load(ClassLoader classLoader, Properties properties) {
         YamlPluginConfig yamlPluginConfig = YamlResolver.parsePluginConfig(classLoader);
-        return yamlPluginConfig.getPlugins();
+        return yamlPluginConfig.getPluginConfig();
     }
 
 }

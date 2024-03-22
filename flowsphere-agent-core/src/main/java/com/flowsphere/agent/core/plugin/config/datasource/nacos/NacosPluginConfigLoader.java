@@ -1,4 +1,4 @@
-package com.flowsphere.agent.core.plugin.config.nacos;
+package com.flowsphere.agent.core.plugin.config.datasource.nacos;
 
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
@@ -21,7 +21,7 @@ public class NacosPluginConfigLoader implements PluginConfigLoader {
 
     @SneakyThrows
     @Override
-    public List<PluginConfig> load(ClassLoader classLoader, Properties properties) {
+    public PluginConfig load(ClassLoader classLoader, Properties properties) {
         String dataId = properties.getProperty(DATA_ID);
         String groupId = properties.getProperty(GROUP_ID);
         int timeout = Integer.parseInt(Optional.ofNullable(properties.getProperty(TIMEOUT))
@@ -29,11 +29,8 @@ public class NacosPluginConfigLoader implements PluginConfigLoader {
         ConfigService configService = NacosFactory.createConfigService(properties);
         configService.addListener(dataId, groupId, new NacosConfigListener());
         String jsonStr = configService.getConfig(dataId, groupId, timeout);
-        Map<String, Map<String, Object>> pluginMap = JacksonUtils.toObj(jsonStr, Map.class);
-        return NacosConfigConverter.convert(pluginMap);
+        return JacksonUtils.toObj(jsonStr, PluginConfig.class);
     }
-
-
 
 
 }

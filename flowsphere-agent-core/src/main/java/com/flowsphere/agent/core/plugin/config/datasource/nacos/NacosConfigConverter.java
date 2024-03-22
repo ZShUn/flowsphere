@@ -1,4 +1,4 @@
-package com.flowsphere.agent.core.plugin.config.nacos;
+package com.flowsphere.agent.core.plugin.config.datasource.nacos;
 
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
 

@@ -1,6 +1,7 @@
 package com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression;
 
-import com.flowsphere.agent.plugin.rocketmq.consumer.config.ConsumerGroupConfig;
+import com.flowsphere.agent.core.plugin.config.PluginConfig;
+import com.flowsphere.agent.core.plugin.config.support.RocketMQConfig;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,6 @@ public class ConsumerMetadata {
 
     private String expressionType;
 
-    private ConsumerGroupConfig consumerGroupConfig;
+    private RocketMQConfig.ConsumerConfig consumerConfig;
 
 }

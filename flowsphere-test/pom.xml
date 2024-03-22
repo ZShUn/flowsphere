@@ -85,6 +85,12 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.zshun</groupId>
+            <artifactId>flowsphere-plugin-rocketmq</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

@@ -1,6 +1,6 @@
 package com.flowsphere.spring.cloud.service.consumer.example.config;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

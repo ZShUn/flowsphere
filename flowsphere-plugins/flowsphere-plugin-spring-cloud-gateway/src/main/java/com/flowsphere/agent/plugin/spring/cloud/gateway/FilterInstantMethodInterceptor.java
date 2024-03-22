@@ -6,7 +6,7 @@ import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.plugin.spring.cloud.gateway.binding.TagBindingManager;
 import com.flowsphere.agent.plugin.spring.cloud.gateway.resolver.HeaderResolver;
 import com.flowsphere.agent.plugin.spring.cloud.gateway.resolver.SimpleHeaderResolver;
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 

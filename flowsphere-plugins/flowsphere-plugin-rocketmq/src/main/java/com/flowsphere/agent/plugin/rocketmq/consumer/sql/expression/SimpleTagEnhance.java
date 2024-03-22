@@ -1,6 +1,6 @@
 package com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import org.apache.rocketmq.common.filter.ExpressionType;
 import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 

@@ -2,7 +2,7 @@ package com.flowsphere.agent.plugin.nacos;
 
 import com.alibaba.cloud.nacos.ribbon.NacosServer;
 import com.flowsphere.common.constant.CommonConstant;
-import com.flowsphere.common.rule.context.TagContext;
+import com.flowsphere.common.tag.context.TagContext;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 

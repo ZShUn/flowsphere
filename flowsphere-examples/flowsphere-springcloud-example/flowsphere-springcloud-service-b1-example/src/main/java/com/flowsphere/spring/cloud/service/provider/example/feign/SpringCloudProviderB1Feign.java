@@ -1,6 +1,6 @@
 package com.flowsphere.spring.cloud.service.provider.example.feign;
 
-import com.flowsphere.common.rule.TagManager;
+import com.flowsphere.common.tag.TagManager;
 import com.flowsphere.spring.cloud.service.api.SpringCloudBApi;
 import com.flowsphere.spring.cloud.service.api.SpringCloudCApi;
 import org.springframework.beans.factory.annotation.Autowired;
