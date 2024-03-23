@@ -3,7 +3,7 @@ package com.flowsphere.agent.plugin.elastic.job;
 import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.agent.plugin.elastic.job.constant.ElasticJobConstant;
 import com.flowsphere.common.util.NetUtils;
 import lombok.SneakyThrows;
@@ -22,8 +22,8 @@ public class ElasticJobInstantMethodInterceptor implements InstantMethodIntercep
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         String localIp = NetUtils.getIpAddress();
-        boolean elasticJobGrayEnabled = (boolean) PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_GRAY_ENABLED);
-        String executeIp = (String) PluginConfigManager.getConfig(ElasticJobConstant.ELASTIC_JOB, ElasticJobConstant.ELASTIC_JOB_EXECUTE_IP);
+        boolean elasticJobGrayEnabled =  PluginConfigCache.get().getElasticJobConfig().isGrayEnabled();
+        String executeIp = PluginConfigCache.get().getElasticJobConfig().getIp();
         if (elasticJobGrayEnabled && localIp.equals(executeIp)) {
             Object call = callable.call();
             instantMethodInterceptorResult.setContinue(false);

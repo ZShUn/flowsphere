@@ -4,7 +4,7 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.agent.plugin.rocketmq.ModelType;
 import com.flowsphere.common.constant.CommonConstant;
 import com.flowsphere.common.tag.TagManager;
@@ -17,7 +17,7 @@ public class RocketMQSendMethodInterceptor implements InstantMethodInterceptor {
 
     @Override
     public void beforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
+        PluginConfig pluginConfig = PluginConfigCache.get();
         String modelType = pluginConfig.getRocketMQConfig().getModelType();
         if (!ModelType.SQL92.getModelType().equals(modelType)) {
             return;

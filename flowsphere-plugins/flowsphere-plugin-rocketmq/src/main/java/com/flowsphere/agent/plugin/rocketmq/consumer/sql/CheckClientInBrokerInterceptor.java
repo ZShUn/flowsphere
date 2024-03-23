@@ -4,7 +4,7 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.agent.core.plugin.config.support.RocketMQConfig;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ConsumerMetadata;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.SQL92Enhance;
@@ -16,7 +16,6 @@ import org.apache.rocketmq.common.protocol.heartbeat.SubscriptionData;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
@@ -53,7 +52,7 @@ public class CheckClientInBrokerInterceptor extends AbstractSqlInterceptor imple
 
     private RocketMQConfig.ConsumerConfig getCurrentConsumerConfig(Object[] allArguments) {
         String groupName = (String) allArguments[1];
-        PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
+        PluginConfig pluginConfig = PluginConfigCache.get();
         RocketMQConfig.ConsumerConfig consumerGroupConfigFilterResult = pluginConfig.getRocketMQConfig()
                 .getConsumerConfigList()
                 .stream()

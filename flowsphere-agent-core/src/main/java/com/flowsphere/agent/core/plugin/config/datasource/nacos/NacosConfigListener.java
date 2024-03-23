@@ -2,7 +2,7 @@ package com.flowsphere.agent.core.plugin.config.datasource.nacos;
 
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.common.concurrent.NamedThreadFactory;
 import com.flowsphere.common.util.JacksonUtils;
 
@@ -21,8 +21,7 @@ public class NacosConfigListener implements Listener {
 
     @Override
     public void receiveConfigInfo(String config) {
-        Map<String, Map<String, Object>> pluginMap = JacksonUtils.toObj(config, Map.class);
-        List<PluginConfig> pluginConfigList = NacosConfigConverter.convert(pluginMap);
-        PluginConfigManager.refresh(pluginConfigList);
+        PluginConfig pluginConfigList = JacksonUtils.toObj(config, PluginConfig.class);
+        PluginConfigCache.put(pluginConfigList);
     }
 }

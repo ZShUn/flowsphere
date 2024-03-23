@@ -4,7 +4,7 @@ import com.flowsphere.agent.core.context.CustomContextAccessor;
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.interceptor.type.InstantMethodInterceptor;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.agent.core.plugin.config.support.RocketMQConfig;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ConsumerMetadata;
 import com.flowsphere.agent.plugin.rocketmq.consumer.sql.expression.ExpressionTypeEnum;
@@ -28,7 +28,7 @@ public class SendHearbeatInterceptor extends AbstractSqlInterceptor implements I
     @Override
     protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
         HeartbeatData heartbeatData = (HeartbeatData) allArguments[1];
-        final PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
+        final PluginConfig pluginConfig = PluginConfigCache.get();
         for (ConsumerData consumerData : heartbeatData.getConsumerDataSet()) {
             List<RocketMQConfig.ConsumerConfig> consumerConfigList = pluginConfig.getRocketMQConfig().getConsumerConfigList();
             if (log.isDebugEnabled()) {

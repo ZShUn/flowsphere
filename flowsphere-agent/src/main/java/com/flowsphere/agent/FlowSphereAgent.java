@@ -11,16 +11,13 @@ import com.flowsphere.agent.core.config.yaml.YamlAgentConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
 import com.flowsphere.agent.core.config.yaml.YamlMethodPointcutConfig;
 import com.flowsphere.agent.core.plugin.config.PluginConfigLoaderManager;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
 import com.flowsphere.agent.core.yaml.YamlResolver;
 import lombok.extern.slf4j.Slf4j;
 import net.bytebuddy.agent.builder.AgentBuilder;
 
 import java.lang.instrument.Instrumentation;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class FlowSphereAgent {

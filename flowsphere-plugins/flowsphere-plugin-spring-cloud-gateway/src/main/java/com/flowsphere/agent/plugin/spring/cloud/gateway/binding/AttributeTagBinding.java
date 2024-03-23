@@ -1,7 +1,7 @@
 package com.flowsphere.agent.plugin.spring.cloud.gateway.binding;
 
 import com.flowsphere.agent.core.plugin.config.PluginConfig;
-import com.flowsphere.agent.core.plugin.config.PluginConfigManager;
+import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
 import com.flowsphere.agent.core.plugin.config.support.SpringCloudGatewayConfig;
 import com.flowsphere.agent.plugin.spring.cloud.gateway.resolver.HeaderResolver;
 import com.flowsphere.common.constant.CommonConstant;
@@ -20,7 +20,7 @@ public abstract class AttributeTagBinding implements TagBinding {
 
     @Override
     public boolean binding(HeaderResolver headerResolver, ServerHttpRequest request) {
-        PluginConfig pluginConfig = PluginConfigManager.getPluginConfig();
+        PluginConfig pluginConfig = PluginConfigCache.get();
         SpringCloudGatewayConfig springCloudGatewayConfig = pluginConfig.getSpringCloudGatewayConfig();
         InstantWeight instantWeight = getInstantWeight(springCloudGatewayConfig);
         if (Objects.isNull(instantWeight)) {
