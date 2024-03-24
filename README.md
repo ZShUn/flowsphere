@@ -13,7 +13,7 @@
 ## 简介
 FlowSphere是基于bytebuddy字节码增强技术进行建设，利用字节码增强技术为微服务提供全链路流量治理能力， 以解决大规模微服务之能力问题，FlowSphere构建了非侵入、高性能、插件化核心框架，同时支持配置中心，动态修改相关配置。
 
-<img src="https://github.com/ZShUn/flowsphere/blob/main/images/agent.jpg" width = "800" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/ZShUn/flowsphere/blob/main/images/agent.jpg" width = "800" height = "200" alt="图片名称" align=center />
 
 ## 功能列表
 ### HTTP、RPC
