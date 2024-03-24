@@ -15,7 +15,7 @@ FlowSphere是基于bytebuddy字节码增强技术进行建设，利用字节码�
 
 
 
-![](https://github.com/ZShUn/flowsphere/blob/main/images/agent.png)
+![](https://github.com/ZShUn/flowsphere/blob/main/images/agent.jpg)
 
 
 ## 功能列表
