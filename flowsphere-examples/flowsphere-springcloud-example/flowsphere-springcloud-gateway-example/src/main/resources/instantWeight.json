@@ -1,0 +1,21 @@
+{
+  "regionWeight":{
+
+  },
+  "userWeight":{
+    "userIds":[
+      "123"
+    ],
+    "tagWeights":[
+      {
+        "tag":"tagA",
+        "weight":0.7
+      },
+      {
+        "tag":"tagA1",
+        "weight":0.3
+      }
+    ]
+  }
+}
+
