@@ -15,11 +15,7 @@ FlowSphere是基于bytebuddy字节码增强技术进行建设，利用字节码�
 
 
 
-<div align="center">
-    <img src="https://github.com/ZShUn/flowsphere/blob/main/images/agent.png" width = "1000" height = "200" alt="图片名称" align=center />
-</div>
-
-
+![](https://github.com/ZShUn/flowsphere/blob/main/images/agent.png)
 
 ## 功能列表
 ### HTTP、RPC
