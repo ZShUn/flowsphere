@@ -20,7 +20,7 @@ FlowSphere是基于bytebuddy字节码增强技术进行建设，利用字节码�
 <div align="center">
 	<p></p>
 	<p></p>
-	<img src="https://github.com/ZShUn/flowsphere/blob/main/images/agent.png" width = "1500" height = "200" alt="图片名称" align=center />
+	<img src="https://github.com/ZShUn/flowsphere/blob/main/images/agent.png" width = "1500" height = "500" alt="图片名称" align=center />
 	<h1>基于JavaAgent的流量治理解决方案</h1>
 
 
