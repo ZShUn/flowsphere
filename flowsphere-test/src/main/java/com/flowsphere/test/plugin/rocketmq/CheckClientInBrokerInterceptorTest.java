@@ -1,4 +1,4 @@
-package com.flowsphere.test.plugin;
+package com.flowsphere.test.plugin.rocketmq;
 
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.google.common.collect.Lists;

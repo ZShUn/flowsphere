@@ -1,4 +1,4 @@
-package com.flowsphere.test.plugin;
+package com.flowsphere.test.plugin.nacos;
 
 import com.alibaba.cloud.nacos.ribbon.NacosServer;
 import com.alibaba.nacos.api.naming.pojo.Instance;

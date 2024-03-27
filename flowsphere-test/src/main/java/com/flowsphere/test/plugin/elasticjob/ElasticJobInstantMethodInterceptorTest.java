@@ -1,4 +1,4 @@
-package com.flowsphere.test.plugin;
+package com.flowsphere.test.plugin.elasticjob;
 
 import com.flowsphere.agent.core.interceptor.template.InstantMethodInterceptorResult;
 import com.flowsphere.agent.core.plugin.config.PluginConfigCache;
