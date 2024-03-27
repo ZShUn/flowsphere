@@ -15,7 +15,7 @@ public class SimpleSQL92Enhance implements SQL92Enhance {
         tagExpression.append(consumerMetadata.getSubString())
                 .append(" and ")
                 .append("(flowSphereTag is not null and flowSphereTag in (")
-                .append(TagManager.getTag())
+                .append(consumerMetadata.getConsumerConfig().getTags())
                 .append("))");
         subscriptionData.setSubString(tagExpression.toString());
         return subscriptionData;

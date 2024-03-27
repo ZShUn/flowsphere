@@ -13,7 +13,7 @@ pointcutConfigs:
     methodPointcutConfigs:
       - methodName: sendHearbeat
         type: instant
-        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.SendHearbeatInterceptor
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.SendHeartbeatInterceptor
   - className: org.apache.rocketmq.client.impl.MQClientAPIImpl
     methodPointcutConfigs:
       - methodName: checkClientInBroker
@@ -27,3 +27,8 @@ pointcutConfigs:
       - methodName: processPullResult
         type: instant
         interceptorName: com.flowsphere.agent.plugin.rocketmq.consumer.sql.ProcessPullResultInterceptor
+  - className: org.apache.rocketmq.client.latency.MQFaultStrategy
+    methodPointcutConfigs:
+      - methodName: selectOneMessageQueue
+        type: instant
+        interceptorName: com.flowsphere.agent.plugin.rocketmq.producer.ProducerMessageQueueInterceptor

@@ -20,20 +20,23 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
+/**
+ * SQL92模式下此类有用
+ */
 @Slf4j
 public class CheckClientInBrokerInterceptor extends AbstractSqlInterceptor implements InstantMethodInterceptor {
 
     @SneakyThrows
     @Override
     protected void doBeforeMethod(CustomContextAccessor customContextAccessor, Object[] allArguments, Callable<?> callable, Method method, InstantMethodInterceptorResult instantMethodInterceptorResult) {
-        RocketMQConfig.ConsumerConfig  currentConsumerConfig = getCurrentConsumerConfig(allArguments);
+        RocketMQConfig.ConsumerConfig currentConsumerConfig = getCurrentConsumerConfig(allArguments);
         if (Objects.isNull(currentConsumerConfig)) {
             return;
         }
         Set<SubscriptionData> subscriptionDataSet = (Set<SubscriptionData>) allArguments[3];
         Set<SubscriptionData> result = new HashSet<>();
         for (SubscriptionData oldSubscriptionData : subscriptionDataSet) {
-            if (!oldSubscriptionData.getSubString().equals("*") && oldSubscriptionData.getExpressionType().equals(ExpressionType.TAG)) {
+            if (!oldSubscriptionData.getSubString().equals("*") && oldSubscriptionData.getExpressionType().equals(ExpressionType.SQL92)) {
                 ConsumerMetadata consumerMetadata = buildConsumerMetadata(oldSubscriptionData, currentConsumerConfig);
                 SQL92Enhance sql92Enhance = SQL92EnhanceManager.getSQL92Enhance(consumerMetadata.getExpressionType());
                 SubscriptionData newSubscriptionData = sql92Enhance.enhance(consumerMetadata);

@@ -18,8 +18,20 @@ public class NacosInstantMethodInterceptorTest {
 
     @Test
     public void beforeTest() {
+
+        Object[] objects = new Object[]{buildServerList()};
+        TagContext.set("TAGA");
+
         NacosInstantMethodInterceptor interceptor = new NacosInstantMethodInterceptor();
         InstantMethodInterceptorResult instantMethodInterceptorResult = new InstantMethodInterceptorResult();
+
+        interceptor.beforeMethod(null, objects,
+                null, null, instantMethodInterceptorResult);
+        Assertions.assertTrue(!instantMethodInterceptorResult.isContinue());
+        Assertions.assertTrue(((List<Server>) instantMethodInterceptorResult.getResult()).size() == 1);
+    }
+
+    private List<Server> buildServerList() {
         List<Server> serverList = new ArrayList<>();
         Instance instance = new Instance();
         instance.setIp("127.0.0.1");
@@ -29,12 +41,7 @@ public class NacosInstantMethodInterceptorTest {
         instance.setMetadata(metadata);
         NacosServer nacosServer = new NacosServer(instance);
         serverList.add(nacosServer);
-        Object[] objects = new Object[]{serverList};
-        TagContext.set("TAGA");
-        interceptor.beforeMethod(null, objects,
-                null, null, instantMethodInterceptorResult);
-        Assertions.assertTrue(!instantMethodInterceptorResult.isContinue());
-        Assertions.assertTrue(((List<Server>) instantMethodInterceptorResult.getResult()).size() == 1);
+        return serverList;
     }
 
 }
